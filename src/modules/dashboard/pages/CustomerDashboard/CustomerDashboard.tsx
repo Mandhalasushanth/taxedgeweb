@@ -6,14 +6,15 @@ import { STATUS_LABELS, STATUS_TONES } from '@shared/constants'
 import { formatDate, relativeTime } from '@shared/utils'
 import { useAuthStore } from '@store/index'
 
-import { DashboardHeader } from '../../components/DashboardHeader/DashboardHeader'
+import { DashboardHero } from '../../components/DashboardHero/DashboardHero'
 import { DashboardStats } from '../../components/DashboardStats/DashboardStats'
+import { DeadlineBanner } from '../../components/DeadlineBanner/DeadlineBanner'
 import { QuickServices } from '../../components/QuickServices/QuickServices'
 import { useDashboardSummary } from '../../hooks/useDashboardSummary'
 import { quickServices } from '../../services/dashboardService'
-import './Dashboard.css'
+import './CustomerDashboard.css'
 
-export const Dashboard = () => {
+export const CustomerDashboard = () => {
   const user = useAuthStore((state) => state.user)
   const { data, isLoading, error } = useDashboardSummary()
 
@@ -24,7 +25,9 @@ export const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <DashboardHeader userName={user?.fullName ?? 'there'} />
+      <DashboardHero userName={user?.fullName ?? 'there'} brief={data.brief} />
+
+      {data.deadline && <DeadlineBanner deadline={data.deadline} />}
 
       <DashboardStats stats={data.stats} />
 
@@ -69,4 +72,4 @@ export const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default CustomerDashboard

@@ -9,7 +9,7 @@ const mockItems: ItrItem[] = [
     id: 'itr_001',
     reference: 'TE-Itr-0001',
     title: 'Sample filing',
-    status: 'in_review',
+    status: 'MANAGER_REVIEW',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },

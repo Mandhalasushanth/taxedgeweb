@@ -1,23 +1,60 @@
-import type { ApplicationStatus, StatusTone } from '../types/common.types'
+import type {
+  ApplicationStatus,
+  PaymentStatus,
+  ServiceType,
+  StatusTone,
+} from '../types/common.types'
 
+/** Backend enums are the source of truth; these turn them into display copy. */
 export const STATUS_LABELS: Record<ApplicationStatus, string> = {
-  draft: 'Draft',
-  submitted: 'Submitted',
-  in_review: 'In review',
-  action_required: 'Action required',
-  approved: 'Approved',
-  rejected: 'Rejected',
-  completed: 'Completed',
+  DRAFT: 'Draft',
+  SUBMITTED: 'Submitted',
+  MANAGER_REVIEW: 'Manager review',
+  QUERY_RAISED: 'Query raised',
+  QUERY_RESOLVED: 'Query resolved',
+  READY_FOR_ASSIGNMENT: 'Ready for assignment',
+  ASSIGNED: 'Assigned',
+  IN_PROGRESS: 'In progress',
+  COMPLETED: 'Completed',
+  REJECTED: 'Rejected',
+  CANCELLED: 'Cancelled',
 }
 
 export const STATUS_TONES: Record<ApplicationStatus, StatusTone> = {
-  draft: 'neutral',
-  submitted: 'info',
-  in_review: 'info',
-  action_required: 'warning',
-  approved: 'success',
-  rejected: 'danger',
-  completed: 'success',
+  DRAFT: 'neutral',
+  SUBMITTED: 'info',
+  MANAGER_REVIEW: 'info',
+  QUERY_RAISED: 'warning',
+  QUERY_RESOLVED: 'info',
+  READY_FOR_ASSIGNMENT: 'warning',
+  ASSIGNED: 'info',
+  IN_PROGRESS: 'info',
+  COMPLETED: 'success',
+  REJECTED: 'danger',
+  CANCELLED: 'neutral',
+}
+
+export const PAYMENT_STATUS_LABELS: Record<PaymentStatus, string> = {
+  UNPAID: 'Unpaid',
+  PARTIAL: 'Part paid',
+  PAID: 'Paid',
+  REFUNDED: 'Refunded',
+}
+
+export const PAYMENT_STATUS_TONES: Record<PaymentStatus, StatusTone> = {
+  UNPAID: 'danger',
+  PARTIAL: 'warning',
+  PAID: 'success',
+  REFUNDED: 'neutral',
+}
+
+export const SERVICE_LABELS: Record<ServiceType, string> = {
+  GST: 'GST',
+  ITR: 'Income tax',
+  LOAN: 'Loans',
+  INSURANCE: 'Insurance',
+  REGISTRATION: 'Registration',
+  ACCOUNTS: 'Accounts',
 }
 
 export const INDIAN_STATES = [

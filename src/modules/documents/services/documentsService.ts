@@ -9,7 +9,7 @@ const mockItems: DocumentsItem[] = [
     id: 'documents_001',
     reference: 'TE-Documents-0001',
     title: 'Sample document',
-    status: 'in_review',
+    status: 'MANAGER_REVIEW',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },

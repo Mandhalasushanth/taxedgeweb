@@ -11,7 +11,7 @@
   gap: var(--space-4);
   padding: var(--space-8) var(--space-7);
   color: var(--color-text-inverse);
-  background: linear-gradient(160deg, var(--teal-600), var(--navy-600));
+  background: linear-gradient(160deg, var(--navy-500), var(--navy-700));
 }
 
 .auth-layout__brand { margin: 0; font-size: var(--font-size-3xl); }

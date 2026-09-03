@@ -8,7 +8,7 @@ export interface QuickServicesProps {
 }
 
 export const QuickServices = ({ services }: QuickServicesProps) => (
-  <section className="quick-services">
+  <section className="quick-services" id="quick-services">
     <h2 className="quick-services__title">Start something</h2>
     <div className="quick-services__grid">
       {services.map((service) => (

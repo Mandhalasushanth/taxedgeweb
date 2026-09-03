@@ -14,6 +14,13 @@ adding anything. Sister project: the TaxEdge Expo app in `../Taxedge/mobile-app`
   or move the shared thing into `shared/` or `core/`.
 - **No hard-coded URLs or endpoints.** `core/config/routePaths.ts` and
   `core/api/apiEndpoints.ts`.
+- **Use the standardized enums.** Roles (`CUSTOMER`, `SUPER_ADMIN`, `ADMIN`,
+  `MANAGER`, `*_AGENT`) and statuses (`DRAFT` … `CANCELLED`) are the backend's
+  values. Map them to labels; never invent a variant.
+- **Staff code lives in `modules/staff/`**, customer code never does, and
+  neither reaches into the other's internals.
+- **Permissions gate navigation and UX only.** Assume the backend re-checks
+  everything.
 - **HTTP only through `apiClient`** (`core/api`) so auth headers, token refresh
   and `AppError` normalisation apply everywhere.
 

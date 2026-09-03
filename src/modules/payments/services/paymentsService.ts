@@ -9,7 +9,7 @@ const mockItems: PaymentsItem[] = [
     id: 'payments_001',
     reference: 'TE-Payments-0001',
     title: 'Sample payment',
-    status: 'in_review',
+    status: 'MANAGER_REVIEW',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },

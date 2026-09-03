@@ -9,7 +9,7 @@ const mockItems: ChatItem[] = [
     id: 'chat_001',
     reference: 'TE-Chat-0001',
     title: 'Sample conversation',
-    status: 'in_review',
+    status: 'MANAGER_REVIEW',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },

@@ -29,6 +29,9 @@
   --color-navy-surface: var(--navy-700);
   --color-navy-border: #1e2e4a;
   --color-accent: var(--orange-500);
+  --color-accent-hover: var(--orange-600);
+  --color-accent-soft: var(--orange-50);
+  --color-on-accent: var(--grey-0);
 
   --color-success: var(--green-500);
   --color-success-soft: var(--green-100);
@@ -93,4 +96,8 @@
   --color-primary-active: var(--orange-600);
   --color-primary-soft: rgba(249, 115, 22, 0.15);
   --color-on-primary: var(--grey-0);
+
+  --color-accent: var(--navy-400);
+  --color-accent-hover: var(--navy-500);
+  --color-on-accent: var(--grey-0);
 }

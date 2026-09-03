@@ -3,11 +3,14 @@ import type { RouteObject } from 'react-router-dom'
 
 import { AuthLayout } from '../layouts/AuthLayout'
 import { DashboardLayout } from '../layouts/DashboardLayout'
+import { StaffLayout } from '../layouts/StaffLayout'
 import { NotFound } from '../pages/NotFound'
 
+import { routePaths } from '@core/config'
 import { applicationsRoutes } from '@modules/applications'
 import { authenticationRoutes } from '@modules/authentication'
 import { chatRoutes } from '@modules/chat'
+import { CustomerTypePage } from '@modules/customerType'
 import { dashboardRoutes } from '@modules/dashboard'
 import { documentsRoutes } from '@modules/documents'
 import { gstRoutes } from '@modules/gst'
@@ -16,14 +19,19 @@ import { itrRoutes } from '@modules/itr'
 import { loansRoutes } from '@modules/loans'
 import { paymentsRoutes } from '@modules/payments'
 import { profileRoutes, CreateProfilePage } from '@modules/profile'
+import { servicesRoutes, AllServicesPage } from '@modules/services'
+import { staffRoutes } from '@modules/staff'
 import { supportRoutes } from '@modules/support'
 
-import { ProtectedRoute } from './ProtectedRoute'
+import { CustomerRoute } from './CustomerRoute'
 import { PublicRoute } from './PublicRoute'
-import { routePaths } from '@core/config'
+import { StaffRoute } from './StaffRoute'
 
 const authLayoutRoutes = authenticationRoutes.filter(
-  (r) => r.path !== routePaths.auth.createProfile && r.path !== routePaths.auth.register,
+  (r) =>
+    r.path !== routePaths.auth.createProfile &&
+    r.path !== routePaths.auth.register &&
+    r.path !== routePaths.auth.customerType,
 )
 
 /**
@@ -48,6 +56,22 @@ export const routeConfig: RouteObject[] = [
     element: <CreateProfilePage />,
   },
   {
+    path: routePaths.customerType,
+    element: <CustomerTypePage />,
+  },
+  {
+    path: routePaths.auth.customerType,
+    element: <CustomerTypePage />,
+  },
+  {
+    path: '/services',
+    element: <AllServicesPage />,
+  },
+  {
+    path: '/all-services',
+    element: <AllServicesPage />,
+  },
+  {
     element: <PublicRoute />,
     children: [
       {
@@ -57,13 +81,18 @@ export const routeConfig: RouteObject[] = [
     ],
   },
   {
-    element: <ProtectedRoute />,
+    element: <StaffRoute />,
+    children: [{ element: <StaffLayout />, children: staffRoutes }],
+  },
+  {
+    element: <CustomerRoute />,
     children: [
       {
         element: <DashboardLayout />,
         children: [
           { index: true, element: <Navigate to={routePaths.dashboard} replace /> },
           ...dashboardRoutes,
+          ...servicesRoutes,
           ...gstRoutes,
           ...itrRoutes,
           ...loansRoutes,

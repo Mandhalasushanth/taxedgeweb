@@ -10,7 +10,7 @@ const mockItems: ProfileItem[] = [
     id: 'profile_001',
     reference: 'TE-Profile-0001',
     title: 'Sample profile record',
-    status: 'in_review',
+    status: 'MANAGER_REVIEW',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },

@@ -1,5 +1,6 @@
 import { env } from '@core/config'
-import type { AuthSession, AuthUser } from '@core/auth'
+import { permissionsFor } from '@core/auth'
+import type { AuthSession, AuthUser, UserRole } from '@core/auth'
 
 import { authApi } from '../api/authApi'
 import type {
@@ -12,14 +13,45 @@ import type {
 /* ------------------------------------------------------------------ *
  * Development mocks - delete this block once the API is live.
  * ------------------------------------------------------------------ */
-const mockUser = (mobile: string): AuthUser => ({
-  id: 'usr_demo_001',
-  fullName: 'Demo User',
-  email: 'demo@taxedge.in',
-  mobile,
-  role: 'business',
-  isProfileComplete: true,
-})
+/**
+ * Demo sign-ins while mocks are on:
+ *   9000000001  Super admin      9000000004  GST agent
+ *   9000000002  Admin            9000000005  ITR agent
+ *   9000000003  Manager          anything else  Customer
+ */
+const DEMO_ROLES: Record<string, { role: UserRole; fullName: string; id: string; department?: string }> = {
+  '9000000001': { role: 'SUPER_ADMIN', fullName: 'Vasavi Reddy', id: 'stf_001', department: 'Operations' },
+  '9000000002': { role: 'ADMIN', fullName: 'Rahul Menon', id: 'stf_002', department: 'Operations' },
+  '9000000003': { role: 'MANAGER', fullName: 'Priya Nair', id: 'stf_003', department: 'Compliance' },
+  '9000000004': { role: 'GST_AGENT', fullName: 'Imran Shaikh', id: 'stf_004', department: 'Compliance' },
+  '9000000005': { role: 'ITR_AGENT', fullName: 'Sneha Kulkarni', id: 'stf_005', department: 'Compliance' },
+}
+
+const mockUser = (mobile: string): AuthUser => {
+  const demo = DEMO_ROLES[mobile]
+  if (demo) {
+    return {
+      id: demo.id,
+      fullName: demo.fullName,
+      email: `${demo.fullName.split(' ')[0].toLowerCase()}@taxedge.in`,
+      mobile,
+      role: demo.role,
+      department: demo.department,
+      permissions: permissionsFor(demo.role),
+      isProfileComplete: true,
+    }
+  }
+
+  return {
+    id: 'usr_demo_001',
+    fullName: 'Demo Customer',
+    email: 'demo@taxedge.in',
+    mobile,
+    role: 'CUSTOMER',
+    permissions: [],
+    isProfileComplete: true,
+  }
+}
 
 const mockSession = (mobile: string): AuthSession => ({
   user: mockUser(mobile),

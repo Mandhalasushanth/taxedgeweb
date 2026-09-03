@@ -21,8 +21,8 @@ services, types, validation and CSS.
 | Layer     | Owns                                                              | May import        |
 |-----------|-------------------------------------------------------------------|-------------------|
 | `app/`    | Router, guards, providers, layouts, 404                            | everything        |
-| `modules/`| One folder per business domain                                     | `core`, `shared`, `store` |
-| `core/`   | HTTP client, endpoints, auth session, config, errors, storage      | nothing internal  |
+| `modules/`| One folder per business domain, plus `staff/`                      | `core`, `shared`, `store` |
+| `core/`   | HTTP client, endpoints, auth session, permissions, config, errors, storage | nothing internal  |
 | `shared/` | UI kit, generic hooks, utils, common types, theme                  | `core/config` only |
 | `store/`  | Global Zustand slices (auth mirror, theme, toasts, preferences)    | `core`            |
 
@@ -102,3 +102,73 @@ return canned data, so the UI runs with no backend. In demo mode the OTP is
 
 `tests/unit`, `tests/integration`, `tests/e2e` are scaffolded but no runner is
 installed yet. Vitest + Testing Library is the natural fit.
+
+
+## Customer and staff
+
+Both applications live in this one project, over the same data. What separates
+them is the guard and the layout the router wraps a route group in:
+
+```
+PublicRoute   → AuthLayout       → modules/authentication
+StaffRoute    → StaffLayout      → modules/staff
+CustomerRoute → DashboardLayout  → the customer modules
+```
+
+- `app/router/StaffRoute` decides staff versus customer.
+- `modules/staff/components/PermissionRoute` decides which staff areas a role
+  may open. It lives in the module so the module does not depend on `app`.
+- `core/auth/permissions.ts` holds the role-to-permission map. It drives the
+  sidebar, the guards and which buttons render — for navigation and UX only.
+  **The backend enforces authorization independently.**
+
+### Standardized enums
+
+Roles and statuses use the backend's exact enum values; the frontend only maps
+them to display labels (`shared/constants/common.constants.ts`).
+
+```
+Roles      CUSTOMER · SUPER_ADMIN · ADMIN · MANAGER ·
+           GST_AGENT · ITR_AGENT · LOAN_AGENT · INSURANCE_AGENT ·
+           REGISTRATION_AGENT · ACCOUNTS_AGENT
+
+Statuses   DRAFT · SUBMITTED · MANAGER_REVIEW · QUERY_RAISED · QUERY_RESOLVED ·
+           READY_FOR_ASSIGNMENT · ASSIGNED · IN_PROGRESS · COMPLETED ·
+           REJECTED · CANCELLED
+```
+
+Never introduce a variant such as `manager`, `ROLE_MANAGER` or `Manager`.
+
+### The application workflow
+
+```
+SUBMITTED → MANAGER_REVIEW ─┬─ QUERY_RAISED → QUERY_RESOLVED ─┐
+                            └─ READY_FOR_ASSIGNMENT ───────────┴→ agent bucket
+                                                                      ↓
+                                              assigned by a manager, or claimed
+                                                                      ↓
+                                            ASSIGNED → IN_PROGRESS → COMPLETED
+```
+
+`modules/staff/constants/staff.constants.ts` encodes this: `STAGE_OF_STATUS`
+maps a status to its pipeline stage, and `NEXT_STATUSES` decides which
+transitions a screen may offer. Assignment history is appended to, never
+overwritten, so a reassignment keeps the earlier record.
+
+### The staff module
+
+```
+modules/staff/
+├── components/          shared across staff areas (DataTable, RoleBadge, …)
+├── constants/           stage map, allowed transitions, filter labels
+├── types/               staff models
+├── services/mockData.ts one dev dataset the area services read from
+├── dashboard/           built
+├── applications/        built
+├── staff-management/    built
+└── customers/ assignments/ documents/ reports/
+    services-management/ pricing/ notifications/ settings/   scaffolded
+```
+
+Each area keeps the same seven folders as any other module and exports its
+routes; `modules/staff/routes.tsx` groups them by the permission each needs.

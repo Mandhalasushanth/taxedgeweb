@@ -9,7 +9,7 @@ const mockItems: InsuranceItem[] = [
     id: 'insurance_001',
     reference: 'TE-Insurance-0001',
     title: 'Sample policy',
-    status: 'in_review',
+    status: 'MANAGER_REVIEW',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },

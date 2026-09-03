@@ -25,7 +25,7 @@ const mockApplications: GstApplication[] = [
     state: 'Telangana',
     pan: 'AABCT1234H',
     gstin: '36AABCT1234H1Z5',
-    status: 'approved',
+    status: 'COMPLETED',
     createdAt: iso(40),
     updatedAt: iso(9),
     timeline: [
@@ -42,7 +42,7 @@ const mockApplications: GstApplication[] = [
     businessType: 'proprietorship',
     state: 'Andhra Pradesh',
     pan: 'AXTPV9821K',
-    status: 'action_required',
+    status: 'QUERY_RAISED',
     createdAt: iso(12),
     updatedAt: iso(2),
     timeline: [
@@ -59,7 +59,7 @@ const mockApplications: GstApplication[] = [
     businessType: 'llp',
     state: 'Karnataka',
     pan: 'AAFFN5533D',
-    status: 'in_review',
+    status: 'MANAGER_REVIEW',
     createdAt: iso(5),
     updatedAt: iso(1),
     timeline: [
@@ -72,9 +72,9 @@ const mockApplications: GstApplication[] = [
 ]
 
 const mockReturns: GstReturn[] = [
-  { id: 'r1', gstin: '36AABCT1234H1Z5', returnType: 'GSTR-1', period: '2026-08', dueOn: '2026-09-11', taxPayable: 0, status: 'completed', createdAt: iso(20), updatedAt: iso(19) },
-  { id: 'r2', gstin: '36AABCT1234H1Z5', returnType: 'GSTR-3B', period: '2026-08', dueOn: '2026-09-20', taxPayable: 84_500, status: 'in_review', createdAt: iso(6), updatedAt: iso(1) },
-  { id: 'r3', gstin: '36AABCT1234H1Z5', returnType: 'GSTR-1', period: '2026-09', dueOn: '2026-10-11', taxPayable: 0, status: 'draft', createdAt: iso(1), updatedAt: iso(1) },
+  { id: 'r1', gstin: '36AABCT1234H1Z5', returnType: 'GSTR-1', period: '2026-08', dueOn: '2026-09-11', taxPayable: 0, status: 'COMPLETED', createdAt: iso(20), updatedAt: iso(19) },
+  { id: 'r2', gstin: '36AABCT1234H1Z5', returnType: 'GSTR-3B', period: '2026-08', dueOn: '2026-09-20', taxPayable: 84_500, status: 'MANAGER_REVIEW', createdAt: iso(6), updatedAt: iso(1) },
+  { id: 'r3', gstin: '36AABCT1234H1Z5', returnType: 'GSTR-1', period: '2026-09', dueOn: '2026-10-11', taxPayable: 0, status: 'DRAFT', createdAt: iso(1), updatedAt: iso(1) },
 ]
 
 const delay = (ms = 400) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -125,7 +125,7 @@ export const gstService = {
         businessType: payload.businessType,
         state: payload.state,
         pan: payload.pan,
-        status: 'submitted',
+        status: 'SUBMITTED',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }
@@ -152,7 +152,7 @@ export const gstService = {
         period: payload.period,
         dueOn: new Date().toISOString(),
         taxPayable: payload.taxPayable,
-        status: 'submitted',
+        status: 'SUBMITTED',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }

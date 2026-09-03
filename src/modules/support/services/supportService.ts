@@ -9,7 +9,7 @@ const mockItems: SupportItem[] = [
     id: 'support_001',
     reference: 'TE-Support-0001',
     title: 'Sample ticket',
-    status: 'in_review',
+    status: 'MANAGER_REVIEW',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },

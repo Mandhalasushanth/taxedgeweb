@@ -9,7 +9,7 @@ const mockItems: LoansItem[] = [
     id: 'loans_001',
     reference: 'TE-Loans-0001',
     title: 'Sample loan application',
-    status: 'in_review',
+    status: 'MANAGER_REVIEW',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
