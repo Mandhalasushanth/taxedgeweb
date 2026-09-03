@@ -7,12 +7,16 @@ import { APPLICATION_STATUSES } from '@shared/types'
 import type { ApplicationStatus } from '@shared/types'
 
 
-import { GSTCard } from '../../components/GSTCard/GSTCard'
+import { GSTStats } from '../../components/GSTStats/GSTStats'
+import { GSTServices } from '../../components/GSTServices/GSTServices'
+import { GSTApplicationList } from '../../components/GSTApplicationList/GSTApplicationList'
+import { useGstDashboardData } from '../../hooks/useGstDashboardData'
 import { useGstApplications } from '../../hooks/useGstApplications'
 import './GSTDashboard.css'
 
 export const GSTDashboard = () => {
   const { data, isLoading, error, search, setSearch, status, setStatus } = useGstApplications()
+  const dashboardData = useGstDashboardData()
 
   return (
     <div className="gst-dashboard">
@@ -57,29 +61,14 @@ export const GSTDashboard = () => {
         </div>
       </div>
 
-      {isLoading && <Loader label="Loading GST applications" />}
-      {error && <EmptyState title="Could not load applications" description={error} />}
-
-      {!isLoading && !error && data && data.length === 0 && (
-        <EmptyState
-          title="No GST applications yet"
-          description="Start a registration and we will take it from there."
-          icon={<span>%</span>}
-          action={
-            <Link to={routePaths.gst.registration}>
-              <Button>Start a registration</Button>
-            </Link>
-          }
-        />
-      )}
-
-      {!isLoading && data && data.length > 0 && (
-        <div className="gst-dashboard__grid">
-          {data.map((application) => (
-            <GSTCard key={application.id} application={application} />
-          ))}
+      {!dashboardData.isLoading && (
+        <div className="gst-dashboard__overview" style={{ marginTop: '24px' }}>
+          <GSTStats stats={dashboardData.stats} />
+          <GSTServices services={dashboardData.services} />
+          <GSTApplicationList applications={dashboardData.applications} />
         </div>
       )}
+
     </div>
   )
 }
