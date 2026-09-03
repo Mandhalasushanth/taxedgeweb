@@ -10,6 +10,7 @@ export interface DataTableColumn<T> {
   header: string
   render: (row: T) => ReactNode
   align?: 'left' | 'right'
+  width?: string
 }
 
 export interface DataTableProps<T> {

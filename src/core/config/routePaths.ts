@@ -1,12 +1,15 @@
 /** Single source of truth for URLs. Never hard-code a path in a component. */
 export const routePaths = {
   root: '/',
+  registration: '/registration',
+  customerType: '/customer-type',
   auth: {
     login: '/auth/login',
     register: '/auth/register',
     otp: '/auth/otp',
     passcode: '/auth/passcode',
     createProfile: '/auth/create-profile',
+    customerType: '/auth/customer-type',
   },
   dashboard: '/dashboard',
   gst: {
@@ -21,6 +24,8 @@ export const routePaths = {
   payments: '/payments',
   documents: '/documents',
   applications: '/applications',
+  services: '/services',
+  allServices: '/all-services',
   profile: '/profile',
   chat: '/chat',
   support: '/support',

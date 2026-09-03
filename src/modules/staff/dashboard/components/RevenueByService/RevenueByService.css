@@ -11,6 +11,7 @@
   border: none;
   border-radius: var(--radius-pill);
   overflow: hidden;
+  background: var(--color-surface-alt);
 }
 
 .revenue-by-service__bar::-webkit-progress-bar {

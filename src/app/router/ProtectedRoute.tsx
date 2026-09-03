@@ -17,7 +17,7 @@ export const ProtectedRoute = ({ roles }: ProtectedRouteProps) => {
   if (isBootstrapping) return <Loader fullPage label="Checking your session" />
 
   if (!isAuthenticated) {
-    return <Navigate to={routePaths.auth.login} state={{ from: location.pathname }} replace />
+    return <Navigate to={routePaths.auth.register} state={{ from: location.pathname }} replace />
   }
 
   if (roles && user && !roles.includes(user.role)) {

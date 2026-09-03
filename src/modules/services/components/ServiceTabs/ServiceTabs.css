@@ -1,0 +1,54 @@
+/* ===================================================
+   TAXEDGE SERVICE CATEGORY TABS
+   Clean Minimalist Pills with TaxEdge Orange Active State
+=================================================== */
+
+.service-tabs-container {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.service-tabs-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Opera */
+}
+
+.service-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: max-content;
+}
+
+.service-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.52rem 1.15rem;
+  background: #ffffff;
+  color: #334155;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.service-tab:hover:not(.service-tab--active) {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.service-tab--active {
+  background: #FF6200;
+  color: #ffffff;
+  border-color: #FF6200;
+  box-shadow: 0 2px 8px rgba(255, 98, 0, 0.28);
+}
