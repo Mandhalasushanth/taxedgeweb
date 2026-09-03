@@ -1,0 +1,107 @@
+/* ===================================================
+   TAXEDGE ALL SERVICES PAGE CONTENT
+=================================================== */
+
+.all-services-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Page Header / Titles */
+.all-services-page__hero {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.5rem;
+}
+
+.all-services-page__title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 2vw, 1.85rem);
+  font-weight: 800;
+  color: #0A2647;
+  letter-spacing: -0.025em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.all-services-page__subtitle {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Filter Controls Bar */
+.all-services-page__filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+/* Empty Search Results State */
+.all-services-page__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px dashed #cbd5e1;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.all-services-page__empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #fff7ed;
+  color: #FF6200;
+  margin-bottom: 1rem;
+}
+
+.all-services-page__empty-title {
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.4rem 0;
+}
+
+.all-services-page__empty-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  max-width: 400px;
+  margin: 0 0 1.25rem 0;
+}
+
+.all-services-page__empty-btn {
+  padding: 0.55rem 1.25rem;
+  background: #FF6200;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+
+.all-services-page__empty-btn:hover {
+  background: #ea580c;
+}
+
+/* Responsive Rules */
+@media (max-width: 640px) {
+  .all-services-page__hero {
+    margin-bottom: 1.25rem;
+  }
+}

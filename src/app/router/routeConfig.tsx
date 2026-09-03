@@ -19,7 +19,7 @@ import { itrRoutes } from '@modules/itr'
 import { loansRoutes } from '@modules/loans'
 import { paymentsRoutes } from '@modules/payments'
 import { profileRoutes, CreateProfilePage } from '@modules/profile'
-import { servicesRoutes, AllServicesPage } from '@modules/services'
+import { servicesRoutes } from '@modules/services'
 import { staffRoutes } from '@modules/staff'
 import { supportRoutes } from '@modules/support'
 
@@ -63,14 +63,7 @@ export const routeConfig: RouteObject[] = [
     path: routePaths.auth.customerType,
     element: <CustomerTypePage />,
   },
-  {
-    path: '/services',
-    element: <AllServicesPage />,
-  },
-  {
-    path: '/all-services',
-    element: <AllServicesPage />,
-  },
+
   {
     element: <PublicRoute />,
     children: [

@@ -30,7 +30,7 @@ export const Logo = ({
     )}
   >
     <img
-      src="/logo.png"
+      src={variant === 'dark' ? '/logo-dark.png' : '/logo.png'}
       alt="TaxEdge Logo"
       className="taxedge-logo__img"
       loading="eager"

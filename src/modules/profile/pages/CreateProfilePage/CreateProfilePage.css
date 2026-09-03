@@ -1,71 +1,23 @@
 /* ===================================================
    TAXEDGE CREATE PROFILE / REGISTRATION PAGE
-   Layout: 55% Left Panel (Dark Navy) & 45% Right Panel (White)
-   Desktop & Tablets: Side-by-Side
+   Single Screen (100vh) Layout: 50% Left Panel & 50% Right Panel
+   Desktop & Tablets: Perfect 50% / 50% Side-by-Side Single Viewport
    Mobile Only (< 768px): Stacked with reduced image height
 =================================================== */
 
 .create-profile-page {
   display: grid;
-  grid-template-columns: 55% 45%;
+  grid-template-columns: 50% 50%;
+  height: 100vh;
   min-height: 100vh;
   width: 100%;
   background: #f8fafc;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 /* ===================================================
-   BACKGROUND DECORATIONS
-=================================================== */
-
-.create-profile-page__dots {
-  position: absolute;
-  width: 100px;
-  height: 70px;
-  background-image: radial-gradient(rgba(56, 189, 248, 0.22) 1.5px, transparent 1.5px);
-  background-size: 14px 14px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.create-profile-page__dots--top-right {
-  top: 30px;
-  right: 47%;
-}
-
-.create-profile-page__dots--bottom-right {
-  bottom: 50px;
-  right: 47%;
-}
-
-.create-profile-page__glow--top-right {
-  position: absolute;
-  top: 25px;
-  right: 48%;
-  width: 8px;
-  height: 8px;
-  background: #FF6200;
-  border-radius: 50%;
-  box-shadow: 0 0 14px 3px #FF6200;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.create-profile-page__wave-bottom-left {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 220px;
-  height: 130px;
-  background: linear-gradient(135deg, #FF6200 0%, #EA580C 100%);
-  clip-path: polygon(0 55%, 100% 100%, 0 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* ===================================================
-   LEFT INFORMATION PANEL (55% DARK NAVY)
+   LEFT INFORMATION PANEL (50% DARK NAVY)
 =================================================== */
 
 .create-profile-page__left-panel {
@@ -73,18 +25,37 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2.25rem 2.75rem;
+  height: 100vh;
+  padding: 2.25rem 3rem;
   background: linear-gradient(165deg, #071126 0%, #030814 100%);
   color: #ffffff;
   z-index: 2;
   border-right: 1px solid rgba(255, 255, 255, 0.06);
-  overflow-y: auto;
+  overflow: hidden;
 }
 
+
+/* Bottom Left Orange Wave Accent */
+.create-profile-page__wave-bottom-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 220px;
+  height: 120px;
+  background: linear-gradient(135deg, #FF6200 0%, #EA580C 100%);
+  clip-path: polygon(0 40%, 100% 100%, 0 100%);
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 0 0 25px rgba(255, 98, 0, 0.4);
+}
+
+/* 1. Top Brand Header */
 .create-profile-page__brand-header {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.85rem;
+  z-index: 2;
 }
 
 .create-profile-page__logo-tile {
@@ -133,26 +104,29 @@
   margin-top: 2px;
 }
 
-/* Middle Section: Text on Left + Graphic on Right */
+/* 2. Middle Section: Text on Left + Graphic on Right */
 .create-profile-page__middle-grid {
+  position: relative;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 1.25rem;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1.5rem;
   align-items: center;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   width: 100%;
+  z-index: 2;
 }
 
 .create-profile-page__text-col {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .create-profile-page__heading {
   font-family: var(--font-sans);
-  font-size: clamp(1.6rem, 2vw, 2.15rem);
+  font-size: clamp(1.6rem, 2.1vw, 2.25rem);
   font-weight: 800;
-  line-height: 1.18;
+  line-height: 1.15;
   color: #ffffff;
   letter-spacing: -0.025em;
   margin: 0 0 0.65rem 0;
@@ -160,6 +134,7 @@
 
 .create-profile-page__heading-orange {
   color: #FF6200;
+  display: inline-block;
 }
 
 .create-profile-page__desc {
@@ -167,6 +142,7 @@
   line-height: 1.55;
   color: rgba(226, 232, 240, 0.82);
   margin: 0;
+  max-width: 330px;
 }
 
 /* Graphic Column */
@@ -179,7 +155,7 @@
 .create-profile-page__graphic {
   position: relative;
   width: 100%;
-  height: 155px;
+  height: 150px;
   perspective: 900px;
 }
 
@@ -194,10 +170,10 @@
 .security-card--aadhaar {
   top: 5px;
   right: 0;
-  width: 145px;
-  height: 90px;
+  width: 140px;
+  height: 86px;
   background: #ffffff;
-  padding: 7px 9px;
+  padding: 6px 9px;
   transform: rotate(6deg);
   border: 1px solid #e2e8f0;
   z-index: 2;
@@ -207,7 +183,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .security-card__aadhaar-emblem {
@@ -217,8 +193,8 @@
 }
 
 .aadhaar-sun {
-  width: 20px;
-  height: 20px;
+  width: 19px;
+  height: 19px;
 }
 
 .security-card__aadhaar-tag {
@@ -231,11 +207,11 @@
 .security-card__lines {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3.5px;
 }
 
 .security-card__line {
-  height: 3px;
+  height: 2.5px;
   background: #cbd5e1;
   border-radius: 2px;
 }
@@ -243,14 +219,14 @@
 .security-card__line--short { width: 45%; }
 .security-card__line--medium { width: 70%; }
 .security-card__line--long { width: 90%; }
-.security-card__line--sm { width: 35px; }
+.security-card__line--sm { width: 34px; }
 
 /* PAN Card (Bottom Left) */
 .security-card--pan {
-  top: 40px;
+  top: 38px;
   left: 0;
-  width: 155px;
-  height: 96px;
+  width: 150px;
+  height: 92px;
   background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
   padding: 8px;
   transform: rotate(-8deg);
@@ -261,28 +237,28 @@
 .security-card__pan-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
+  gap: 7px;
+  margin-bottom: 5px;
 }
 
 .security-card__pan-avatar {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 23px;
+  height: 23px;
   background: #0284c7;
   color: #ffffff;
   border-radius: 5px;
 }
 
 .pan-user-icon {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
 }
 
 .security-card__pan-label {
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 800;
   color: #0369a1;
   letter-spacing: 0.05em;
@@ -291,11 +267,11 @@
 .security-card__pan-body {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .security-card__pan-strip {
-  height: 4px;
+  height: 3.5px;
   background: rgba(3, 105, 161, 0.25);
   border-radius: 2px;
   width: 85%;
@@ -304,10 +280,10 @@
 /* Orange Shield */
 .security-card__shield {
   position: absolute;
-  top: 45px;
-  right: 15px;
-  width: 50px;
-  height: 58px;
+  top: 42px;
+  right: 12px;
+  width: 48px;
+  height: 55px;
   color: #FF6200;
   filter: drop-shadow(0 6px 16px rgba(255, 98, 0, 0.6));
   z-index: 4;
@@ -323,18 +299,20 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -45%);
-  width: 20px;
-  height: 20px;
+  width: 19px;
+  height: 19px;
 }
 
-/* Bottom Security Features */
+/* 3. Bottom Security Features */
 .create-profile-page__security-bottom {
+  position: relative;
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: 0;
+  z-index: 2;
 }
 
 /* ===================================================
-   RIGHT FORM SECTION (45% LIGHT SURFACE)
+   RIGHT FORM SECTION (50% LIGHT SURFACE)
 =================================================== */
 
 .create-profile-page__right-section {
@@ -342,103 +320,104 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1.75rem 2.25rem;
+  height: 100vh;
+  padding: 1.5rem 2.5rem;
   background: #f8fafc;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .create-profile-page__card {
   width: 100%;
-  max-width: 530px;
+  max-width: 510px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 20px;
-  padding: 2rem 2.25rem;
+  border-radius: 18px;
+  padding: 1.5rem 1.85rem;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
 }
 
 .create-profile-page__orange-dash {
-  width: 42px;
-  height: 5px;
+  width: 38px;
+  height: 4.5px;
   background: #FF6200;
   border-radius: 3px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.65rem;
 }
 
 .create-profile-page__form-header {
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.85rem;
 }
 
 .create-profile-page__title {
   font-family: var(--font-sans);
-  font-size: clamp(1.45rem, 1.8vw, 1.85rem);
+  font-size: clamp(1.35rem, 1.65vw, 1.75rem);
   font-weight: 800;
   color: #0f172a;
   letter-spacing: -0.025em;
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 0.2rem 0;
 }
 
 .create-profile-page__subtitle {
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   color: #64748b;
   margin: 0;
 }
 
 /* ===================================================
    TABLETS & MEDIUM SCREENS (768px to 1199px)
-   KEEPS SIDE-BY-SIDE 55% / 45% (SAME AS DESKTOP)
+   KEEPS SIDE-BY-SIDE 50% / 50% (SAME AS DESKTOP)
 =================================================== */
 
 @media (min-width: 768px) and (max-width: 1199px) {
   .create-profile-page {
-    grid-template-columns: 52% 48%;
+    grid-template-columns: 50% 50%;
   }
 
   .create-profile-page__left-panel {
-    padding: 1.5rem 1.75rem;
+    padding: 1.25rem 1.5rem;
   }
 
   .create-profile-page__heading {
-    font-size: 1.45rem;
+    font-size: 1.35rem;
   }
 
   .create-profile-page__desc {
-    font-size: 0.78rem;
+    font-size: 0.76rem;
   }
 
   .create-profile-page__middle-grid {
     grid-template-columns: 1.15fr 0.85fr;
     gap: 0.75rem;
-    margin: 0.75rem 0;
+    margin: 0.35rem 0;
   }
 
   .create-profile-page__graphic {
-    height: 135px;
+    height: 125px;
   }
 
   .security-card--aadhaar {
-    width: 125px;
-    height: 78px;
+    width: 115px;
+    height: 72px;
   }
 
   .security-card--pan {
-    width: 130px;
-    height: 82px;
-    top: 35px;
+    width: 120px;
+    height: 76px;
+    top: 30px;
   }
 
   .security-card__shield {
-    width: 44px;
-    height: 50px;
-    top: 38px;
+    width: 40px;
+    height: 46px;
+    top: 32px;
   }
 
   .create-profile-page__right-section {
-    padding: 1.25rem 1.5rem;
+    padding: 1.25rem 1.25rem;
   }
 
   .create-profile-page__card {
-    padding: 1.5rem 1.5rem;
+    padding: 1.25rem 1.35rem;
     border-radius: 16px;
   }
 }
@@ -456,8 +435,6 @@
     overflow-y: auto;
   }
 
-  .create-profile-page__dots,
-  .create-profile-page__glow--top-right,
   .create-profile-page__wave-bottom-left {
     display: none;
   }
@@ -467,6 +444,7 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 1.5rem 1.25rem;
     height: auto;
+    overflow: visible;
   }
 
   .create-profile-page__heading {
@@ -514,6 +492,7 @@
   .create-profile-page__right-section {
     padding: 1.5rem 1rem;
     height: auto;
+    overflow: visible;
   }
 
   .create-profile-page__card {

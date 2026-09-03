@@ -1,15 +1,15 @@
-import { Link } from 'react-router-dom'
-
-import { routePaths } from '@core/config'
-import { Badge, Card, EmptyState, Loader } from '@shared/components'
-import { STATUS_LABELS, STATUS_TONES } from '@shared/constants'
-import { formatDate, relativeTime } from '@shared/utils'
+import { EmptyState, Loader } from '@shared/components'
 import { useAuthStore } from '@store/index'
 
-import { DashboardHero } from '../../components/DashboardHero/DashboardHero'
-import { DashboardStats } from '../../components/DashboardStats/DashboardStats'
-import { DeadlineBanner } from '../../components/DeadlineBanner/DeadlineBanner'
-import { QuickServices } from '../../components/QuickServices/QuickServices'
+import {
+  DashboardHero,
+  DashboardStats,
+  DeadlineBanner,
+  PendingOnYou,
+  QuickServices,
+  RecentApplications,
+  UpcomingDeadlines,
+} from '../../components'
 import { useDashboardSummary } from '../../hooks/useDashboardSummary'
 import { quickServices } from '../../services/dashboardService'
 import './CustomerDashboard.css'
@@ -33,40 +33,11 @@ export const CustomerDashboard = () => {
 
       <QuickServices services={quickServices} />
 
-      <div className="dashboard__columns">
-        <Card
-          title="Recent activity"
-          actions={
-            <Link className="dashboard__link" to={routePaths.applications}>
-              View all
-            </Link>
-          }
-        >
-          <ul className="dashboard__activity">
-            {data.recentActivity.map((item) => (
-              <li className="activity" key={item.id}>
-                <div>
-                  <p className="activity__title">{item.title}</p>
-                  <p className="activity__meta">
-                    {item.module} · {relativeTime(item.updatedAt)}
-                  </p>
-                </div>
-                <Badge tone={STATUS_TONES[item.status]}>{STATUS_LABELS[item.status]}</Badge>
-              </li>
-            ))}
-          </ul>
-        </Card>
+      <RecentApplications applications={data.recentApplications} />
 
-        <Card title="Upcoming deadlines" subtitle="Filing dates in the next few weeks">
-          <ul className="dashboard__deadlines">
-            {data.upcomingDeadlines.map((deadline) => (
-              <li className="deadline" key={deadline.id}>
-                <span>{deadline.label}</span>
-                <span className="deadline__date">{formatDate(deadline.dueOn)}</span>
-              </li>
-            ))}
-          </ul>
-        </Card>
+      <div className="dashboard__columns">
+        <PendingOnYou tasks={data.pendingTasks} />
+        <UpcomingDeadlines deadlines={data.upcomingDeadlinesList} />
       </div>
     </div>
   )

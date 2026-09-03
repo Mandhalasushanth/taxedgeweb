@@ -54,8 +54,17 @@
   font-size: var(--font-size-sm);
   color: var(--grey-900);
   background: transparent;
-  border: none;
-  outline: none;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.field__input:focus,
+.field__input:focus-visible,
+.field__input:active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .field__input::placeholder {

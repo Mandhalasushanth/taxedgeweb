@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import type { ChangeEvent, FormEvent } from 'react'
 import { Button, Input } from '@shared/components'
 import { profileSchema } from '../../validation/profileSchema'
@@ -31,19 +31,57 @@ export const ProfileForm = ({
     ...initialValues,
   })
   const [errors, setErrors] = useState<Partial<Record<keyof ProfileFormValues | 'form', string>>>({})
+  const dateInputRef = useRef<HTMLInputElement>(null)
 
   const formatPAN = (val: string) => val.toUpperCase().slice(0, 10)
 
-  const formatAadhaar = (val: string) => {
-    const digits = val.replace(/\D/g, '').slice(0, 12)
-    return digits
-  }
+  const formatAadhaar = (val: string) => val.replace(/\D/g, '').slice(0, 12)
+
+  const formatMobile = (val: string) => val.replace(/\D/g, '').slice(0, 10)
 
   const formatDOB = (val: string) => {
     const digits = val.replace(/\D/g, '').slice(0, 8)
     if (digits.length <= 2) return digits
     if (digits.length <= 4) return `${digits.slice(0, 2)}-${digits.slice(2)}`
     return `${digits.slice(0, 2)}-${digits.slice(2, 4)}-${digits.slice(4)}`
+  }
+
+  const handleDatePickerChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const pickerValue = event.target.value // Format: YYYY-MM-DD
+    if (!pickerValue) return
+
+    const parts = pickerValue.split('-')
+    if (parts.length === 3) {
+      const [year, month, day] = parts
+      const formatted = `${day}-${month}-${year}`
+      setValues((prev) => ({ ...prev, dob: formatted }))
+      if (errors.dob) {
+        setErrors((prev) => ({ ...prev, dob: undefined }))
+      }
+    }
+  }
+
+  const openCalendar = () => {
+    if (dateInputRef.current) {
+      if ('showPicker' in HTMLInputElement.prototype) {
+        try {
+          dateInputRef.current.showPicker()
+        } catch {
+          dateInputRef.current.click()
+        }
+      } else {
+        dateInputRef.current.click()
+      }
+    }
+  }
+
+  // Convert DD-MM-YYYY to YYYY-MM-DD for native picker value
+  const getPickerValue = () => {
+    const match = values.dob.match(/^(\d{2})-(\d{2})-(\d{4})$/)
+    if (match) {
+      return `${match[3]}-${match[2]}-${match[1]}`
+    }
+    return ''
   }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -54,6 +92,8 @@ export const ProfileForm = ({
       formattedValue = formatPAN(value)
     } else if (name === 'aadhaar') {
       formattedValue = formatAadhaar(value)
+    } else if (name === 'mobile') {
+      formattedValue = formatMobile(value)
     } else if (name === 'dob' && !value.includes('/') && value.length > (values.dob?.length || 0)) {
       formattedValue = formatDOB(value)
     }
@@ -62,6 +102,9 @@ export const ProfileForm = ({
 
     if (errors[name as keyof ProfileFormValues]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }))
+    }
+    if (errors.form) {
+      setErrors((prev) => ({ ...prev, form: undefined }))
     }
   }
 
@@ -93,6 +136,17 @@ export const ProfileForm = ({
 
   return (
     <form className="profile-form" onSubmit={handleSubmit} noValidate>
+      {/* Hidden Native Date Input for Calendar Picker */}
+      <input
+        ref={dateInputRef}
+        type="date"
+        className="profile-form__hidden-date-picker"
+        value={getPickerValue()}
+        onChange={handleDatePickerChange}
+        tabIndex={-1}
+        aria-hidden="true"
+      />
+
       {/* Row 1: Full name * & Email * */}
       <div className="profile-form__row">
         <Input
@@ -147,20 +201,36 @@ export const ProfileForm = ({
           required
           autoComplete="bday"
           prefix={
-            <svg className="form-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
+            <button
+              type="button"
+              className="dob-calendar-btn"
+              onClick={openCalendar}
+              title="Open calendar picker"
+              aria-label="Open calendar picker"
+            >
+              <svg className="form-field-icon dob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </button>
           }
           suffix={
-            <svg className="form-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
+            <button
+              type="button"
+              className="dob-calendar-btn"
+              onClick={openCalendar}
+              title="Open calendar picker"
+              aria-label="Open calendar picker"
+            >
+              <svg className="form-field-icon dob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </button>
           }
         />
 
@@ -217,7 +287,9 @@ export const ProfileForm = ({
           name="mobile"
           type="tel"
           label="Mobile"
-          placeholder="+91 98765 43210"
+          inputMode="numeric"
+          maxLength={10}
+          placeholder="10-digit mobile"
           value={values.mobile}
           error={errors.mobile}
           onChange={handleChange}
@@ -247,7 +319,7 @@ export const ProfileForm = ({
             <textarea
               id="profile-address"
               name="address"
-              rows={3}
+              rows={2}
               className="field__input address-textarea"
               placeholder="Enter your complete address"
               value={values.address}

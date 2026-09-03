@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 
 import { permissionsFor } from '@core/auth'
 import type { UserRole } from '@core/auth'
-import { appConfig, routePaths } from '@core/config'
+import { routePaths } from '@core/config'
 
 import { staffNavSections } from './staffNavigation'
 
@@ -16,8 +16,15 @@ export const StaffSidebar = ({ role }: StaffSidebarProps) => {
   return (
     <aside className="staff-shell__sidebar">
       <NavLink className="staff-shell__brand" to={routePaths.staff.dashboard}>
-        {appConfig.name}
-        <span className="staff-shell__brand-tag">Staff</span>
+        <div className="staff-shell__brand-logo-box">
+          <img src="/logo.png" alt="TaxEdge" className="staff-shell__brand-logo-img" />
+        </div>
+        <div className="staff-shell__brand-text">
+          <span className="staff-shell__brand-name">
+            TAX<span className="staff-shell__brand-name-accent">EDGE</span>
+          </span>
+          <span className="staff-shell__brand-tag">Staff Portal</span>
+        </div>
       </NavLink>
 
       <nav className="staff-shell__nav">

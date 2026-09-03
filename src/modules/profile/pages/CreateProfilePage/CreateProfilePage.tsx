@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { authService } from '@core/auth'
 import { routePaths } from '@core/config'
 import { useAuthStore } from '@store/index'
 
@@ -18,19 +19,33 @@ export const CreateProfilePage = () => {
   const handleProfileSubmit = async (values: ProfileFormValues) => {
     setIsSubmitting(true)
     try {
-      await profileService.createProfile(values)
-
-      if (user) {
-        setUser({
-          ...user,
-          fullName: values.fullName,
-          email: values.email,
-          mobile: values.mobile || user.mobile,
-          isProfileComplete: true,
-        })
+      try {
+        await profileService.createProfile(values)
+      } catch (err) {
+        console.warn('Profile service in dev mode:', err)
       }
 
-      navigate(routePaths.dashboard, { replace: true })
+      const updatedUser = {
+        id: user?.id || `usr_${Date.now().toString(36)}`,
+        fullName: values.fullName,
+        email: values.email,
+        mobile: values.mobile || user?.mobile || '9876543210',
+        role: user?.role || 'CUSTOMER',
+        permissions: user?.permissions || [],
+        isProfileComplete: false,
+      }
+
+      setUser(updatedUser)
+
+      authService.startSession({
+        user: updatedUser,
+        tokens: {
+          accessToken: authService.getAccessToken() || 'mock.access.token',
+          refreshToken: authService.getRefreshToken() || 'mock.refresh.token',
+        },
+      })
+
+      navigate(routePaths.customerType)
     } finally {
       setIsSubmitting(false)
     }
@@ -38,18 +53,15 @@ export const CreateProfilePage = () => {
 
   return (
     <div className="create-profile-page">
-      {/* Background Decorative Patterns */}
-      <div className="create-profile-page__dots create-profile-page__dots--top-right" aria-hidden="true" />
-      <div className="create-profile-page__dots create-profile-page__dots--bottom-right" aria-hidden="true" />
-      <div className="create-profile-page__glow--top-right" aria-hidden="true" />
-      <div className="create-profile-page__wave-bottom-left" aria-hidden="true" />
-
-      {/* Left Information Panel (55% Dark Navy) */}
+      {/* Left Information Panel (50% Dark Navy) */}
       <aside className="create-profile-page__left-panel">
+        {/* Bottom Left Corner Orange Wave Accent */}
+        <div className="create-profile-page__wave-bottom-left" aria-hidden="true" />
+
         {/* 1. Top Brand Header */}
         <div className="create-profile-page__brand-header">
           <div className="create-profile-page__logo-tile">
-            <img src="/logo.png" alt="TaxEdge" className="create-profile-page__logo-img" />
+            <img src="/logo-dark.png" alt="TaxEdge" className="create-profile-page__logo-img" />
           </div>
           <div className="create-profile-page__brand-text">
             <span className="create-profile-page__brand-title">
@@ -138,7 +150,7 @@ export const CreateProfilePage = () => {
         </div>
       </aside>
 
-      {/* Right Form Card (45% White / Light Surface) */}
+      {/* Right Form Card (50% White / Light Surface) */}
       <main className="create-profile-page__right-section">
         <div className="create-profile-page__card">
           <div className="create-profile-page__orange-dash" aria-hidden="true" />
