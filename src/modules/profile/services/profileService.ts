@@ -1,3 +1,4 @@
+import { apiClient, apiEndpoints } from '@core/api'
 import { env } from '@core/config'
 
 import { profileApi } from '../api/profileApi'
@@ -24,4 +25,13 @@ export const profileService = {
     const response = await profileApi.list(filters)
     return response.data
   },
+
+  async createProfile(values: Record<string, unknown>): Promise<void> {
+    if (env.enableMocks) {
+      await new Promise((resolve) => setTimeout(resolve, 400))
+      return
+    }
+    await apiClient.post(apiEndpoints.auth.profile, values)
+  },
 }
+

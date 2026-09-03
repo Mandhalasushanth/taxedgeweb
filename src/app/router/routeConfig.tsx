@@ -15,12 +15,16 @@ import { insuranceRoutes } from '@modules/insurance'
 import { itrRoutes } from '@modules/itr'
 import { loansRoutes } from '@modules/loans'
 import { paymentsRoutes } from '@modules/payments'
-import { profileRoutes } from '@modules/profile'
+import { profileRoutes, CreateProfilePage } from '@modules/profile'
 import { supportRoutes } from '@modules/support'
 
 import { ProtectedRoute } from './ProtectedRoute'
 import { PublicRoute } from './PublicRoute'
 import { routePaths } from '@core/config'
+
+const authLayoutRoutes = authenticationRoutes.filter(
+  (r) => r.path !== routePaths.auth.createProfile && r.path !== routePaths.auth.register,
+)
 
 /**
  * Modules own their own routes and export them from their barrel;
@@ -28,11 +32,27 @@ import { routePaths } from '@core/config'
  */
 export const routeConfig: RouteObject[] = [
   {
+    path: routePaths.root,
+    element: <CreateProfilePage />,
+  },
+  {
+    path: routePaths.registration,
+    element: <CreateProfilePage />,
+  },
+  {
+    path: routePaths.auth.register,
+    element: <CreateProfilePage />,
+  },
+  {
+    path: routePaths.auth.createProfile,
+    element: <CreateProfilePage />,
+  },
+  {
     element: <PublicRoute />,
     children: [
       {
         element: <AuthLayout />,
-        children: authenticationRoutes,
+        children: authLayoutRoutes,
       },
     ],
   },

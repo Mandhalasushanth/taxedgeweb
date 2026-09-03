@@ -2,7 +2,6 @@ import type { ReactNode } from 'react'
 
 import { ErrorBoundary } from '@core/errors'
 
-import { AuthProvider } from './AuthProvider'
 import { ThemeProvider } from './ThemeProvider'
 import { ToastHost } from './ToastHost'
 
@@ -10,10 +9,8 @@ import { ToastHost } from './ToastHost'
 export const AppProviders = ({ children }: { children: ReactNode }) => (
   <ErrorBoundary>
     <ThemeProvider>
-      <AuthProvider>
-        {children}
-        <ToastHost />
-      </AuthProvider>
+      {children}
+      <ToastHost />
     </ThemeProvider>
   </ErrorBoundary>
 )

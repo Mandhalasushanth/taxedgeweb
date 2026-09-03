@@ -1,6 +1,7 @@
 /** Single source of truth for URLs. Never hard-code a path in a component. */
 export const routePaths = {
   root: '/',
+  registration: '/registration',
   auth: {
     login: '/auth/login',
     register: '/auth/register',
