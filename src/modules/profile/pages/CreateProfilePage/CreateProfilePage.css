@@ -27,7 +27,7 @@
   justify-content: space-between;
   height: 100vh;
   padding: 2.25rem 3rem;
-  background: linear-gradient(165deg, #071126 0%, #030814 100%);
+  background: #083B75;
   color: #ffffff;
   z-index: 2;
   border-right: 1px solid rgba(255, 255, 255, 0.06);
