@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { routePaths } from '@core/config';
 import type { GstService } from '../../hooks/useGstDashboardData';
 import './GSTServices.css';
 
@@ -57,6 +59,18 @@ const getServiceIcon = (type: GstService['iconType']) => {
 };
 
 export const GSTServices = ({ services }: GSTServicesProps) => {
+  const navigate = useNavigate();
+
+  const handleStart = (service: GstService) => {
+    if (service.iconType === 'registration' || service.id === '1') {
+      navigate(routePaths.gst.registration);
+    } else if (service.iconType === 'filing') {
+      navigate(routePaths.gst.returns);
+    } else {
+      navigate(routePaths.gst.registration);
+    }
+  };
+
   return (
     <div className="gst-services-grid">
       {services.map((service, index) => (
@@ -72,7 +86,12 @@ export const GSTServices = ({ services }: GSTServicesProps) => {
               <span className="gst-service-card__price">{service.price}</span>
               <span className="gst-service-card__price-type">{service.priceType}</span>
             </div>
-            <button className="gst-service-card__action">
+            <button
+              type="button"
+              className="gst-service-card__action"
+              onClick={() => handleStart(service)}
+              aria-label={`Start ${service.title}`}
+            >
               Start
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="gst-service-card__arrow">
                 <line x1="5" y1="12" x2="19" y2="12" />

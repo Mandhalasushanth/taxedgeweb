@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { routePaths } from '@core/config';
 import { EmptyState, Loader } from '@shared/components';
 import { useGstMonthlyFilingDetail } from '../../hooks/useGstMonthlyFilingDetail';
@@ -10,11 +10,18 @@ import { useState } from 'react';
 
 export const GSTDetails = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { data, isLoading } = useGstMonthlyFilingDetail(id);
   const [activeTab, setActiveTab] = useState('summary');
 
   if (isLoading) return <Loader label="Loading application details" />;
   if (!data) return <EmptyState title="Application not found" />;
+
+  const handleOpenMessage = () => {
+    navigate(
+      `${routePaths.support}?appId=${encodeURIComponent(data.reference)}&executiveId=exec_rohit&executiveName=Rohit%20Kulkarni&serviceName=${encodeURIComponent(data.title)}`
+    );
+  };
 
   return (
     <div className="gst-details-page">
@@ -35,13 +42,25 @@ export const GSTDetails = () => {
             <p className="gst-details-header-card__meta">{data.details}</p>
           </div>
           <div className="gst-details-header-card__actions">
-            <button className="gst-details-btn-message">
+            <button
+              type="button"
+              className="gst-details-btn-message"
+              onClick={handleOpenMessage}
+              aria-label="Message assigned executive"
+            >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
               </svg>
               Message
             </button>
-            <button className="gst-details-btn-track">Track</button>
+            <button
+              type="button"
+              className="gst-details-btn-track"
+              onClick={() => navigate(routePaths.gst.track(id || data.id || '1'))}
+              aria-label="Track application progress"
+            >
+              Track
+            </button>
           </div>
         </div>
         <div className="gst-details-header-card__progress">

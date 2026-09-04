@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { routePaths } from '@core/config';
 import type { GstPayment } from '../../hooks/useGstMonthlyFilingDetail';
 import './GSTPaymentsTab.css';
 
@@ -6,6 +8,7 @@ interface GSTPaymentsTabProps {
 }
 
 export const GSTPaymentsTab = ({ payments }: GSTPaymentsTabProps) => {
+  const navigate = useNavigate();
   return (
     <div className="gst-payments-container">
       <div className="gst-payments-card">
@@ -51,8 +54,13 @@ export const GSTPaymentsTab = ({ payments }: GSTPaymentsTabProps) => {
         </div>
       </div>
       
-      {/* Assuming there's at least one payment to download a receipt for, or just a general download button as shown in UI */}
-      <button className="gst-payments-download-btn">
+      {/* Download receipt button navigating to tax invoice receipt */}
+      <button
+        type="button"
+        className="gst-payments-download-btn"
+        onClick={() => navigate(`${routePaths.paymentReceiptDirect}?id=GST-2026-00118`)}
+        aria-label="Download receipt"
+      >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="download-icon">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
           <polyline points="7 10 12 15 17 10" />
