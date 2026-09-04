@@ -50,4 +50,21 @@
   --grey-700: #334155;
   --grey-800: #1e293b;
   --grey-900: #0f172a;
+
+  /* Official TaxEdge Design System Palette Tokens */
+  --taxedge-navy: #083B75;
+  --taxedge-navy-dark: #052750;
+  --taxedge-navy-deep: #06152D;
+  --taxedge-navy-splash: #0F1D36;
+  --taxedge-blue: #0B5ED7;
+  --taxedge-orange: #F97316;
+  --taxedge-orange-feature: #FF7A00;
+  --taxedge-light-blue: #EAF1FE;
+  --taxedge-light-orange: #FEF0E6;
+  --taxedge-success: #16A34A;
+  --taxedge-success-feature: #059669;
+  --taxedge-success-light: #E6F5F0;
+  --taxedge-error: #DC2626;
+  --taxedge-error-light: #FDEBEB;
+  --taxedge-warning: #F59E0B;
 }
