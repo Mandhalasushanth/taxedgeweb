@@ -6,12 +6,7 @@
   user-select: none;
 }
 
-.auth-brand-logo__img {
-  height: 48px;
-  max-width: 220px;
-  object-fit: contain;
-  display: block;
-}
+.auth-brand-logo__img { height: 48px; max-width: 220px; object-fit: contain; display: block; }
 
 .auth-brand-logo__emblem {
   position: relative;
@@ -27,17 +22,8 @@
   flex-shrink: 0;
   overflow: hidden;
 }
-
-.auth-brand-logo__svg {
-  width: 32px;
-  height: 32px;
-}
-
-.auth-brand-logo__content {
-  display: flex;
-  flex-direction: column;
-}
-
+.auth-brand-logo__svg { width: 32px; height: 32px; }
+.auth-brand-logo__content { display: flex; flex-direction: column; }
 .auth-brand-logo__title {
   color: #ffffff;
   font-size: 1.5rem;
@@ -46,7 +32,6 @@
   line-height: 1.1;
   font-family: inherit;
 }
-
 .auth-brand-logo__subtitle {
   color: #8da4c4;
   font-size: 0.6875rem;
@@ -57,7 +42,5 @@
 }
 
 @media (max-width: 640px) {
-  .auth-brand-logo__img {
-    height: 40px;
-  }
+  .auth-brand-logo__img { height: 40px; }
 }

@@ -11,7 +11,6 @@
   overflow: hidden;
 }
 
-/* Left Brand Stage (55% Dark Navy Side) */
 .register-screen__left {
   display: flex;
   flex-direction: column;
@@ -25,15 +24,8 @@
   margin: 0 auto;
 }
 
-.register-screen__brand {
-  margin-bottom: 0;
-}
-
-.register-screen__hero-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
+.register-screen__brand { margin-bottom: 0; }
+.register-screen__hero-text { display: flex; flex-direction: column; gap: 0.5rem; }
 
 .register-screen__headline {
   margin: 0;
@@ -59,14 +51,7 @@
   max-width: 600px;
 }
 
-/* Service Pills Grid (Row 1: 4 pills, Row 2: 1 pill) */
-.register-screen__services-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0;
-  max-width: 580px;
-}
+.register-screen__services-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; max-width: 580px; }
 
 .register-screen__service-pill {
   display: inline-flex;
@@ -84,19 +69,9 @@
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.15s ease, border-color 0.15s ease;
 }
+.register-screen__service-pill:hover { transform: translateY(-1px); border-color: rgba(255, 122, 26, 0.4); }
+.register-screen__service-icon { color: #ff7a1a; display: flex; align-items: center; }
 
-.register-screen__service-pill:hover {
-  transform: translateY(-1px);
-  border-color: rgba(255, 122, 26, 0.4);
-}
-
-.register-screen__service-icon {
-  color: #ff7a1a;
-  display: flex;
-  align-items: center;
-}
-
-/* Middle Visual Stage: Side-by-Side without overlap */
 .register-screen__visual-row {
   display: flex;
   align-items: center;
@@ -105,7 +80,6 @@
   width: 100%;
 }
 
-/* Center Dividing Vertical Line with Glowing Orange Ring Node */
 .register-screen__center-divider {
   position: absolute;
   top: 0;
@@ -119,15 +93,7 @@
   justify-content: center;
   z-index: 20;
 }
-
-.register-screen__divider-line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: rgba(80, 130, 210, 0.3);
-}
-
+.register-screen__divider-line { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(80, 130, 210, 0.3); }
 .register-screen__divider-node {
   position: relative;
   width: 24px;
@@ -139,7 +105,6 @@
   z-index: 21;
 }
 
-/* Right Stage (FULL TOP-TO-BOTTOM WHITE PANEL) */
 .register-screen__right {
   background: #ffffff;
   height: 100vh;
@@ -154,71 +119,21 @@
   box-shadow: -15px 0 45px rgba(0, 0, 0, 0.35);
   overflow-y: auto;
 }
+.register-screen__card-box { width: 100%; max-width: 480px; box-sizing: border-box; }
 
-.register-screen__card-box {
-  width: 100%;
-  max-width: 480px;
-  background: transparent;
-  padding: 0;
-  border-radius: 0;
-  box-shadow: none;
-  box-sizing: border-box;
-}
-
-/* Tablet & Mobile Responsiveness */
 @media (max-width: 1080px) {
-  .register-screen {
-    grid-template-columns: 1fr;
-    height: auto;
-    min-height: 100vh;
-    max-height: none;
-    overflow-y: auto;
-  }
-  .register-screen__left {
-    height: auto;
-    min-height: auto;
-    max-height: none;
-    padding: 2.5rem 2rem 2rem 2rem;
-    gap: 1.75rem;
-  }
-  .register-screen__headline {
-    font-size: 2.25rem;
-  }
-  .register-screen__visual-row {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  .register-screen__right {
-    height: auto;
-    min-height: auto;
-    max-height: none;
-    padding: 3.5rem 2rem;
-    border-top-left-radius: 32px;
-    border-top-right-radius: 32px;
-  }
-  .register-screen__center-divider {
-    display: none;
-  }
+  .register-screen { grid-template-columns: 1fr; height: auto; min-height: 100vh; max-height: none; overflow-y: auto; }
+  .register-screen__left { height: auto; min-height: auto; max-height: none; padding: 2.5rem 2rem 2rem; gap: 1.75rem; }
+  .register-screen__headline { font-size: 2.25rem; }
+  .register-screen__visual-row { flex-direction: column; gap: 1.5rem; }
+  .register-screen__right { height: auto; min-height: auto; max-height: none; padding: 3.5rem 2rem; border-top-left-radius: 32px; border-top-right-radius: 32px; }
+  .register-screen__center-divider { display: none; }
 }
 
 @media (max-width: 640px) {
-  .register-screen__left {
-    padding: 1.75rem 1.25rem;
-    gap: 1.5rem;
-  }
-  .register-screen__headline {
-    font-size: 1.875rem;
-  }
-  .register-screen__subtext {
-    font-size: 0.875rem;
-  }
-  .register-screen__right {
-    padding: 2.5rem 1.25rem 3rem 1.25rem;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-  }
-  .register-screen__service-pill {
-    font-size: 0.75rem;
-    padding: 0.35rem 0.75rem;
-  }
+  .register-screen__left { padding: 1.75rem 1.25rem; gap: 1.5rem; }
+  .register-screen__headline { font-size: 1.875rem; }
+  .register-screen__subtext { font-size: 0.875rem; }
+  .register-screen__right { padding: 2.5rem 1.25rem 3rem; border-top-left-radius: 24px; border-top-right-radius: 24px; }
+  .register-screen__service-pill { font-size: 0.75rem; padding: 0.35rem 0.75rem; }
 }
