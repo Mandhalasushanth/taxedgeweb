@@ -1,4 +1,9 @@
-.gst-dashboard { display: flex; flex-direction: column; gap: var(--space-5); }
+.gst-dashboard { 
+  display: flex; 
+  flex-direction: column; 
+  gap: var(--space-5); 
+  width: 100%;
+}
 
 .gst-dashboard__header {
   display: flex;
@@ -10,7 +15,7 @@
 
 .gst-dashboard__title { margin: 0; }
 .gst-dashboard__subtitle { margin-top: var(--space-1); color: var(--color-text-muted); }
-.gst-dashboard__actions { display: flex; gap: var(--space-3); }
+.gst-dashboard__actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
 
 .gst-dashboard__filters {
   display: grid;
@@ -31,7 +36,27 @@
   margin-top: var(--space-6);
 }
 
-@media (width <= 720px) {
-  .gst-dashboard__filters { grid-template-columns: 1fr; }
+@media (max-width: 720px) {
+  .gst-dashboard__filters { 
+    grid-template-columns: 1fr; 
+  }
 }
 
+@media (max-width: 640px) {
+  .gst-dashboard__header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .gst-dashboard__actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .gst-dashboard__actions a,
+  .gst-dashboard__actions button {
+    width: 100%;
+  }
+}

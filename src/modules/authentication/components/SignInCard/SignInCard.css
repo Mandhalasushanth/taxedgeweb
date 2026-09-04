@@ -275,3 +275,21 @@
     font-size: 0.9375rem;
   }
 }
+
+@media (max-width: 380px) {
+  .sign-in-card__input-group {
+    gap: 0.4rem;
+  }
+  .sign-in-card__country-select {
+    padding: 0 0.6rem;
+    font-size: 0.92rem;
+  }
+  .sign-in-card__input {
+    padding: 0 0.75rem;
+    font-size: 0.95rem;
+  }
+  .sign-in-card__title {
+    font-size: 1.75rem;
+  }
+}
+

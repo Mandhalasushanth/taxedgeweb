@@ -235,3 +235,15 @@
     font-size: 0.9375rem;
   }
 }
+
+@media (max-width: 380px) {
+  .otp-card__boxes {
+    gap: 0.25rem;
+  }
+  .otp-card__box {
+    height: 44px;
+    font-size: 1.15rem;
+    border-radius: 8px;
+  }
+}
+

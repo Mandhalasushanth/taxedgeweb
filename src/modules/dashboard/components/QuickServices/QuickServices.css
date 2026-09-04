@@ -139,5 +139,22 @@
 @media (max-width: 640px) {
   .quick-services__grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
+
+@media (max-width: 480px) {
+  .quick-service {
+    padding: 1.25rem 1.15rem 1.15rem 1.15rem;
+    border-radius: 14px;
+  }
+
+  .quick-service__label {
+    font-size: 1.05rem;
+  }
+
+  .quick-service__description {
+    margin-bottom: 1.15rem;
+  }
+}
+

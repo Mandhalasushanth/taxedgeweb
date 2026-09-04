@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+  width: 100%;
 }
 
 .documents-file-input {
@@ -38,6 +39,7 @@
 .documents-page__upload-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.6rem 1.25rem;
   background: #FF7A00;
@@ -79,10 +81,29 @@
 .documents-page__row-title {
   font-weight: var(--font-weight-semibold);
   color: #083B75;
+  margin: 0;
 }
 
 .documents-page__row-meta {
   font-size: var(--font-size-xs);
   color: #64748B;
   margin-top: 2px;
+}
+
+@media (max-width: 640px) {
+  .documents-page__header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .documents-page__upload-btn {
+    width: 100%;
+  }
+
+  .documents-page__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }

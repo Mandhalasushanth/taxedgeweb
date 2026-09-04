@@ -1,12 +1,27 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 
 import { routePaths } from '@core/config'
 import { initialsOf } from '@shared/utils'
-import { useAppStore, useAuthStore } from '@store/index'
+import { useAuthStore } from '@store/index'
 import { navSections } from './navigation'
 import { useDashboardSummary } from '@modules/dashboard'
 import './DashboardLayout.css'
+
+const MenuIcon = () => (
+  <svg className="shell__menu-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <line x1="3" y1="12" x2="21" y2="12" />
+    <line x1="3" y1="6" x2="21" y2="6" />
+    <line x1="3" y1="18" x2="21" y2="18" />
+  </svg>
+)
+
+const CloseIcon = () => (
+  <svg className="shell__menu-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+)
 
 const SearchIcon = () => (
   <svg className="shell__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -35,9 +50,9 @@ const GridIcon = () => (
 export const DashboardLayout = () => {
   const user = useAuthStore((state) => state.user)
   const signOut = useAuthStore((state) => state.signOut)
-  const isSidebarOpen = useAppStore((state) => state.isSidebarOpen)
   const location = useLocation()
   const { data } = useDashboardSummary()
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   const currentLabel = useMemo(() => {
     const items = navSections.flatMap((s) => s.items).filter((i) => !i.to.includes('#'))
@@ -52,17 +67,45 @@ export const DashboardLayout = () => {
   const customerCode = user ? `TE-CUS-${user.id.slice(-5).toUpperCase()}` : ''
 
   return (
-    <div className={`shell${isSidebarOpen ? '' : ' shell--collapsed'}`}>
-      <aside className="shell__sidebar" aria-label="TaxEdge Dashboard Sidebar">
-        <NavLink className="shell__brand" to={routePaths.dashboard}>
-          <div className="shell__brand-logo-box">
-            <img src="/logo-dark.png" alt="TaxEdge" className="shell__brand-logo-img" />
-          </div>
-          <div className="shell__brand-text">
-            <span className="shell__brand-name">TAX<span className="shell__brand-name-accent">EDGE</span></span>
-            <span className="shell__brand-tag">FIN SOLUTIONS</span>
-          </div>
-        </NavLink>
+    <div className="shell">
+      {/* Mobile Drawer Overlay Backdrop */}
+      {isMobileNavOpen && (
+        <div
+          className="shell__backdrop"
+          onClick={() => setIsMobileNavOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Sidebar (Fixed on Desktop, Slide-over Drawer on Tablet/Mobile) */}
+      <aside
+        className={`shell__sidebar${isMobileNavOpen ? ' shell__sidebar--mobile-open' : ''}`}
+        aria-label="TaxEdge Dashboard Sidebar"
+      >
+        <div className="shell__brand-row">
+          <NavLink
+            className="shell__brand"
+            to={routePaths.dashboard}
+            onClick={() => setIsMobileNavOpen(false)}
+          >
+            <div className="shell__brand-logo-box">
+              <img src="/logo-dark.png" alt="TaxEdge" className="shell__brand-logo-img" />
+            </div>
+            <div className="shell__brand-text">
+              <span className="shell__brand-name">TAX<span className="shell__brand-name-accent">EDGE</span></span>
+              <span className="shell__brand-tag">FIN SOLUTIONS</span>
+            </div>
+          </NavLink>
+
+          <button
+            type="button"
+            className="shell__sidebar-close"
+            onClick={() => setIsMobileNavOpen(false)}
+            aria-label="Close sidebar navigation"
+          >
+            <CloseIcon />
+          </button>
+        </div>
 
         <nav className="shell__nav">
           {navSections.map((section) => (
@@ -70,12 +113,22 @@ export const DashboardLayout = () => {
               <p className="shell__nav-title">{section.title}</p>
               {section.items.map((item) =>
                 item.to.includes('#') ? (
-                  <a key={item.to} href={item.to} className="shell__nav-link">
+                  <a
+                    key={item.to}
+                    href={item.to}
+                    className="shell__nav-link"
+                    onClick={() => setIsMobileNavOpen(false)}
+                  >
                     <span className="shell__nav-icon" aria-hidden="true">{item.icon}</span>
                     <span>{item.label}</span>
                   </a>
                 ) : (
-                  <NavLink key={item.to} to={item.to} className={({ isActive }) => `shell__nav-link${isActive ? ' is-active' : ''}`}>
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    className={({ isActive }) => `shell__nav-link${isActive ? ' is-active' : ''}`}
+                    onClick={() => setIsMobileNavOpen(false)}
+                  >
                     <span className="shell__nav-icon" aria-hidden="true">{item.icon}</span>
                     <span>{item.label}</span>
                     {item.badgeKey && badges[item.badgeKey] && (
@@ -108,6 +161,16 @@ export const DashboardLayout = () => {
       <div className="shell__main">
         <header className="shell__header">
           <div className="shell__header-left">
+            <button
+              type="button"
+              className="shell__mobile-toggle"
+              onClick={() => setIsMobileNavOpen((prev) => !prev)}
+              aria-label={isMobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMobileNavOpen}
+            >
+              {isMobileNavOpen ? <CloseIcon /> : <MenuIcon />}
+            </button>
+
             <nav className="shell__breadcrumb" aria-label="Breadcrumb">
               <Link to={routePaths.dashboard}>Home</Link>
               <span className="shell__breadcrumb-sep" aria-hidden="true">→</span>
