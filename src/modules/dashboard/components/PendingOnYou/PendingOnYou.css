@@ -1,4 +1,3 @@
-/* TAXEDGE PENDING ON YOU (CONCISE) */
 .pending-section {
   display: flex;
   flex-direction: column;
@@ -13,15 +12,9 @@
 
 .pending-section__header { margin-bottom: 0.75rem; }
 .pending-section__title { margin: 0; font-family: var(--font-sans); font-size: 1.2rem; font-weight: 800; color: #083B75; line-height: 1.2; }
-.pending-section__subtitle { margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #64748B; line-height: 1.4; }
+.pending-section__subtitle { margin: 0.25rem 0 0; font-size: 0.85rem; color: #64748B; line-height: 1.4; }
 
-.pending-section__list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
-  flex: 1;
-}
+.pending-section__list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem; flex: 1; }
 
 .pending-card {
   display: flex;
@@ -45,14 +38,12 @@
 .pending-card__left { display: flex; align-items: center; gap: 0.85rem; min-width: 0; flex: 1; }
 .pending-card__icon { display: grid; flex-shrink: 0; place-items: center; width: 2.15rem; height: 2.15rem; border-radius: 10px; }
 .pending-card__icon-svg { width: 0.92rem; height: 0.92rem; }
-
 .pending-card__icon--danger { color: #FF7A00; background: #FEF0E6; }
-.pending-card__icon--muted { color: #083B75; background: #EAF1FE; }
-.pending-card__icon--success { color: #083B75; background: #EAF1FE; }
+.pending-card__icon--muted, .pending-card__icon--success { color: #083B75; background: #EAF1FE; }
 
 .pending-card__info { display: flex; flex-direction: column; min-width: 0; }
 .pending-card__title { margin: 0; font-family: var(--font-sans); font-size: 0.92rem; font-weight: 700; color: #083B75; line-height: 1.3; }
-.pending-card__meta { margin: 0.2rem 0 0 0; font-size: 0.78rem; color: #64748B; line-height: 1.35; }
+.pending-card__meta { margin: 0.2rem 0 0; font-size: 0.78rem; color: #64748B; line-height: 1.35; }
 
 .pending-card__right { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
 .pending-card__badge {
@@ -68,14 +59,10 @@
   white-space: nowrap;
 }
 .pending-card__badge-dot { font-size: 0.5rem; }
-
 .pending-card__badge--danger { background: #FDEBEB; color: #DC2626; border: 1px solid #fde8e6; }
-.pending-card__badge--muted,
-.pending-card__badge--success { background: #EAF1FE; color: #083B75; border: 1px solid #dbe4f0; }
+.pending-card__badge--muted, .pending-card__badge--success { background: #EAF1FE; color: #083B75; border: 1px solid #dbe4f0; }
 
-.pending-file-input {
-  display: none;
-}
+.pending-file-input { display: none; }
 
 .pending-card__btn {
   display: inline-flex;

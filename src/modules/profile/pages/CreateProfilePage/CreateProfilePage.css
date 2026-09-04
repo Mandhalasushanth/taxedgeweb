@@ -1,10 +1,3 @@
-/* ===================================================
-   TAXEDGE CREATE PROFILE / REGISTRATION PAGE
-   Single Screen (100vh) Layout: 50% Left Panel & 50% Right Panel
-   Desktop & Tablets: Perfect 50% / 50% Side-by-Side Single Viewport
-   Mobile Only (< 768px): Stacked with reduced image height
-=================================================== */
-
 .create-profile-page {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -15,10 +8,6 @@
   position: relative;
   overflow: hidden;
 }
-
-/* ===================================================
-   LEFT INFORMATION PANEL (50% DARK NAVY)
-=================================================== */
 
 .create-profile-page__left-panel {
   position: relative;
@@ -32,9 +21,9 @@
   z-index: 2;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
+  box-sizing: border-box;
 }
 
-/* Bottom Left Orange Wave Accent */
 .create-profile-page__wave-bottom-left {
   position: absolute;
   bottom: 0;
@@ -48,7 +37,6 @@
   box-shadow: 0 0 25px rgba(249, 115, 22, 0.35);
 }
 
-/* 1. Top Brand Header */
 .create-profile-page__brand-header {
   position: relative;
   display: flex;
@@ -71,39 +59,12 @@
   flex-shrink: 0;
 }
 
-.create-profile-page__logo-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+.create-profile-page__logo-img { width: 100%; height: 100%; object-fit: contain; }
+.create-profile-page__brand-text { display: flex; flex-direction: column; }
+.create-profile-page__brand-title { font-family: var(--font-sans); font-size: 1.35rem; font-weight: 700; color: #ffffff; line-height: 1.1; letter-spacing: -0.02em; }
+.create-profile-page__brand-title-accent { color: #F97316; }
+.create-profile-page__brand-subtitle { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.7); margin-top: 2px; }
 
-.create-profile-page__brand-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.create-profile-page__brand-title {
-  font-family: var(--font-sans);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.create-profile-page__brand-title-accent {
-  color: #F97316;
-}
-
-.create-profile-page__brand-subtitle {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: 2px;
-}
-
-/* 2. Middle Section: Text on Left + Graphic on Right */
 .create-profile-page__middle-grid {
   position: relative;
   display: grid;
@@ -115,57 +76,16 @@
   z-index: 2;
 }
 
-.create-profile-page__text-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+.create-profile-page__text-col { display: flex; flex-direction: column; justify-content: center; }
+.create-profile-page__heading { font-family: var(--font-sans); font-size: clamp(1.6rem, 2.1vw, 2.25rem); font-weight: 800; line-height: 1.15; color: #ffffff; letter-spacing: -0.025em; margin: 0 0 0.65rem; }
+.create-profile-page__heading-orange { color: #F97316; display: inline-block; }
+.create-profile-page__desc { font-size: 0.85rem; line-height: 1.55; color: rgba(226, 232, 240, 0.82); margin: 0; max-width: 330px; }
 
-.create-profile-page__heading {
-  font-family: var(--font-sans);
-  font-size: clamp(1.6rem, 2.1vw, 2.25rem);
-  font-weight: 800;
-  line-height: 1.15;
-  color: #ffffff;
-  letter-spacing: -0.025em;
-  margin: 0 0 0.65rem 0;
-}
+.create-profile-page__graphic-col { display: flex; align-items: center; justify-content: center; }
+.create-profile-page__graphic { position: relative; width: 100%; height: 150px; perspective: 900px; }
 
-.create-profile-page__heading-orange {
-  color: #F97316;
-  display: inline-block;
-}
+.security-card { position: absolute; border-radius: 10px; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5); transition: transform 0.3s ease; }
 
-.create-profile-page__desc {
-  font-size: 0.85rem;
-  line-height: 1.55;
-  color: rgba(226, 232, 240, 0.82);
-  margin: 0;
-  max-width: 330px;
-}
-
-/* Graphic Column */
-.create-profile-page__graphic-col {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.create-profile-page__graphic {
-  position: relative;
-  width: 100%;
-  height: 150px;
-  perspective: 900px;
-}
-
-.security-card {
-  position: absolute;
-  border-radius: 10px;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
-}
-
-/* Aadhaar Card (Top Right) */
 .security-card--aadhaar {
   top: 5px;
   right: 0;
@@ -177,50 +97,17 @@
   border: 1px solid #e2e8f0;
   z-index: 2;
 }
-
-.security-card__aadhaar-top {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 5px;
-}
-
-.security-card__aadhaar-emblem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.aadhaar-sun {
-  width: 19px;
-  height: 19px;
-}
-
-.security-card__aadhaar-tag {
-  font-size: 6.5px;
-  font-weight: 800;
-  color: #1e3a8a;
-  letter-spacing: 0.05em;
-}
-
-.security-card__lines {
-  display: flex;
-  flex-direction: column;
-  gap: 3.5px;
-}
-
-.security-card__line {
-  height: 2.5px;
-  background: #cbd5e1;
-  border-radius: 2px;
-}
-
+.security-card__aadhaar-top { display: flex; align-items: center; justify-content: center; margin-bottom: 5px; }
+.security-card__aadhaar-emblem { display: flex; flex-direction: column; align-items: center; }
+.aadhaar-sun { width: 19px; height: 19px; }
+.security-card__aadhaar-tag { font-size: 6.5px; font-weight: 800; color: #1e3a8a; letter-spacing: 0.05em; }
+.security-card__lines { display: flex; flex-direction: column; gap: 3.5px; }
+.security-card__line { height: 2.5px; background: #cbd5e1; border-radius: 2px; }
 .security-card__line--short { width: 45%; }
 .security-card__line--medium { width: 70%; }
 .security-card__line--long { width: 90%; }
 .security-card__line--sm { width: 34px; }
 
-/* PAN Card (Bottom Left) */
 .security-card--pan {
   top: 38px;
   left: 0;
@@ -232,51 +119,13 @@
   border: 1px solid #93c5fd;
   z-index: 3;
 }
+.security-card__pan-header { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+.security-card__pan-avatar { display: flex; align-items: center; justify-content: center; width: 23px; height: 23px; background: #0284c7; color: #ffffff; border-radius: 5px; }
+.pan-user-icon { width: 14px; height: 14px; }
+.security-card__pan-label { font-size: 8.5px; font-weight: 800; color: #0369a1; letter-spacing: 0.05em; }
+.security-card__pan-body { display: flex; flex-direction: column; gap: 4px; }
+.security-card__pan-strip { height: 3.5px; background: rgba(3, 105, 161, 0.25); border-radius: 2px; width: 85%; }
 
-.security-card__pan-header {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 5px;
-}
-
-.security-card__pan-avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 23px;
-  height: 23px;
-  background: #0284c7;
-  color: #ffffff;
-  border-radius: 5px;
-}
-
-.pan-user-icon {
-  width: 14px;
-  height: 14px;
-}
-
-.security-card__pan-label {
-  font-size: 8.5px;
-  font-weight: 800;
-  color: #0369a1;
-  letter-spacing: 0.05em;
-}
-
-.security-card__pan-body {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.security-card__pan-strip {
-  height: 3.5px;
-  background: rgba(3, 105, 161, 0.25);
-  border-radius: 2px;
-  width: 85%;
-}
-
-/* Orange Shield */
 .security-card__shield {
   position: absolute;
   top: 42px;
@@ -287,32 +136,10 @@
   filter: drop-shadow(0 6px 16px rgba(249, 115, 22, 0.6));
   z-index: 4;
 }
+.shield-svg { width: 100%; height: 100%; }
+.security-card__shield-lock { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -45%); width: 19px; height: 19px; }
 
-.shield-svg {
-  width: 100%;
-  height: 100%;
-}
-
-.security-card__shield-lock {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -45%);
-  width: 19px;
-  height: 19px;
-}
-
-/* 3. Bottom Security Features */
-.create-profile-page__security-bottom {
-  position: relative;
-  width: 100%;
-  margin-top: 0;
-  z-index: 2;
-}
-
-/* ===================================================
-   RIGHT FORM SECTION (50% LIGHT SURFACE MERGED)
-=================================================== */
+.create-profile-page__security-bottom { position: relative; width: 100%; margin-top: 0; z-index: 2; }
 
 .create-profile-page__right-section {
   display: flex;
@@ -323,6 +150,7 @@
   padding: 2rem 3.5rem;
   background: #ffffff;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .create-profile-page__card {
@@ -330,168 +158,36 @@
   max-width: 530px;
   background: transparent;
   border: none;
-  border-radius: 0;
   padding: 0;
   box-shadow: none;
 }
-
-.create-profile-page__form-header {
-  margin-bottom: 1.25rem;
-}
-
-.create-profile-page__title {
-  font-family: var(--font-sans);
-  font-size: clamp(1.5rem, 1.85vw, 1.95rem);
-  font-weight: 700;
-  color: var(--grey-900);
-  letter-spacing: -0.025em;
-  margin: 0 0 0.35rem 0;
-}
-
-.create-profile-page__subtitle {
-  font-size: 0.875rem;
-  color: var(--grey-500);
-  margin: 0;
-}
-
-/* ===================================================
-   TABLETS & MEDIUM SCREENS (768px to 1199px)
-   KEEPS SIDE-BY-SIDE 50% / 50% (SAME AS DESKTOP)
-=================================================== */
+.create-profile-page__form-header { margin-bottom: 1.25rem; }
+.create-profile-page__title { font-family: var(--font-sans); font-size: clamp(1.5rem, 1.85vw, 1.95rem); font-weight: 700; color: var(--grey-900); letter-spacing: -0.025em; margin: 0 0 0.35rem; }
+.create-profile-page__subtitle { font-size: 0.875rem; color: var(--grey-500); margin: 0; }
 
 @media (min-width: 768px) and (max-width: 1199px) {
-  .create-profile-page {
-    grid-template-columns: 50% 50%;
-  }
-
-  .create-profile-page__left-panel {
-    padding: 1.25rem 1.5rem;
-  }
-
-  .create-profile-page__heading {
-    font-size: 1.35rem;
-  }
-
-  .create-profile-page__desc {
-    font-size: 0.76rem;
-  }
-
-  .create-profile-page__middle-grid {
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 0.75rem;
-    margin: 0.35rem 0;
-  }
-
-  .create-profile-page__graphic {
-    height: 125px;
-  }
-
-  .security-card--aadhaar {
-    width: 115px;
-    height: 72px;
-  }
-
-  .security-card--pan {
-    width: 120px;
-    height: 76px;
-    top: 30px;
-  }
-
-  .security-card__shield {
-    width: 40px;
-    height: 46px;
-    top: 32px;
-  }
-
-  .create-profile-page__right-section {
-    padding: 1.5rem 1.5rem;
-  }
-
-  .create-profile-page__card {
-    padding: 0;
-    border-radius: 0;
-  }
+  .create-profile-page__left-panel { padding: 1.25rem 1.5rem; }
+  .create-profile-page__heading { font-size: 1.35rem; }
+  .create-profile-page__desc { font-size: 0.76rem; }
+  .create-profile-page__middle-grid { grid-template-columns: 1.15fr 0.85fr; gap: 0.75rem; margin: 0.35rem 0; }
+  .create-profile-page__graphic { height: 125px; }
+  .security-card--aadhaar { width: 115px; height: 72px; }
+  .security-card--pan { width: 120px; height: 76px; top: 30px; }
+  .security-card__shield { width: 40px; height: 46px; top: 32px; }
+  .create-profile-page__right-section { padding: 1.5rem; }
 }
 
-/* ===================================================
-   MOBILE SCREENS ONLY (< 768px)
-   STACKED ONE BY ONE + REDUCED GRAPHIC HEIGHT
-=================================================== */
-
 @media (max-width: 767px) {
-  .create-profile-page {
-    grid-template-columns: 1fr;
-    height: auto;
-    min-height: 100vh;
-    overflow-y: auto;
-  }
-
-  .create-profile-page__wave-bottom-left {
-    display: none;
-  }
-
-  .create-profile-page__left-panel {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 1.5rem 1.25rem;
-    height: auto;
-    overflow: visible;
-  }
-
-  .create-profile-page__heading {
-    font-size: 1.5rem;
-  }
-
-  .create-profile-page__desc {
-    font-size: 0.82rem;
-  }
-
-  .create-profile-page__middle-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    margin: 0.75rem 0;
-  }
-
-  /* Reduced image / graphic height for mobile screen */
-  .create-profile-page__graphic {
-    height: 105px;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-
-  .security-card--aadhaar {
-    width: 110px;
-    height: 68px;
-    top: 0;
-    right: 10px;
-  }
-
-  .security-card--pan {
-    width: 115px;
-    height: 72px;
-    top: 25px;
-    left: 10px;
-  }
-
-  .security-card__shield {
-    width: 38px;
-    height: 44px;
-    top: 30px;
-    right: 25px;
-  }
-
-  .create-profile-page__right-section {
-    padding: 1.5rem 1rem;
-    height: auto;
-    overflow: visible;
-  }
-
-  .create-profile-page__card {
-    padding: 0;
-    border-radius: 0;
-  }
-
-  .create-profile-page__title {
-    font-size: 1.4rem;
-  }
+  .create-profile-page { grid-template-columns: 1fr; height: auto; min-height: 100vh; overflow-y: auto; }
+  .create-profile-page__wave-bottom-left { display: none; }
+  .create-profile-page__left-panel { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem 1.25rem; height: auto; overflow: visible; }
+  .create-profile-page__heading { font-size: 1.5rem; }
+  .create-profile-page__desc { font-size: 0.82rem; }
+  .create-profile-page__middle-grid { grid-template-columns: 1fr; gap: 1rem; margin: 0.75rem 0; }
+  .create-profile-page__graphic { height: 105px; max-width: 240px; margin: 0 auto; }
+  .security-card--aadhaar { width: 110px; height: 68px; top: 0; right: 10px; }
+  .security-card--pan { width: 115px; height: 72px; top: 25px; left: 10px; }
+  .security-card__shield { width: 38px; height: 44px; top: 30px; right: 25px; }
+  .create-profile-page__right-section { padding: 1.5rem 1rem; height: auto; overflow: visible; }
+  .create-profile-page__title { font-size: 1.4rem; }
 }
