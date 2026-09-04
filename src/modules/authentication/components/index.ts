@@ -16,6 +16,9 @@ export type { SignInCardProps } from './SignInCard/SignInCard'
 export { OtpVerificationCard } from './OtpVerificationCard/OtpVerificationCard'
 export type { OtpVerificationCardProps } from './OtpVerificationCard/OtpVerificationCard'
 
+export { PasscodeCard } from './PasscodeCard/PasscodeCard'
+export type { PasscodeCardProps } from './PasscodeCard/PasscodeCard'
+
 export { LoginForm } from './LoginForm/LoginForm'
 export type { LoginFormProps } from './LoginForm/LoginForm'
 export { RegisterForm } from './RegisterForm/RegisterForm'

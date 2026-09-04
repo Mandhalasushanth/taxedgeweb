@@ -25,6 +25,17 @@ export interface PasscodePayload {
   passcode: string
 }
 
+export interface VerifyPasscodePayload {
+  mobile: string
+  passcode: string
+}
+
+export interface SaveRegistrationStep1Payload {
+  mobile: string
+  passcode: string
+  user: AuthUser
+}
+
 export interface CreateProfilePayload {
   pan: string
   addressLine: string

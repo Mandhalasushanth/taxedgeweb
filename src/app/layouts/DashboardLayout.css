@@ -1,6 +1,6 @@
 /* ===================================================
    TAXEDGE CUSTOMER DASHBOARD SHELL
-   Fixed Sticky Left Sidebar & Smooth Main Viewport
+   Fixed Sticky Left Sidebar (Desktop) & Slide-in Drawer (Mobile/Tablet)
 =================================================== */
 
 .shell {
@@ -9,13 +9,11 @@
   min-height: 100vh;
   background: var(--color-bg);
   position: relative;
+  width: 100%;
 }
 
-.shell--collapsed {
-  grid-template-columns: 0 1fr;
-}
-
-.shell--collapsed .shell__sidebar {
+/* Backdrop Overlay for Mobile Drawer */
+.shell__backdrop {
   display: none;
 }
 
@@ -41,13 +39,20 @@
   box-sizing: border-box;
 }
 
-/* Brand Header */
+/* Brand Header Row */
+.shell__brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
 .shell__brand {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0 0.25rem 0.75rem 0.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   color: #ffffff;
   text-decoration: none;
   flex-shrink: 0;
@@ -96,6 +101,19 @@
   letter-spacing: 0.12em;
   color: rgba(255, 255, 255, 0.65);
   margin-top: 1px;
+}
+
+.shell__sidebar-close {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #ffffff;
+  cursor: pointer;
 }
 
 /* Navigation Sections */
@@ -283,6 +301,7 @@
   flex-direction: column;
   min-width: 0;
   background: var(--color-bg);
+  width: 100%;
 }
 
 .shell__header {
@@ -292,7 +311,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.25rem;
   height: 64px;
   padding-inline: 1.75rem;
   background: #ffffff;
@@ -306,14 +325,31 @@
   min-width: 0;
 }
 
-.shell__toggle-btn {
+.shell__mobile-toggle {
   display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #F7F9FC;
+  border: 1px solid #E2E8F0;
+  color: #083B75;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  padding: 0;
+  flex-shrink: 0;
 }
 
-@media (max-width: 1024px) {
-  .shell__toggle-btn {
-    display: flex;
-  }
+.shell__mobile-toggle:hover {
+  background: #EAF1FE;
+  border-color: #083B75;
+}
+
+.shell__menu-svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
 }
 
 .shell__breadcrumb {
@@ -324,6 +360,9 @@
   font-size: 0.95rem;
   font-weight: 500;
   color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .shell__breadcrumb a {
@@ -349,19 +388,23 @@
   font-weight: 700;
   color: #083B75;
   font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .shell__header-actions {
   display: flex;
   align-items: center;
   gap: 0.65rem;
+  flex-shrink: 0;
 }
 
 .shell__search {
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  width: 21rem;
+  width: 20rem;
   height: 40px;
   padding: 0 1.15rem;
   color: #64748b;
@@ -412,6 +455,7 @@
   text-decoration: none;
   transition: all 0.18s ease;
   padding: 0;
+  flex-shrink: 0;
 }
 
 .shell__action-svg {
@@ -447,27 +491,134 @@
   flex: 1;
   width: 100%;
   max-width: 1400px;
-  padding: 1.75rem 1.75rem;
+  padding: 1.75rem;
   margin-inline: auto;
+  box-sizing: border-box;
 }
 
-/* Responsive Breakpoints */
+/* ===================================================
+   RESPONSIVE BREAKPOINTS (LAPTOP, TABLET, MOBILE)
+=================================================== */
+
+/* Large Laptops & Desktops */
+@media (max-width: 1200px) {
+  .shell__search {
+    width: 15rem;
+  }
+}
+
+/* Tablets & Small Laptops (<= 1024px) */
 @media (max-width: 1024px) {
   .shell {
     grid-template-columns: 1fr;
   }
 
+  /* Backdrop Overlay */
+  .shell__backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 33, 69, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 199;
+    animation: fadeIn 0.2s ease;
+  }
+
+  /* Transform Sidebar into Slide-Over Drawer */
   .shell__sidebar {
-    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .shell__sidebar--mobile-open {
+    transform: translateX(0);
+  }
+
+  .shell__sidebar-close {
+    display: flex;
+  }
+
+  /* Header adjustments */
+  .shell__mobile-toggle {
+    display: flex;
   }
 
   .shell__header {
     padding-inline: 1.25rem;
   }
+
+  .shell__content {
+    padding: 1.35rem 1.25rem;
+  }
 }
 
+/* Medium Phones / Small Tablets (<= 768px) */
 @media (max-width: 768px) {
   .shell__search {
     display: none;
   }
+
+  .shell__header {
+    padding-inline: 1rem;
+    height: 58px;
+    gap: 0.75rem;
+  }
+
+  .shell__header-actions {
+    gap: 0.45rem;
+  }
+
+  .shell__icon-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .shell__content {
+    padding: 1.15rem 1rem;
+  }
+
+  .shell__breadcrumb {
+    font-size: 0.88rem;
+    gap: 0.45rem;
+  }
+
+  .shell__breadcrumb-current {
+    font-size: 0.88rem;
+  }
+}
+
+/* Small Mobile Phones (<= 480px) */
+@media (max-width: 480px) {
+  .shell__header {
+    padding-inline: 0.75rem;
+    height: 56px;
+  }
+
+  .shell__breadcrumb a {
+    display: none;
+  }
+
+  .shell__breadcrumb-sep {
+    display: none;
+  }
+
+  .shell__breadcrumb-current {
+    font-size: 0.92rem;
+  }
+
+  .shell__content {
+    padding: 1rem 0.75rem;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

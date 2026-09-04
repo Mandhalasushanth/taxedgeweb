@@ -10,11 +10,12 @@ import { CustomerTypeList } from '../CustomerTypeList/CustomerTypeList'
 import { CreateAccountButton } from '../CreateAccountButton/CreateAccountButton'
 import { CUSTOMER_TYPE_OPTIONS } from '../../data/customerTypeOptions'
 import { useCustomerType } from '../../hooks/useCustomerType'
+import { authFlowService } from '@modules/authentication/services/authFlowService'
 import './CustomerTypePage.css'
 
 export const CustomerTypePage = () => {
   const navigate = useNavigate()
-  const { selectedId, setSelectedId } = useCustomerType('proprietorship')
+  const { selectedId, setSelectedId } = useCustomerType(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const user = useAuthStore((state) => state.user)
   const setUser = useAuthStore((state) => state.setUser)
@@ -24,9 +25,17 @@ export const CustomerTypePage = () => {
   }
 
   const handleCreateAccount = async () => {
+    if (!selectedId) return
+
     setIsSubmitting(true)
     try {
       const currentUser = user || authService.getUser()
+      const userMobile = currentUser?.mobile || ''
+
+      if (userMobile) {
+        await authFlowService.completeRegistration(userMobile)
+      }
+
       if (currentUser) {
         const completedUser = {
           ...currentUser,
@@ -79,7 +88,11 @@ export const CustomerTypePage = () => {
 
           {/* Bottom Action CTA */}
           <footer className="customer-type-page__footer">
-            <CreateAccountButton onClick={handleCreateAccount} isLoading={isSubmitting} />
+            <CreateAccountButton
+              onClick={handleCreateAccount}
+              isLoading={isSubmitting}
+              disabled={!selectedId}
+            />
           </footer>
         </div>
       </main>

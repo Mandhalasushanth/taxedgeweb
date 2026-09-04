@@ -1,46 +1,57 @@
-import { useNavigate } from 'react-router-dom'
-
-import { routePaths } from '@core/config'
-import { Button, Input } from '@shared/components'
-import { useZodForm } from '@shared/hooks'
-
-import { authFlowService } from '../../services/authFlowService'
-import { passcodeSchema } from '../../validation/authSchema'
+import { useLocation } from 'react-router-dom'
+import { AuthBrandLogo } from '../../components/AuthBrandLogo/AuthBrandLogo'
+import { AuthPedestal } from '../../components/AuthPedestal/AuthPedestal'
+import { PasscodeCard } from '../../components/PasscodeCard/PasscodeCard'
 import './Passcode.css'
 
-export const Passcode = () => {
-  const navigate = useNavigate()
+interface PasscodeRouterLocationState {
+  mobile?: string
+  countryCode?: string
+}
 
-  const form = useZodForm(passcodeSchema, { passcode: '' }, async (values) => {
-    await authFlowService.setPasscode(values.passcode)
-    navigate(routePaths.dashboard, { replace: true })
-  })
+export const Passcode = () => {
+  const location = useLocation()
+  const locationState = location.state as PasscodeRouterLocationState | null
+  const mobile = locationState?.mobile ?? '9867041255'
+  const countryCode = locationState?.countryCode ?? '+91'
 
   return (
-    <form className="passcode-page" onSubmit={form.handleSubmit} noValidate>
-      <header className="passcode-page__header">
-        <h1 className="passcode-page__title">Set a passcode</h1>
-        <p className="passcode-page__subtitle">A 4-digit code to unlock TaxEdge quickly next time.</p>
-      </header>
+    <div className="passcode-screen">
+      {/* Left Stage */}
+      <section className="passcode-screen__left">
+        <div className="passcode-screen__brand">
+          <AuthBrandLogo />
+        </div>
 
-      <Input
-        name="passcode"
-        label="4-digit passcode"
-        inputMode="numeric"
-        maxLength={4}
-        type="password"
-        value={form.values.passcode}
-        error={form.errors.passcode}
-        onChange={form.handleChange}
-        required
-      />
+        <div className="passcode-screen__hero-text">
+          <h1 className="passcode-screen__headline">
+            Welcome back to <span className="passcode-screen__headline-orange">TaxEdge</span>
+          </h1>
+          <p className="passcode-screen__subtext">
+            <span>Enter your 6-digit passcode to sign in quickly</span>
+            <span>and access your filings securely.</span>
+          </p>
+        </div>
 
-      {form.errors.form && <p className="passcode-page__error">{form.errors.form}</p>}
+        {/* 3D Pedestal with Phone, Shield and Lock visual */}
+        <div className="passcode-screen__visual-box">
+          <AuthPedestal variant="signIn" />
+        </div>
+      </section>
 
-      <Button type="submit" fullWidth size="lg" isLoading={form.isSubmitting}>
-        Save passcode
-      </Button>
-    </form>
+      {/* Center Dividing Vertical Line with Glowing Orange Ring Node */}
+      <div className="passcode-screen__center-divider" aria-hidden="true">
+        <div className="passcode-screen__divider-line" />
+        <div className="passcode-screen__divider-node" />
+      </div>
+
+      {/* Right Stage: White Card */}
+      <aside className="passcode-screen__right">
+        <div className="passcode-screen__card-box">
+          <PasscodeCard mobile={mobile} countryCode={countryCode} />
+        </div>
+      </aside>
+    </div>
   )
 }
 

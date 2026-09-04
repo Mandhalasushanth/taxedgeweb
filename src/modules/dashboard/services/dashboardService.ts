@@ -188,6 +188,24 @@ export const quickServices: QuickService[] = [
     price: '1%',
     priceUnit: 'processing',
   },
+  {
+    id: 'insurance',
+    label: 'Insurance',
+    description: 'Health, life, motor and commercial coverage tailored to your business and family.',
+    to: routePaths.insurance,
+    icon: '☂',
+    price: 'Custom',
+    priceUnit: 'quotes',
+  },
+  {
+    id: 'company',
+    label: 'Company',
+    description: 'Private limited, LLP, OPC incorporation, MSME Udyam, trademark and compliance.',
+    to: routePaths.services,
+    icon: '🏢',
+    price: '₹4,999',
+    priceUnit: 'from',
+  },
 ]
 
 export const dashboardService = {

@@ -47,28 +47,42 @@
 }
 
 .dob-calendar-btn:hover {
-  color: #FF7A00;
+  color: #F97316;
   transform: scale(1.08);
 }
 
 .dob-calendar-btn:focus-visible {
-  outline: 2px solid #FF7A00;
+  outline: 2px solid #F97316;
   outline-offset: 1px;
 }
 
-.address-control {
-  align-items: flex-start;
-  padding-top: 0.45rem;
-  padding-bottom: 0.45rem;
+.address-control-wrapper {
+  display: flex;
+  padding: 0.65rem 0.875rem;
   background: var(--color-surface);
+  border: 1.5px solid var(--grey-300);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.address-affix {
-  margin-top: 2px;
-  flex-shrink: 0;
+.address-control-wrapper:hover:not(:focus-within) {
+  border-color: var(--grey-400);
 }
 
-/* Remove default browser borders, outlines, and double boxes from textarea */
+.address-control-wrapper:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3.5px rgba(249, 115, 22, 0.16);
+}
+
+.field--invalid .address-control-wrapper {
+  border-color: var(--color-danger);
+}
+
+.field--invalid .address-control-wrapper:focus-within {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3.5px rgba(239, 68, 68, 0.16);
+}
+
 .address-textarea {
   border: none !important;
   outline: none !important;
@@ -77,12 +91,12 @@
   padding: 0 !important;
   margin: 0 !important;
   width: 100%;
-  resize: none;
-  min-height: 48px;
+  resize: vertical;
+  min-height: 60px;
   font-family: inherit;
   font-size: var(--font-size-sm);
   color: var(--grey-900);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .address-textarea::placeholder {
@@ -121,25 +135,25 @@
 }
 
 .profile-form__submit-btn {
-  background: #FF7A00;
+  background: #F97316;
   color: #ffffff;
   font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: 0.01em;
   padding-block: 0.75rem;
   border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(255, 122, 0, 0.35);
+  box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
   transition: all var(--transition-fast);
 }
 
 .profile-form__submit-btn:hover:not(:disabled) {
-  background: #e66e00;
-  box-shadow: 0 6px 20px rgba(255, 122, 0, 0.45);
+  background: #ea580c;
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.45);
   transform: translateY(-1px);
 }
 
 .profile-form__submit-btn:active:not(:disabled) {
-  background: #cc6200;
+  background: #c2410c;
   transform: translateY(0);
 }
 

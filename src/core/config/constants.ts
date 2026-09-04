@@ -4,6 +4,7 @@ export const STORAGE_KEYS = {
   refreshToken: 'taxedge.refreshToken',
   user: 'taxedge.user',
   theme: 'taxedge.theme',
+  registeredUsers: 'taxedge.registeredUsers',
 } as const
 
 export const HTTP_STATUS = {

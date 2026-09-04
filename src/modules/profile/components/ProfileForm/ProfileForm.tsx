@@ -18,6 +18,8 @@ const DEFAULT_VALUES: ProfileFormValues = {
   pan: '',
   aadhaar: '',
   mobile: '',
+  passcode: '',
+  confirmPasscode: '',
   address: '',
 }
 
@@ -38,6 +40,8 @@ export const ProfileForm = ({
   const formatAadhaar = (val: string) => val.replace(/\D/g, '').slice(0, 12)
 
   const formatMobile = (val: string) => val.replace(/\D/g, '').slice(0, 10)
+
+  const formatPasscode = (val: string) => val.replace(/\D/g, '').slice(0, 6)
 
   const formatDOB = (val: string) => {
     const digits = val.replace(/\D/g, '').slice(0, 8)
@@ -94,6 +98,8 @@ export const ProfileForm = ({
       formattedValue = formatAadhaar(value)
     } else if (name === 'mobile') {
       formattedValue = formatMobile(value)
+    } else if (name === 'passcode' || name === 'confirmPasscode') {
+      formattedValue = formatPasscode(value)
     } else if (name === 'dob' && !value.includes('/') && value.length > (values.dob?.length || 0)) {
       formattedValue = formatDOB(value)
     }
@@ -153,18 +159,12 @@ export const ProfileForm = ({
           id="profile-fullName"
           name="fullName"
           label="Full name"
-          placeholder="Enter your full name"
+          placeholder="Anjali Deshmukh"
           value={values.fullName}
           error={errors.fullName}
           onChange={handleChange}
           required
           autoComplete="name"
-          prefix={
-            <svg className="form-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
-          }
         />
 
         <Input
@@ -172,18 +172,12 @@ export const ProfileForm = ({
           name="email"
           type="email"
           label="Email"
-          placeholder="you@example.com"
+          placeholder="anjali@shreedeshmukh.in"
           value={values.email}
           error={errors.email}
           onChange={handleChange}
           required
           autoComplete="email"
-          prefix={
-            <svg className="form-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-          }
         />
       </div>
 
@@ -193,29 +187,13 @@ export const ProfileForm = ({
           id="profile-dob"
           name="dob"
           label="Date of birth"
-          placeholder="DD-MM-YYYY"
+          placeholder="14-03-1988"
           maxLength={10}
           value={values.dob}
           error={errors.dob}
           onChange={handleChange}
           required
           autoComplete="bday"
-          prefix={
-            <button
-              type="button"
-              className="dob-calendar-btn"
-              onClick={openCalendar}
-              title="Open calendar picker"
-              aria-label="Open calendar picker"
-            >
-              <svg className="form-field-icon dob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                <line x1="16" y1="2" x2="16" y2="6" />
-                <line x1="8" y1="2" x2="8" y2="6" />
-                <line x1="3" y1="10" x2="21" y2="10" />
-              </svg>
-            </button>
-          }
           suffix={
             <button
               type="button"
@@ -238,26 +216,17 @@ export const ProfileForm = ({
           id="profile-pan"
           name="pan"
           label="PAN"
-          placeholder="ABCDE1234F"
+          placeholder="AXTPD4419K"
           maxLength={10}
           value={values.pan}
           error={errors.pan}
           onChange={handleChange}
           required
           autoCapitalize="characters"
-          prefix={
-            <svg className="form-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="4" width="18" height="16" rx="2" />
-              <circle cx="9" cy="10" r="2" />
-              <path d="M15 8h2" />
-              <path d="M15 12h2" />
-              <path d="M7 16h10" />
-            </svg>
-          }
         />
       </div>
 
-      {/* Row 3: Aadhaar number * & Mobile * */}
+      {/* Row 3: Aadhaar number * & Mobile */}
       <div className="profile-form__row">
         <Input
           id="profile-aadhaar"
@@ -270,16 +239,6 @@ export const ProfileForm = ({
           error={errors.aadhaar}
           onChange={handleChange}
           required
-          prefix={
-            <svg className="form-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 2a10 10 0 0 0-10 10c0 3.1 1.4 5.9 3.6 7.8" />
-              <path d="M12 6a6 6 0 0 0-6 6c0 1.9.9 3.6 2.2 4.7" />
-              <path d="M12 10a2 2 0 0 0-2 2c0 .6.3 1.2.7 1.6" />
-              <path d="M18.4 19.8A10 10 0 0 0 22 12a10 10 0 0 0-10-10" />
-              <path d="M17.8 16.7A6 6 0 0 0 18 12a6 6 0 0 0-6-6" />
-              <path d="M13.3 13.6A2 2 0 0 0 14 12a2 2 0 0 0-2-2" />
-            </svg>
-          }
         />
 
         <Input
@@ -288,40 +247,61 @@ export const ProfileForm = ({
           type="tel"
           label="Mobile"
           inputMode="numeric"
-          maxLength={10}
-          placeholder="10-digit mobile"
+          maxLength={14}
+          placeholder="+91 98670 41255"
           value={values.mobile}
           error={errors.mobile}
           onChange={handleChange}
-          required
           autoComplete="tel"
-          prefix={
-            <svg className="form-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-            </svg>
-          }
+        />
+      </div>
+
+      {/* Row 4: Create passcode * & Confirm passcode * */}
+      <div className="profile-form__row">
+        <Input
+          id="profile-passcode"
+          name="passcode"
+          type="password"
+          label="Create passcode"
+          placeholder="6 digit passcode"
+          inputMode="numeric"
+          maxLength={6}
+          value={values.passcode}
+          error={errors.passcode}
+          onChange={handleChange}
+          required
+          autoComplete="new-password"
+        />
+
+        <Input
+          id="profile-confirmPasscode"
+          name="confirmPasscode"
+          type="password"
+          label="Confirm passcode"
+          placeholder="Confirm passcode"
+          inputMode="numeric"
+          maxLength={6}
+          value={values.confirmPasscode}
+          error={errors.confirmPasscode}
+          onChange={handleChange}
+          required
+          autoComplete="new-password"
         />
       </div>
 
       {/* Row 4: Address * (Full width) */}
       <div className="profile-form__row profile-form__row--full">
-        <div className="field address-field">
+        <div className={`field ${errors.address ? 'field--invalid' : ''}`}>
           <label className="field__label" htmlFor="profile-address">
             Address<span aria-hidden="true"> *</span>
           </label>
-          <div className="field__control address-control">
-            <span className="field__affix address-affix">
-              <svg className="form-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-            </span>
+          <div className="address-control-wrapper">
             <textarea
               id="profile-address"
               name="address"
-              rows={2}
-              className="field__input address-textarea"
-              placeholder="Enter your complete address"
+              rows={3}
+              className="address-textarea"
+              placeholder="Shop 14, Laxmi Complex, FC Road, Pune, Maharashtra 411004"
               value={values.address}
               onChange={handleChange}
               required

@@ -65,3 +65,10 @@ export interface AuthSession {
   user: AuthUser
   tokens: AuthTokens
 }
+
+export interface RegisteredUserRecord {
+  mobile: string
+  passcode: string
+  isRegistered: boolean
+  user: AuthUser
+}

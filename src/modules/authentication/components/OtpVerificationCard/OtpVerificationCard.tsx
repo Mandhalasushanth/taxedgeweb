@@ -106,6 +106,14 @@ export const OtpVerificationCard = ({
     setError(null)
   }
 
+  const handleBack = () => {
+    navigate(routePaths.auth.login, {
+      state: {
+        initialMobile: mobile,
+      },
+    })
+  }
+
   const formatDisplayMobile = (num: string) => {
     const clean = num.replace(/\D/g, '')
     if (clean.length === 10) {
@@ -116,6 +124,30 @@ export const OtpVerificationCard = ({
 
   return (
     <div className="otp-card">
+      <div className="otp-card__top-nav">
+        <button
+          type="button"
+          className="otp-card__back-btn"
+          onClick={handleBack}
+          aria-label="Back to enter mobile number"
+        >
+          <svg
+            className="otp-card__back-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+          </svg>
+          <span className="otp-card__back-label">Back</span>
+        </button>
+      </div>
+
       <header className="otp-card__header">
         <h2 className="otp-card__title">Enter the code</h2>
         <p className="otp-card__subtitle">
@@ -123,7 +155,7 @@ export const OtpVerificationCard = ({
           <button
             type="button"
             className="otp-card__change-link"
-            onClick={() => navigate(routePaths.auth.login)}
+            onClick={handleBack}
           >
             Change
           </button>

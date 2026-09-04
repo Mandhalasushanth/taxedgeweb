@@ -44,7 +44,7 @@ export const routeConfig: RouteObject[] = [
   },
   {
     path: routePaths.registration,
-    element: <Navigate to={routePaths.auth.register} replace />,
+    element: <Navigate to={routePaths.auth.createProfile} replace />,
   },
   {
     path: routePaths.auth.createProfile,

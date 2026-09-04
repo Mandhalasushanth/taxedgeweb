@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   padding: 1.75rem 2rem;
-  background: #ffffff;
+  background: #FFFFFF;
   border: 1px solid #E2E8F0;
   border-radius: 20px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
@@ -22,7 +22,7 @@
   font-size: 0.84rem;
   font-weight: 700;
   color: #083B75;
-  background: #ffffff;
+  background: #FFFFFF;
   border: 1px solid #E2E8F0;
   border-radius: 9999px;
   text-decoration: none;
@@ -30,7 +30,7 @@
   white-space: nowrap;
 }
 .recent-apps__view-all:hover {
-  background: #f8fafc;
+  background: #F7F9FC;
   color: #FF7A00;
   border-color: rgba(255, 122, 0, 0.4);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
@@ -44,7 +44,7 @@
   justify-content: space-between;
   gap: 1.5rem;
   padding: 1.15rem 1.35rem;
-  background: #ffffff;
+  background: #FFFFFF;
   border: 1px solid #E2E8F0;
   border-radius: 14px;
   text-decoration: none;
@@ -57,7 +57,7 @@
 }
 
 .recent-app-card__left { display: flex; align-items: center; gap: 1rem; min-width: 0; }
-.recent-app-card__icon { display: grid; flex-shrink: 0; place-items: center; width: 2.35rem; height: 2.35rem; font-size: 1.1rem; color: #083B75; background: #EFF6FF; border-radius: 10px; }
+.recent-app-card__icon { display: grid; flex-shrink: 0; place-items: center; width: 2.35rem; height: 2.35rem; font-size: 1.1rem; color: #083B75; background: #EAF1FE; border-radius: 10px; }
 
 .recent-app-card__info { display: flex; flex-direction: column; min-width: 0; }
 .recent-app-card__title { margin: 0; font-family: var(--font-sans); font-size: 0.96rem; font-weight: 700; color: #083B75; line-height: 1.3; }
@@ -79,9 +79,9 @@
 .recent-app-card__badge-dot { font-size: 0.55rem; }
 
 .recent-app-card__badge--info,
-.recent-app-card__badge--success { background: #EFF6FF; color: #083B75; border: 1px solid #DBEAFE; }
-.recent-app-card__badge--warning { background: #FFF7ED; color: #e66e00; border: 1px solid #FFEDD5; }
-.recent-app-card__badge--danger { background: #FEF2F2; color: #DC2626; border: 1px solid #FEE2E2; }
+.recent-app-card__badge--success { background: #EAF1FE; color: #083B75; border: 1px solid #dbe4f0; }
+.recent-app-card__badge--warning { background: #FEF0E6; color: #F97316; border: 1px solid #ffedd5; }
+.recent-app-card__badge--danger { background: #FDEBEB; color: #DC2626; border: 1px solid #fde8e6; }
 
 .recent-app-card__progress-wrap { display: flex; flex-direction: column; align-items: flex-end; margin-top: 0.45rem; }
 .recent-app-card__progress-bar { width: 95px; height: 5px; background: #E2E8F0; border-radius: 9999px; overflow: hidden; }

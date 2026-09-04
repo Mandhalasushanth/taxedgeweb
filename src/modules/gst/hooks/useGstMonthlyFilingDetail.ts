@@ -41,6 +41,19 @@ export interface GstFilingDetail {
     due: string;
     currentStage: string;
   };
+  tracking?: {
+    arnNumber: string;
+    currentStageIndex: number;
+    totalStages: number;
+    fee: string;
+    paymentStatus: string;
+    documentsCount: string;
+    assignee: {
+      name: string;
+      role: string;
+      initials: string;
+    };
+  };
   returnFigures: {
     taxableTurnover: string;
     outputTax: string;
@@ -65,7 +78,7 @@ export const useGstMonthlyFilingDetail = (id?: string) => {
         id: id || '1',
         reference: 'GST-2026-00118',
         title: 'GST Monthly Filing',
-        details: 'August 2026 · GSTR-1 & GSTR-3B · assigned to Rohit Kulkarni',
+        details: 'August 2026 · GSTR-1 & GSTR-3B',
         progress: 58,
         application: {
           appId: 'GST-2026-00118',
@@ -74,7 +87,20 @@ export const useGstMonthlyFilingDetail = (id?: string) => {
           gstin: '27AXTPD4419K1ZP',
           opened: '28 Aug 2026',
           due: '20 Sep 2026',
-          currentStage: 'ARN Generated'
+          currentStage: 'ARN Generated',
+        },
+        tracking: {
+          arnNumber: 'ARN AA2708260041926',
+          currentStageIndex: 7,
+          totalStages: 12,
+          fee: '₹2,500',
+          paymentStatus: 'Paid',
+          documentsCount: '8 / 8',
+          assignee: {
+            name: 'Rohit Kulkarni',
+            role: 'GST Executive',
+            initials: 'RK',
+          },
         },
         returnFigures: {
           taxableTurnover: '₹18,17,700',
@@ -94,13 +120,13 @@ export const useGstMonthlyFilingDetail = (id?: string) => {
           { id: '8', title: 'Digital signature (DSC)', subtitle: 'Only for companies and LLPs — optional for you', status: 'pending' }
         ],
         timeline: [
-          { id: '1', title: 'New Request', date: '28 Aug 2026', status: 'completed' },
-          { id: '2', title: 'Documents Pending', date: '28 Aug 2026', status: 'completed' },
-          { id: '3', title: 'Documents Received', date: '29 Aug 2026', status: 'completed' },
-          { id: '4', title: 'Verification', date: '30 Aug 2026', status: 'completed' },
-          { id: '5', title: 'Application Prepared', date: '31 Aug 2026', status: 'completed' },
-          { id: '6', title: 'Submitted', date: '1 Sep 2026', status: 'completed' },
-          { id: '7', title: 'ARN Generated', date: '1 Sep 2026', status: 'current', description: 'Currently at this stage. Your executive will update you as it moves.' },
+          { id: '1', title: 'New Request', date: '28 Aug 2026, 9:12 AM', status: 'completed' },
+          { id: '2', title: 'Documents Pending', date: '28 Aug 2026, 9:14 AM', status: 'completed' },
+          { id: '3', title: 'Documents Received', date: '29 Aug 2026, 11:04 AM', status: 'completed' },
+          { id: '4', title: 'Verification', date: '30 Aug 2026, 2:30 PM', status: 'completed' },
+          { id: '5', title: 'Application Prepared', date: '31 Aug 2026, 10:15 AM', status: 'completed' },
+          { id: '6', title: 'Submitted', date: '1 Sep 2026, 4:02 PM', status: 'completed' },
+          { id: '7', title: 'ARN Generated', date: '1 Sep 2026, 4:11 PM', status: 'current', description: 'Currently at this stage. Your executive will update you as it moves.' },
           { id: '8', title: 'Department Query', date: 'Pending', status: 'pending' },
           { id: '9', title: 'Query Response Submitted', date: 'Pending', status: 'pending' },
           { id: '10', title: 'GST Approved', date: 'Pending', status: 'pending' },

@@ -22,17 +22,11 @@ export const ServiceSection = ({
       className="service-section"
     >
       <header className="service-section__header">
-        <div className="service-section__header-left">
-          <h2 id={`service-section-title-${config.id}`} className="service-section__title">
-            {config.title}
-          </h2>
-          {config.badgeText && (
-            <span className="service-section__badge">{config.badgeText}</span>
-          )}
-        </div>
-
-        <span className="service-section__count-text">
-          {services.length} {services.length === 1 ? 'service' : 'services'} available
+        <h2 id={`service-section-title-${config.id}`} className="service-section__title">
+          {config.title}
+        </h2>
+        <span className="service-section__badge">
+          {services.length} {services.length === 1 ? 'service' : 'services'}
         </span>
       </header>
 
