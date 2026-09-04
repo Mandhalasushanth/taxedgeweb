@@ -1,4 +1,6 @@
 export { paymentsRoutes } from './routes'
 export { usePayments } from './hooks/usePayments'
 export { paymentsService } from './services/paymentsService'
-export type { PaymentsFilters, PaymentsItem } from './types/payments.types'
+export { receiptService } from './services/receiptService'
+export { ReceiptActions, ReceiptCard } from './components'
+export type { PaymentsFilters, PaymentsItem, TaxReceipt, TaxReceiptLineItem } from './types/payments.types'

@@ -64,6 +64,9 @@ export const apiEndpoints = {
     tickets: '/support/tickets',
     ticketDetail: (id: string) => `/support/tickets/${id}`,
     faqs: '/support/faqs',
+    executives: '/support/executives',
+    conversation: (appId: string) => `/support/conversations/${appId}`,
+    messages: (conversationId: string) => `/support/conversations/${conversationId}/messages`,
   },
   staff: {
     dashboard: '/staff/dashboard',
