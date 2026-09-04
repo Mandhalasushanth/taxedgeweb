@@ -19,12 +19,7 @@ export const RevenueByService = ({ rows }: RevenueByServiceProps) => {
             <span>{SERVICE_LABELS[row.service]}</span>
             <span className="revenue-by-service__amount">{formatCurrency(row.amount)}</span>
           </div>
-          <div className="revenue-by-service__track">
-            <div
-              className="revenue-by-service__bar"
-              style={{ width: `${Math.round((row.amount / max) * 100)}%` }}
-            />
-          </div>
+          <progress className="revenue-by-service__bar" value={row.amount} max={max} aria-label={SERVICE_LABELS[row.service]} />
         </li>
       ))}
     </ul>

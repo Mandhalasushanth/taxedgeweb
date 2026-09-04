@@ -13,3 +13,17 @@ export interface ProfileFilters {
   status?: ApplicationStatus
   search?: string
 }
+
+export interface UserProfileData {
+  id: string
+  fullName: string
+  email: string
+  dob: string
+  pan: string
+  aadhaar: string
+  mobile?: string
+  address: string
+  isProfileComplete: boolean
+  createdAt: string
+  updatedAt: string
+}

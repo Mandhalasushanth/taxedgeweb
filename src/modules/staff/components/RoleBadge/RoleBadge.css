@@ -9,8 +9,8 @@
   white-space: nowrap;
 }
 
-.role-badge--super { color: var(--color-on-primary); background: var(--navy-500); }
-.role-badge--admin { color: var(--color-text-inverse); background: var(--teal-600); }
-.role-badge--manager { color: var(--color-primary); background: var(--color-primary-soft); border-color: var(--teal-300); }
+.role-badge--super { color: var(--color-text-inverse); background: var(--navy-600); }
+.role-badge--admin { color: var(--color-text-inverse); background: var(--navy-500); }
+.role-badge--manager { color: var(--color-primary); background: var(--color-primary-soft); border-color: var(--orange-300); }
 .role-badge--agent { color: var(--color-text-muted); background: var(--color-surface-alt); }
 .role-badge--customer { color: var(--color-info); background: var(--color-info-soft); }

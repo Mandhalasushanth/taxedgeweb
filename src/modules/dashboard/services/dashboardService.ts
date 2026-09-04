@@ -1,15 +1,151 @@
 import { env, routePaths } from '@core/config'
+import { formatCurrency } from '@shared/utils'
 
 import { dashboardApi } from '../api/dashboardApi'
 import type { DashboardSummary, QuickService } from '../types/dashboard.types'
 
 /* Development mock - delete once the API is live. */
 const mockSummary: DashboardSummary = {
+  brief: {
+    dateLabel: new Intl.DateTimeFormat('en-IN', {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    }).format(new Date()),
+    message:
+      'Your GSTR-3B for August is due in 18 days and two documents are still pending on your ITR. Everything else is moving.',
+    activeApplications: 3,
+    paymentDue: formatCurrency(3000),
+  },
+  deadline: {
+    id: 'gstr3b-aug',
+    title: 'GSTR-3B · August 2026',
+    meta: 'Due 20 September 2026 · GSTIN 27AXTPD4419K1ZP',
+    daysLeft: 18,
+    ctaLabel: 'Start filing',
+    ctaTo: routePaths.gst.returns,
+  },
   stats: [
-    { id: 'open', label: 'Open applications', value: '4', change: 1, hint: '1 needs your input' },
-    { id: 'gst', label: 'GST returns filed', value: '12', change: 2, hint: 'This financial year' },
-    { id: 'refund', label: 'Refunds received', value: '₹48,200', hint: 'Across 2 filings' },
-    { id: 'documents', label: 'Documents stored', value: '37' },
+    { id: 'active', label: 'Active applications', value: '3', hint: '2 GST · 1 loan', tone: 'success', icon: '🗎' },
+    {
+      id: 'pending-docs',
+      label: 'Pending documents',
+      value: '2',
+      hint: 'on ITR-2026-00074',
+      hintFlag: 'Action needed',
+      tone: 'warning',
+      icon: '⚠',
+    },
+    {
+      id: 'payment-due',
+      label: 'Payment due',
+      value: formatCurrency(3000),
+      hint: 'ITR filing fee · not yet paid',
+      tone: 'danger',
+      icon: '₹',
+    },
+    { id: 'completed', label: 'Completed services', value: '2', hint: 'Since Jan 2024', tone: 'info', icon: '✓' },
+  ],
+  recentApplications: [
+    {
+      id: 'app-gst-1',
+      code: 'GST-2026-00118',
+      title: 'GST Monthly Filing',
+      meta: 'August 2026 · GSTR-1 & GSTR-3B · Rohit Kulkarni',
+      statusLabel: 'ARN Generated',
+      statusTone: 'info',
+      progress: 58,
+      icon: '📄',
+      to: routePaths.gst.returns,
+    },
+    {
+      id: 'app-itr-1',
+      code: 'ITR-2026-00074',
+      title: 'ITR Filing — AY 2026-27',
+      meta: 'Proprietorship · ITR-3 · Meera Iyer',
+      statusLabel: 'Tax Calculation',
+      statusTone: 'warning',
+      progress: 46,
+      icon: '📊',
+      to: routePaths.itr,
+    },
+    {
+      id: 'app-loan-1',
+      code: 'LOAN-2026-00231',
+      title: 'Business Loan — ₹12,00,000',
+      meta: 'HDFC Bank · 60 months · Sameer Joshi',
+      statusLabel: 'Under Credit Review',
+      statusTone: 'info',
+      progress: 53,
+      icon: '$',
+      to: routePaths.loans,
+    },
+  ],
+  pendingTasks: [
+    {
+      id: 'pt-1',
+      title: 'Bank statement — Apr to Mar',
+      meta: 'Rejected · file is password protected',
+      statusLabel: 'Rejected',
+      statusTone: 'danger',
+      actionLabel: 'Upload',
+      actionTo: routePaths.documents,
+      icon: '⚠',
+      iconTone: 'danger',
+    },
+    {
+      id: 'pt-2',
+      title: 'Form 16A — Q1 FY 2026-27',
+      meta: 'Required for ITR-2026-00074',
+      statusLabel: 'Pending',
+      statusTone: 'muted',
+      actionLabel: 'Upload',
+      actionTo: routePaths.documents,
+      icon: '📄',
+      iconTone: 'muted',
+    },
+    {
+      id: 'pt-3',
+      title: 'Sales invoices — August 2026',
+      meta: '42 files · verified 29 Aug 2026',
+      statusLabel: 'Verified',
+      statusTone: 'success',
+      actionLabel: 'View',
+      actionTo: routePaths.documents,
+      icon: '✓',
+      iconTone: 'success',
+    },
+  ],
+  upcomingDeadlinesList: [
+    {
+      id: 'ud-1',
+      title: 'GSTR-1 · August 2026',
+      dueLabel: 'Due 11 Sep 2026',
+      daysText: '9 days',
+      daysTone: 'warning',
+    },
+    {
+      id: 'ud-2',
+      title: 'GSTR-3B · August 2026',
+      dueLabel: 'Due 20 Sep 2026',
+      daysText: '18 days',
+      daysTone: 'info',
+    },
+    {
+      id: 'ud-3',
+      title: 'ITR filing · AY 2026-27',
+      dueLabel: 'Due 30 Sep 2026',
+      daysText: '28 days',
+      daysTone: 'info',
+    },
+    {
+      id: 'ud-4',
+      title: 'Advance tax · Q2 instalment',
+      dueLabel: 'Due 15 Sep 2026',
+      daysText: '13 days',
+      daysTone: 'info',
+    },
   ],
   recentActivity: [
     { id: 'a1', title: 'GSTR-3B — August', module: 'GST', status: 'MANAGER_REVIEW', updatedAt: new Date().toISOString() },
@@ -25,12 +161,33 @@ const mockSummary: DashboardSummary = {
 }
 
 export const quickServices: QuickService[] = [
-  { id: 'gst-reg', label: 'GST registration', description: 'New GSTIN in 3-7 days', to: routePaths.gst.registration, icon: '%' },
-  { id: 'gst-return', label: 'File GST return', description: 'GSTR-1 and GSTR-3B', to: routePaths.gst.returns, icon: '⇪' },
-  { id: 'itr', label: 'File income tax', description: 'ITR-1 to ITR-4', to: routePaths.itr, icon: '₹' },
-  { id: 'loan', label: 'Apply for a loan', description: 'Business and personal', to: routePaths.loans, icon: '◈' },
-  { id: 'insurance', label: 'Get insured', description: 'Health, term and motor', to: routePaths.insurance, icon: '☂' },
-  { id: 'documents', label: 'Upload documents', description: 'Store once, reuse everywhere', to: routePaths.documents, icon: '🗎' },
+  {
+    id: 'gst',
+    label: 'GST',
+    description: 'Registration, monthly and quarterly filing, amendments, compliance and certificates.',
+    to: routePaths.gst.root,
+    icon: '📄',
+    price: '₹2,500',
+    priceUnit: 'per period',
+  },
+  {
+    id: 'itr',
+    label: 'ITR & TDS',
+    description: 'Income tax returns for every profile, TDS refunds, revised returns and notice replies.',
+    to: routePaths.itr,
+    icon: '📊',
+    price: '₹3,000',
+    priceUnit: 'from',
+  },
+  {
+    id: 'loans',
+    label: 'Loans',
+    description: 'Business, personal, home, property and vehicle finance with a live EMI calculator.',
+    to: routePaths.loans,
+    icon: '$',
+    price: '1%',
+    priceUnit: 'processing',
+  },
 ]
 
 export const dashboardService = {

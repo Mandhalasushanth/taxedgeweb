@@ -1,5 +1,5 @@
 import { env } from '@core/config'
-import { permissionsFor } from '@core/auth'
+import { authStorage, permissionsFor } from '@core/auth'
 import type { AuthSession, AuthUser, UserRole } from '@core/auth'
 
 import { authApi } from '../api/authApi'
@@ -27,6 +27,8 @@ const DEMO_ROLES: Record<string, { role: UserRole; fullName: string; id: string;
   '9000000005': { role: 'ITR_AGENT', fullName: 'Sneha Kulkarni', id: 'stf_005', department: 'Compliance' },
 }
 
+const registeredUsers = new Map<string, { fullName: string; email: string; mobile: string }>()
+
 const mockUser = (mobile: string): AuthUser => {
   const demo = DEMO_ROLES[mobile]
   if (demo) {
@@ -42,11 +44,29 @@ const mockUser = (mobile: string): AuthUser => {
     }
   }
 
+  const registered = registeredUsers.get(mobile)
+  if (registered) {
+    return {
+      id: `usr_${Date.now().toString(36)}`,
+      fullName: registered.fullName,
+      email: registered.email,
+      mobile: registered.mobile,
+      role: 'CUSTOMER',
+      permissions: [],
+      isProfileComplete: true,
+    }
+  }
+
+  const stored = authStorage.getUser()
+  if (stored && stored.fullName && stored.fullName !== 'Demo Customer') {
+    return stored
+  }
+
   return {
-    id: 'usr_demo_001',
-    fullName: 'Demo Customer',
-    email: 'demo@taxedge.in',
-    mobile,
+    id: 'usr_cus_001',
+    fullName: stored?.fullName || 'Customer',
+    email: stored?.email || `${mobile || 'user'}@taxedge.in`,
+    mobile: mobile || stored?.mobile || '9876543210',
     role: 'CUSTOMER',
     permissions: [],
     isProfileComplete: true,
@@ -77,6 +97,21 @@ export const authFlowService = {
   async register(payload: RegisterPayload): Promise<{ mobile: string }> {
     if (env.enableMocks) {
       await delay()
+      registeredUsers.set(payload.mobile, {
+        fullName: payload.fullName,
+        email: payload.email,
+        mobile: payload.mobile,
+      })
+      const user: AuthUser = {
+        id: `usr_${Date.now().toString(36)}`,
+        fullName: payload.fullName,
+        email: payload.email,
+        mobile: payload.mobile,
+        role: 'CUSTOMER',
+        permissions: [],
+        isProfileComplete: false,
+      }
+      authStorage.setUser(user)
       return { mobile: payload.mobile }
     }
     await authApi.register(payload)

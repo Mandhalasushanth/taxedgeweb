@@ -15,12 +15,23 @@
   --color-text-muted: var(--grey-500);
   --color-text-inverse: var(--grey-0);
 
-  --color-primary: var(--teal-500);
-  --color-primary-hover: var(--teal-600);
-  --color-primary-soft: var(--teal-50);
+  /* TaxEdge Primary Brand (Orange) */
+  --color-primary: var(--orange-500);
+  --color-primary-hover: var(--orange-600);
+  --color-primary-active: var(--orange-700);
+  --color-primary-soft: var(--orange-50);
+  --color-primary-glow: rgba(249, 115, 22, 0.18);
   --color-on-primary: var(--grey-0);
 
-  --color-accent: var(--navy-500);
+  /* TaxEdge Navy Palette */
+  --color-navy-dark: var(--navy-900);
+  --color-navy-panel: var(--navy-800);
+  --color-navy-surface: var(--navy-700);
+  --color-navy-border: #1e2e4a;
+  --color-accent: var(--orange-500);
+  --color-accent-hover: var(--orange-600);
+  --color-accent-soft: var(--orange-50);
+  --color-on-accent: var(--grey-0);
 
   --color-success: var(--green-500);
   --color-success-soft: var(--green-100);
@@ -42,21 +53,24 @@
   --space-8: 4rem;
 
   /* Radii, shadows, layout */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 14px;
-  --radius-pill: 999px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
 
-  --shadow-sm: 0 1px 2px rgb(26 31 38 / 8%);
-  --shadow-md: 0 6px 18px rgb(26 31 38 / 10%);
-  --shadow-lg: 0 18px 40px rgb(26 31 38 / 14%);
+  --shadow-xs: 0 1px 2px rgb(15 23 42 / 5%);
+  --shadow-sm: 0 1px 3px rgb(15 23 42 / 8%);
+  --shadow-md: 0 6px 20px rgb(15 23 42 / 8%);
+  --shadow-lg: 0 20px 45px rgb(15 23 42 / 12%);
 
   --sidebar-width: 248px;
   --header-height: 64px;
   --content-max-width: 1200px;
 
-  --transition-fast: 120ms ease;
-  --transition-base: 200ms ease;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 220ms cubic-bezier(0.4, 0, 0.2, 1);
 
   --z-header: 100;
   --z-sidebar: 90;
@@ -67,18 +81,23 @@
 [data-theme='dark'] {
   color-scheme: dark;
 
-  --color-bg: var(--navy-700);
-  --color-surface: var(--navy-600);
-  --color-surface-alt: var(--navy-500);
-  --color-border: #253444;
-  --color-border-strong: #35485c;
+  --color-bg: var(--navy-900);
+  --color-surface: var(--navy-800);
+  --color-surface-alt: var(--navy-700);
+  --color-border: #1e2e4a;
+  --color-border-strong: #2c4266;
 
   --color-text: var(--grey-50);
   --color-text-muted: var(--grey-300);
   --color-text-inverse: var(--grey-900);
 
-  --color-primary: var(--teal-300);
-  --color-primary-hover: var(--teal-100);
-  --color-primary-soft: rgb(31 138 122 / 18%);
-  --color-on-primary: var(--navy-700);
+  --color-primary: var(--orange-500);
+  --color-primary-hover: var(--orange-400);
+  --color-primary-active: var(--orange-600);
+  --color-primary-soft: rgba(249, 115, 22, 0.15);
+  --color-on-primary: var(--grey-0);
+
+  --color-accent: var(--navy-400);
+  --color-accent-hover: var(--navy-500);
+  --color-on-accent: var(--grey-0);
 }

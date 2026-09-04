@@ -20,7 +20,7 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
   user: authService.getUser(),
   isAuthenticated: authService.isAuthenticated(),
-  isBootstrapping: true,
+  isBootstrapping: false,
 
   signIn: (session) => {
     authService.startSession(session)

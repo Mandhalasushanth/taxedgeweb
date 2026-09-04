@@ -1,0 +1,144 @@
+/* ===================================================
+   TAXEDGE CUSTOMER TYPE SELECTION PAGE
+   Split screen: 50% Left (Brand Panel) & 50% Right (Scrollable List)
+   Mobile: 100% Width (Brand Panel Hidden)
+=================================================== */
+
+.customer-type-page {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  min-height: 100vh;
+  height: 100vh;
+  width: 100%;
+  background: #f8fafc;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Right Scrollable Content Panel */
+.customer-type-page__content-panel {
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.75rem 3.5rem;
+  background: #f8fafc;
+  scroll-behavior: smooth;
+}
+
+.customer-type-page__scroll-container {
+  width: 100%;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+/* Top Navigation */
+.customer-type-page__top-nav {
+  display: flex;
+  align-items: center;
+}
+
+/* Header */
+.customer-type-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.customer-type-page__title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.65rem, 2.2vw, 2.15rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.customer-type-page__subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Selection List Section */
+.customer-type-page__list-section {
+  width: 100%;
+}
+
+/* Bottom Action Footer */
+.customer-type-page__footer {
+  width: 100%;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+/* ===================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+=================================================== */
+
+/* Tablet Screens (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .customer-type-page {
+    grid-template-columns: 45% 55%;
+  }
+
+  .customer-type-page__content-panel {
+    padding: 2rem 2rem;
+  }
+
+  .customer-type-page__title {
+    font-size: 1.65rem;
+  }
+}
+
+/* Mobile Screens Only (< 768px) */
+@media (max-width: 767px) {
+  .customer-type-page {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Hide left branding panel completely on mobile */
+  .customer-type-page .brand-panel {
+    display: none !important;
+  }
+
+  .customer-type-page__content-panel {
+    height: auto;
+    overflow-y: visible;
+    padding: 1.5rem 1.25rem 2.5rem;
+    width: 100%;
+  }
+
+  .customer-type-page__scroll-container {
+    max-width: 100%;
+    gap: 1.25rem;
+    padding-bottom: 2rem;
+  }
+
+  .customer-type-page__title {
+    font-size: 1.55rem;
+  }
+
+  .customer-type-page__subtitle {
+    font-size: 0.88rem;
+  }
+}
+
+/* Extra Small Phones (< 380px) */
+@media (max-width: 380px) {
+  .customer-type-page__content-panel {
+    padding: 1.25rem 0.85rem 2rem;
+  }
+
+  .customer-type-page__title {
+    font-size: 1.35rem;
+  }
+}

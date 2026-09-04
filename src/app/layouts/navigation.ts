@@ -4,6 +4,8 @@ export interface NavItem {
   label: string
   to: string
   icon: string
+  /** Optional key into the badge map DashboardLayout builds from live data. */
+  badgeKey?: 'applications' | 'notifications'
 }
 
 export interface NavSection {
@@ -16,31 +18,38 @@ export const navSections: NavSection[] = [
     title: 'Overview',
     items: [
       { label: 'Dashboard', to: routePaths.dashboard, icon: '⌂' },
-      { label: 'Applications', to: routePaths.applications, icon: '☰' },
-      { label: 'Documents', to: routePaths.documents, icon: '🗎' },
+      { label: 'All Services', to: routePaths.services, icon: '▦' },
     ],
   },
   {
-    title: 'Compliance',
+    title: 'Services',
     items: [
       { label: 'GST', to: routePaths.gst.root, icon: '%' },
-      { label: 'Income tax', to: routePaths.itr, icon: '₹' },
-    ],
-  },
-  {
-    title: 'Finance',
-    items: [
+      { label: 'ITR & TDS', to: routePaths.itr, icon: '₹' },
       { label: 'Loans', to: routePaths.loans, icon: '◈' },
       { label: 'Insurance', to: routePaths.insurance, icon: '☂' },
-      { label: 'Payments', to: routePaths.payments, icon: '⇄' },
     ],
   },
   {
-    title: 'Account',
+    title: 'My account',
     items: [
+      { label: 'Applications', to: routePaths.applications, icon: '☰', badgeKey: 'applications' },
+      { label: 'Document Vault', to: routePaths.documents, icon: '🗎' },
+      { label: 'Payments', to: routePaths.payments, icon: '⇄' },
+      { label: 'Notifications', to: routePaths.chat, icon: '🔔', badgeKey: 'notifications' },
+      { label: 'Support Chat', to: routePaths.support, icon: '💬' },
       { label: 'Profile', to: routePaths.profile, icon: '☺' },
-      { label: 'Chat', to: routePaths.chat, icon: '✉' },
-      { label: 'Support', to: routePaths.support, icon: '?' },
+    ],
+  },
+  {
+    title: 'Back office',
+    items: [
+      { label: 'Admin Dashboard', to: routePaths.staff.dashboard, icon: '📊' },
+      { label: 'Applications Desk', to: routePaths.staff.applications, icon: '📄' },
+      { label: 'Customers (CRM)', to: routePaths.staff.customers, icon: '👥' },
+      { label: 'Staff & Roles', to: routePaths.staff.staffManagement, icon: '🛡️' },
+      { label: 'Service Pricing', to: routePaths.staff.pricing, icon: '🏷️' },
+      { label: 'Reports', to: routePaths.staff.reports, icon: '📥' },
     ],
   },
 ]

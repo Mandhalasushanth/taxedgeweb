@@ -1,22 +1,25 @@
+/* Minimal reset for modern browsers */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-* {
   margin: 0;
+  padding: 0;
 }
 
-html,
-body,
-#root {
-  height: 100%;
+html {
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
 }
 
 body {
-  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
   line-height: var(--line-height-normal);
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 img,
@@ -33,7 +36,6 @@ button,
 textarea,
 select {
   font: inherit;
-  color: inherit;
 }
 
 p,
@@ -46,11 +48,9 @@ h6 {
   overflow-wrap: break-word;
 }
 
-ul[class],
-ol[class] {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+#root {
+  isolation: isolate;
+  min-height: 100vh;
 }
 
 a {
@@ -67,6 +67,12 @@ button {
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
