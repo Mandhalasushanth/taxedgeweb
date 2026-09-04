@@ -1,24 +1,10 @@
-/* ===================================================
-   TAXEDGE QUICK SERVICES (3-CARD GRID WITH BRAND STYLES)
-   Matching All Services Card Aesthetic & Hover Behaviors
-=================================================== */
-
-.quick-services {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.quick-services__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-}
+.quick-services { display: flex; flex-direction: column; width: 100%; }
+.quick-services__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
 
 .quick-service {
   display: flex;
   flex-direction: column;
-  padding: 1.6rem 1.6rem 1.4rem 1.6rem;
+  padding: 1.6rem 1.6rem 1.4rem;
   background: #ffffff;
   border: 1px solid #E2E8F0;
   border-radius: 18px;
@@ -28,19 +14,13 @@
   height: 100%;
   box-sizing: border-box;
 }
-
 .quick-service:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 24px rgba(8, 59, 117, 0.08);
   border-color: #FF7A00;
 }
 
-.quick-service__icon-wrap {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 1.25rem;
-}
-
+.quick-service__icon-wrap { display: flex; align-items: flex-start; margin-bottom: 1.25rem; }
 .quick-service__icon {
   display: flex;
   align-items: center;
@@ -54,20 +34,11 @@
   flex-shrink: 0;
   transition: all 0.2s ease;
 }
-
-.quick-service:hover .quick-service__icon {
-  background: #083B75;
-  color: #ffffff;
-}
-
-.quick-service__icon-svg {
-  width: 22px;
-  height: 22px;
-  stroke: currentColor;
-}
+.quick-service:hover .quick-service__icon { background: #083B75; color: #ffffff; }
+.quick-service__icon-svg { width: 22px; height: 22px; stroke: currentColor; }
 
 .quick-service__label {
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.5rem;
   font-family: var(--font-sans);
   font-size: 1.12rem;
   font-weight: 700;
@@ -75,9 +46,8 @@
   line-height: 1.3;
   letter-spacing: -0.015em;
 }
-
 .quick-service__description {
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 1.5rem;
   font-size: 0.88rem;
   line-height: 1.5;
   color: #64748B;
@@ -92,13 +62,7 @@
   border-top: 1px dashed #E2E8F0;
   margin-top: auto;
 }
-
-.quick-service__price-wrap {
-  display: flex;
-  align-items: baseline;
-  gap: 0.45rem;
-}
-
+.quick-service__price-wrap { display: flex; align-items: baseline; gap: 0.45rem; }
 .quick-service__price {
   font-family: var(--font-sans);
   font-size: 1.15rem;
@@ -107,12 +71,7 @@
   letter-spacing: -0.02em;
   line-height: 1;
 }
-
-.quick-service__price-unit {
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: #64748B;
-}
+.quick-service__price-unit { font-size: 0.82rem; font-weight: 500; color: #64748B; }
 
 .quick-service__action {
   font-family: var(--font-sans);
@@ -124,37 +83,16 @@
   gap: 0.35rem;
   transition: color 0.15s ease, gap 0.15s ease;
 }
-
-.quick-service:hover .quick-service__action {
-  color: #e66e00;
-  gap: 0.5rem;
-}
+.quick-service:hover .quick-service__action { color: #e66e00; gap: 0.5rem; }
 
 @media (max-width: 1024px) {
-  .quick-services__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .quick-services__grid { grid-template-columns: repeat(2, 1fr); }
 }
-
 @media (max-width: 640px) {
-  .quick-services__grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
+  .quick-services__grid { grid-template-columns: 1fr; gap: 1rem; }
 }
-
 @media (max-width: 480px) {
-  .quick-service {
-    padding: 1.25rem 1.15rem 1.15rem 1.15rem;
-    border-radius: 14px;
-  }
-
-  .quick-service__label {
-    font-size: 1.05rem;
-  }
-
-  .quick-service__description {
-    margin-bottom: 1.15rem;
-  }
+  .quick-service { padding: 1.25rem 1.15rem; border-radius: 14px; }
+  .quick-service__label { font-size: 1.05rem; }
+  .quick-service__description { margin-bottom: 1.15rem; }
 }
-

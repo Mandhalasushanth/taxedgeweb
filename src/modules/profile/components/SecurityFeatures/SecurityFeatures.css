@@ -1,8 +1,4 @@
-.security-features {
-  width: 100%;
-  margin-top: 0;
-}
-
+.security-features { width: 100%; margin-top: 0; }
 .security-features__card {
   display: flex;
   flex-direction: column;
@@ -15,23 +11,9 @@
   backdrop-filter: blur(12px);
 }
 
-.security-feature-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.55rem 0;
-}
-
-.security-feature-row:not(:last-child) {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.security-feature-row__left {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-}
+.security-feature-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; }
+.security-feature-row:not(:last-child) { border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.security-feature-row__left { display: flex; align-items: center; gap: 0.85rem; }
 
 .security-feature-row__icon-circle {
   display: flex;
@@ -45,18 +27,8 @@
   flex-shrink: 0;
   box-shadow: 0 2px 8px rgba(249, 115, 22, 0.35);
 }
-
-.security-feature-row__icon-circle svg {
-  width: 14px;
-  height: 14px;
-}
-
-.security-feature-row__title {
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
-  letter-spacing: -0.01em;
-}
+.security-feature-row__icon-circle svg { width: 14px; height: 14px; }
+.security-feature-row__title { font-size: 0.82rem; font-weight: 500; color: rgba(255, 255, 255, 0.92); letter-spacing: -0.01em; }
 
 .security-feature-row__status-badge {
   display: inline-flex;

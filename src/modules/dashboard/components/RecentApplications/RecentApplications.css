@@ -1,4 +1,3 @@
-/* TAXEDGE RECENT APPLICATIONS (CONCISE) */
 .recent-apps {
   display: flex;
   flex-direction: column;
@@ -11,7 +10,7 @@
 
 .recent-apps__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem; }
 .recent-apps__title { margin: 0; font-family: var(--font-sans); font-size: 1.25rem; font-weight: 800; color: #083B75; line-height: 1.2; }
-.recent-apps__subtitle { margin: 0.25rem 0 0 0; font-size: 0.88rem; color: #64748B; }
+.recent-apps__subtitle { margin: 0.25rem 0 0; font-size: 0.88rem; color: #64748B; }
 
 .recent-apps__view-all {
   display: inline-flex;
@@ -57,11 +56,21 @@
 }
 
 .recent-app-card__left { display: flex; align-items: center; gap: 1rem; min-width: 0; }
-.recent-app-card__icon { display: grid; flex-shrink: 0; place-items: center; width: 2.35rem; height: 2.35rem; font-size: 1.1rem; color: #083B75; background: #EAF1FE; border-radius: 10px; }
+.recent-app-card__icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  font-size: 1.1rem;
+  color: #083B75;
+  background: #EAF1FE;
+  border-radius: 10px;
+}
 
 .recent-app-card__info { display: flex; flex-direction: column; min-width: 0; }
 .recent-app-card__title { margin: 0; font-family: var(--font-sans); font-size: 0.96rem; font-weight: 700; color: #083B75; line-height: 1.3; }
-.recent-app-card__meta { margin: 0.25rem 0 0 0; font-size: 0.8rem; color: #64748B; line-height: 1.35; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.recent-app-card__meta { margin: 0.25rem 0 0; font-size: 0.8rem; color: #64748B; line-height: 1.35; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .recent-app-card__code { font-weight: 600; color: #083B75; }
 
 .recent-app-card__right { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; }
@@ -77,9 +86,7 @@
   line-height: 1.2;
 }
 .recent-app-card__badge-dot { font-size: 0.55rem; }
-
-.recent-app-card__badge--info,
-.recent-app-card__badge--success { background: #EAF1FE; color: #083B75; border: 1px solid #dbe4f0; }
+.recent-app-card__badge--info, .recent-app-card__badge--success { background: #EAF1FE; color: #083B75; border: 1px solid #dbe4f0; }
 .recent-app-card__badge--warning { background: #FEF0E6; color: #F97316; border: 1px solid #ffedd5; }
 .recent-app-card__badge--danger { background: #FDEBEB; color: #DC2626; border: 1px solid #fde8e6; }
 
