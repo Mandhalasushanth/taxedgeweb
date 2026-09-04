@@ -4,8 +4,8 @@
   gap: 1rem;
   width: 100%;
   padding: 1rem 1.25rem;
-  background: #ffffff;
-  border: 1.5px solid #e2e8f0;
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
   border-radius: 14px;
   cursor: pointer;
   text-align: left;
@@ -16,8 +16,8 @@
 }
 
 .customer-type-card:hover {
-  border-color: #cbd5e1;
-  background: #fafafa;
+  border-color: #CBD5E1;
+  background: #F7F9FC;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
@@ -29,7 +29,7 @@
 
 /* Selected Card Styling (Orange + Navy) */
 .customer-type-card--selected {
-  background: #fff7ed !important;
+  background: #FEF0E6 !important;
   border-color: #FF7A00 !important;
   border-width: 2px !important;
   box-shadow: 0 4px 14px rgba(255, 122, 0, 0.16) !important;
@@ -43,8 +43,8 @@
   width: 42px;
   height: 42px;
   border-radius: 10px;
-  background: #fff7ed;
-  color: #e66e00;
+  background: #FEF0E6;
+  color: #FF7A00;
   flex-shrink: 0;
   transition: all var(--transition-fast);
 }
@@ -56,7 +56,7 @@
 
 .customer-type-card__icon--selected {
   background: #FF7A00;
-  color: #ffffff;
+  color: #FFFFFF;
   box-shadow: 0 2px 8px rgba(255, 122, 0, 0.35);
 }
 
@@ -72,23 +72,23 @@
   font-family: var(--font-sans);
   font-size: 0.98rem;
   font-weight: 600;
-  color: #0f172a;
+  color: #172033;
   letter-spacing: -0.01em;
 }
 
 .customer-type-card--selected .customer-type-card__title {
-  color: #0f172a;
+  color: #172033;
   font-weight: 700;
 }
 
 .customer-type-card__desc {
   font-size: 0.82rem;
-  color: #64748b;
+  color: #64748B;
   line-height: 1.4;
 }
 
 .customer-type-card--selected .customer-type-card__desc {
-  color: #cc6200;
+  color: #083B75;
 }
 
 /* Radio / Check Indicator */
@@ -99,8 +99,8 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 2px solid #cbd5e1;
-  background: #ffffff;
+  border: 2px solid #CBD5E1;
+  background: #FFFFFF;
   flex-shrink: 0;
   transition: all var(--transition-fast);
 }
@@ -108,7 +108,7 @@
 .customer-type-card__radio--selected {
   background: #FF7A00;
   border-color: #FF7A00;
-  color: #ffffff;
+  color: #FFFFFF;
   box-shadow: 0 2px 6px rgba(255, 122, 0, 0.4);
 }
 

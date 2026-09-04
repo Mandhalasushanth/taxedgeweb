@@ -1,17 +1,17 @@
-.otp-card {
+.passcode-card {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.875rem;
 }
 
-.otp-card__top-nav {
+.passcode-card__top-nav {
   display: flex;
   align-items: center;
   margin-bottom: -0.5rem;
 }
 
-.otp-card__back-btn {
+.passcode-card__back-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -28,43 +28,43 @@
   transition: all 0.15s ease;
 }
 
-.otp-card__back-btn:hover {
+.passcode-card__back-btn:hover {
   background: #F7F9FC;
   border-color: #CBD5E1;
   color: #083B75;
   transform: translateX(-2px);
 }
 
-.otp-card__back-btn:active {
+.passcode-card__back-btn:active {
   transform: translateX(0);
 }
 
-.otp-card__back-btn:focus-visible {
+.passcode-card__back-btn:focus-visible {
   outline: 2px solid #FF7A00;
   outline-offset: 2px;
 }
 
-.otp-card__back-icon {
+.passcode-card__back-icon {
   width: 15px;
   height: 15px;
   transition: transform 0.15s ease;
 }
 
-.otp-card__back-btn:hover .otp-card__back-icon {
+.passcode-card__back-btn:hover .passcode-card__back-icon {
   transform: translateX(-2px);
 }
 
-.otp-card__back-label {
+.passcode-card__back-label {
   line-height: 1;
 }
 
-.otp-card__header {
+.passcode-card__header {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
 }
 
-.otp-card__title {
+.passcode-card__title {
   margin: 0;
   color: #172033;
   font-size: 2.875rem;
@@ -73,7 +73,7 @@
   line-height: 1.1;
 }
 
-.otp-card__subtitle {
+.passcode-card__subtitle {
   margin: 0;
   color: #64748B;
   font-size: 1.0625rem;
@@ -81,7 +81,7 @@
   font-weight: 400;
 }
 
-.otp-card__change-link {
+.passcode-card__change-link {
   color: #FF7A00;
   font-weight: 700;
   background: none;
@@ -94,20 +94,20 @@
   transition: color 0.15s ease;
 }
 
-.otp-card__change-link:hover {
+.passcode-card__change-link:hover {
   color: #e66e00;
   text-decoration: underline;
 }
 
-/* 6-box OTP container */
-.otp-card__boxes {
+/* 6-box Passcode container */
+.passcode-card__boxes {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 0.75rem;
-  margin: 0.25rem 0;
+  margin: 0.25rem 0 0;
 }
 
-.otp-card__box {
+.passcode-card__box {
   width: 100%;
   height: 68px;
   border-radius: 16px;
@@ -123,33 +123,63 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
-.otp-card__box:hover {
+.passcode-card__box:hover {
   border-color: #CBD5E1;
 }
 
-.otp-card__box:focus {
+.passcode-card__box:focus {
   border-color: #FF7A00;
   box-shadow: 0 0 0 3.5px rgba(255, 122, 0, 0.16);
 }
 
-.otp-card__box--filled {
+.passcode-card__box--filled {
   border-color: #94A3B8;
   background: #F8FAFC;
 }
 
-.otp-card__box--error {
+.passcode-card__box--error {
   border-color: #DC2626;
   background: #FDEBEB;
 }
 
-.otp-card__error-text {
-  color: #DC2626;
-  font-size: 0.85rem;
-  font-weight: 500;
-  margin: -0.25rem 0 0.25rem;
+.passcode-card__meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: -0.75rem;
 }
 
-.otp-card__btn-primary {
+.passcode-card__toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  color: #64748B;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.passcode-card__toggle-btn:hover {
+  color: #083B75;
+  background: #F1F5F9;
+}
+
+.passcode-card__error-text {
+  color: #DC2626;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: -0.5rem 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.passcode-card__btn-primary {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -167,18 +197,18 @@
   transition: all 0.18s ease;
 }
 
-.otp-card__btn-primary:hover:not(:disabled) {
+.passcode-card__btn-primary:hover:not(:disabled) {
   background: linear-gradient(180deg, #e66e00 0%, #cc6200 100%);
   transform: translateY(-1.5px);
   box-shadow: 0 10px 30px rgba(249, 115, 22, 0.48);
 }
 
-.otp-card__btn-primary:disabled {
+.passcode-card__btn-primary:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
 
-.otp-card__resend-row {
+.passcode-card__footer-row {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -187,12 +217,7 @@
   font-size: 1.0625rem;
 }
 
-.otp-card__resend-highlight {
-  color: #FF7A00;
-  font-weight: 700;
-}
-
-.otp-card__resend-btn {
+.passcode-card__reset-btn {
   background: none;
   border: none;
   color: #FF7A00;
@@ -203,35 +228,35 @@
   transition: color 0.15s ease;
 }
 
-.otp-card__resend-btn:hover {
+.passcode-card__reset-btn:hover {
   color: #e66e00;
   text-decoration: underline;
 }
 
 @media (max-width: 640px) {
-  .otp-card {
+  .passcode-card {
     gap: 1.25rem;
   }
-  .otp-card__title {
+  .passcode-card__title {
     font-size: 2.125rem;
   }
-  .otp-card__subtitle {
+  .passcode-card__subtitle {
     font-size: 0.9375rem;
   }
-  .otp-card__boxes {
+  .passcode-card__boxes {
     gap: 0.35rem;
   }
-  .otp-card__box {
+  .passcode-card__box {
     height: 52px;
     font-size: 1.35rem;
     border-radius: 10px;
   }
-  .otp-card__btn-primary {
+  .passcode-card__btn-primary {
     height: 54px;
     font-size: 1.0625rem;
     border-radius: 14px;
   }
-  .otp-card__resend-row {
+  .passcode-card__footer-row {
     font-size: 0.9375rem;
   }
 }

@@ -7,6 +7,7 @@ import { useAuthStore } from '@store/index'
 import { ProfileForm } from '../../components/ProfileForm/ProfileForm'
 import { SecurityFeatures } from '../../components/SecurityFeatures/SecurityFeatures'
 import { profileService } from '../../services/profileService'
+import { authFlowService } from '@modules/authentication/services/authFlowService'
 import type { ProfileFormValues } from '../../validation/profileSchema'
 import './CreateProfilePage.css'
 
@@ -25,15 +26,24 @@ export const CreateProfilePage = () => {
         console.warn('Profile service in dev mode:', err)
       }
 
+      const userMobile = (values.mobile || user?.mobile || '').replace(/\D/g, '')
+
       const updatedUser = {
         id: user?.id || `usr_${Date.now().toString(36)}`,
         fullName: values.fullName,
         email: values.email,
-        mobile: values.mobile || user?.mobile || '9876543210',
+        mobile: userMobile,
         role: user?.role || 'CUSTOMER',
         permissions: user?.permissions || [],
         isProfileComplete: false,
       }
+
+      // Save registration step 1 state and user's 6-digit passcode
+      await authFlowService.saveRegistrationStep1({
+        mobile: userMobile,
+        passcode: values.passcode,
+        user: updatedUser,
+      })
 
       setUser(updatedUser)
 
@@ -153,7 +163,6 @@ export const CreateProfilePage = () => {
       {/* Right Form Card (50% White / Light Surface) */}
       <main className="create-profile-page__right-section">
         <div className="create-profile-page__card">
-          <div className="create-profile-page__orange-dash" aria-hidden="true" />
           <header className="create-profile-page__form-header">
             <h2 className="create-profile-page__title">Create your profile</h2>
             <p className="create-profile-page__subtitle">Step 1 of 2 — your details.</p>

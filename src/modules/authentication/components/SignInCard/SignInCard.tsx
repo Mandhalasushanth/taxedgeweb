@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { routePaths } from '@core/config'
 import { authFlowService } from '../../services/authFlowService'
 import { COUNTRY_CODES } from '../../constants/authData.constants'
@@ -12,6 +12,8 @@ export interface SignInCardProps {
 
 export const SignInCard = ({ initialMobile = '' }: SignInCardProps) => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const locationState = location.state as { forceOtp?: boolean } | null
   const [mobile, setMobile] = useState(initialMobile)
   const [countryIndex, setCountryIndex] = useState(0)
   const [error, setError] = useState<string | null>(null)
@@ -51,6 +53,20 @@ export const SignInCard = ({ initialMobile = '' }: SignInCardProps) => {
     setIsSubmitting(true)
 
     try {
+      const isAlreadyRegistered = authFlowService.isRegistered(cleanMobile)
+
+      if (isAlreadyRegistered && !locationState?.forceOtp) {
+        // Returning user: skip OTP verification, navigate directly to passcode entry
+        navigate(routePaths.auth.passcode, {
+          state: {
+            mobile: cleanMobile,
+            countryCode: selectedCountry.code,
+          },
+        })
+        return
+      }
+
+      // Trigger OTP verification
       try {
         await authFlowService.sendOtp(cleanMobile)
       } catch (err) {
@@ -65,7 +81,7 @@ export const SignInCard = ({ initialMobile = '' }: SignInCardProps) => {
         },
       })
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to send OTP. Please try again.')
+      setError(err instanceof Error ? err.message : 'Unable to proceed. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -142,7 +158,7 @@ export const SignInCard = ({ initialMobile = '' }: SignInCardProps) => {
           disabled={isSubmitting}
           onClick={handleSendOtp}
         >
-          <span>{isSubmitting ? 'Sending OTP...' : 'Send OTP'}</span>
+          <span>{isSubmitting ? 'Continuing...' : 'Continue'}</span>
           {!isSubmitting && (
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="5" y1="12" x2="19" y2="12" />
@@ -170,7 +186,7 @@ export const SignInCard = ({ initialMobile = '' }: SignInCardProps) => {
 
       <p className="sign-in-card__footer">
         New to TaxEdge?
-        <Link to={routePaths.auth.register} className="sign-in-card__link">
+        <Link to={routePaths.auth.createProfile} className="sign-in-card__link">
           Create an account
         </Link>
       </p>

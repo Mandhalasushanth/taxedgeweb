@@ -4,7 +4,7 @@
   flex-direction: column;
   height: 100%;
   padding: 1.5rem 1.75rem;
-  background: #ffffff;
+  background: #FFFFFF;
   border: 1px solid #E2E8F0;
   border-radius: 18px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
@@ -30,7 +30,7 @@
   gap: 0.85rem;
   padding: 0.95rem 1.15rem;
   min-height: 72px;
-  background: #ffffff;
+  background: #FFFFFF;
   border: 1px solid #E2E8F0;
   border-radius: 14px;
   box-sizing: border-box;
@@ -46,9 +46,9 @@
 .pending-card__icon { display: grid; flex-shrink: 0; place-items: center; width: 2.15rem; height: 2.15rem; border-radius: 10px; }
 .pending-card__icon-svg { width: 0.92rem; height: 0.92rem; }
 
-.pending-card__icon--danger { color: #FF7A00; background: #FFF7ED; }
-.pending-card__icon--muted { color: #083B75; background: #EFF6FF; }
-.pending-card__icon--success { color: #083B75; background: #EFF6FF; }
+.pending-card__icon--danger { color: #FF7A00; background: #FEF0E6; }
+.pending-card__icon--muted { color: #083B75; background: #EAF1FE; }
+.pending-card__icon--success { color: #083B75; background: #EAF1FE; }
 
 .pending-card__info { display: flex; flex-direction: column; min-width: 0; }
 .pending-card__title { margin: 0; font-family: var(--font-sans); font-size: 0.92rem; font-weight: 700; color: #083B75; line-height: 1.3; }
@@ -69,9 +69,13 @@
 }
 .pending-card__badge-dot { font-size: 0.5rem; }
 
-.pending-card__badge--danger { background: #FEF2F2; color: #DC2626; border: 1px solid #FEE2E2; }
+.pending-card__badge--danger { background: #FDEBEB; color: #DC2626; border: 1px solid #fde8e6; }
 .pending-card__badge--muted,
-.pending-card__badge--success { background: #EFF6FF; color: #083B75; border: 1px solid #DBEAFE; }
+.pending-card__badge--success { background: #EAF1FE; color: #083B75; border: 1px solid #dbe4f0; }
+
+.pending-file-input {
+  display: none;
+}
 
 .pending-card__btn {
   display: inline-flex;
@@ -85,11 +89,13 @@
   text-decoration: none;
   transition: all 0.15s ease;
   white-space: nowrap;
+  cursor: pointer;
+  border: none;
 }
-.pending-card__btn--upload { color: #FF7A00; background: #FFF7ED; border: 1px solid #FFEDD5; }
-.pending-card__btn--upload:hover { background: #FFEDD5; color: #e66e00; }
-.pending-card__btn--view { color: #083B75; background: #F8FAFC; border: 1px solid #E2E8F0; }
-.pending-card__btn--view:hover { background: #EFF6FF; color: #083B75; border-color: #DBEAFE; }
+.pending-card__btn--upload { color: #FF7A00; background: #FEF0E6; border: 1px solid #ffedd5; }
+.pending-card__btn--upload:hover { background: #ffedd5; color: #e66e00; }
+.pending-card__btn--view { color: #083B75; background: #F7F9FC; border: 1px solid #E2E8F0; }
+.pending-card__btn--view:hover { background: #EAF1FE; color: #083B75; border-color: #dbe4f0; }
 
 @media (max-width: 640px) {
   .pending-section { padding: 1.25rem 1rem; }

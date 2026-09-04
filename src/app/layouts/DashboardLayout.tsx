@@ -36,7 +36,6 @@ export const DashboardLayout = () => {
   const user = useAuthStore((state) => state.user)
   const signOut = useAuthStore((state) => state.signOut)
   const isSidebarOpen = useAppStore((state) => state.isSidebarOpen)
-  const toggleSidebar = useAppStore((state) => state.toggleSidebar)
   const location = useLocation()
   const { data } = useDashboardSummary()
 
@@ -109,9 +108,6 @@ export const DashboardLayout = () => {
       <div className="shell__main">
         <header className="shell__header">
           <div className="shell__header-left">
-            <button className="shell__icon-button shell__toggle-btn" type="button" onClick={toggleSidebar} aria-label="Toggle navigation">
-              ☰
-            </button>
             <nav className="shell__breadcrumb" aria-label="Breadcrumb">
               <Link to={routePaths.dashboard}>Home</Link>
               <span className="shell__breadcrumb-sep" aria-hidden="true">→</span>

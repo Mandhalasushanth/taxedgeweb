@@ -5,7 +5,7 @@ import './CustomerTypeList.css'
 
 export interface CustomerTypeListProps {
   options: CustomerTypeOption[]
-  selectedId: CustomerTypeId
+  selectedId: CustomerTypeId | null
   onSelect: (id: CustomerTypeId) => void
 }
 

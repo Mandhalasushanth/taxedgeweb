@@ -12,13 +12,13 @@
 .all-services-page__hero {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  margin-bottom: 1.5rem;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
 }
 
 .all-services-page__title {
   font-family: var(--font-sans);
-  font-size: clamp(1.5rem, 2vw, 1.85rem);
+  font-size: clamp(1.6rem, 2.2vw, 2rem);
   font-weight: 800;
   color: #083B75;
   letter-spacing: -0.025em;
@@ -29,8 +29,9 @@
 .all-services-page__subtitle {
   font-size: 0.92rem;
   line-height: 1.5;
-  color: #64748b;
+  color: #64748B;
   margin: 0;
+  max-width: 900px;
 }
 
 /* Filter Controls Bar */
@@ -38,7 +39,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.25rem;
 }
 
 /* Empty Search Results State */
@@ -50,7 +51,7 @@
   padding: 4rem 2rem;
   background: #ffffff;
   border-radius: 16px;
-  border: 1px dashed #cbd5e1;
+  border: 1px dashed #CBD5E1;
   text-align: center;
   margin-top: 1rem;
 }
@@ -62,7 +63,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #fff7ed;
+  background: #FEF0E6;
   color: #FF7A00;
   margin-bottom: 1rem;
 }
@@ -71,13 +72,13 @@
   font-family: var(--font-sans);
   font-size: 1.2rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #172033;
   margin: 0 0 0.4rem 0;
 }
 
 .all-services-page__empty-desc {
   font-size: 0.88rem;
-  color: #64748b;
+  color: #64748B;
   max-width: 400px;
   margin: 0 0 1.25rem 0;
 }

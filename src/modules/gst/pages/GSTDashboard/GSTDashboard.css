@@ -24,6 +24,14 @@
   gap: var(--space-4);
 }
 
+.gst-dashboard__overview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
 @media (width <= 720px) {
   .gst-dashboard__filters { grid-template-columns: 1fr; }
 }
+

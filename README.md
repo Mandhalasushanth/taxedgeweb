@@ -65,7 +65,6 @@ The customer app and the staff app live in the same project, behind different
 guards and layouts, over the same data.
 
 `src/modules/gst` is the reference module — copy its shape.
-See [ARCHITECTURE.md](./ARCHITECTURE.md) for the layer rules.
 
 ## Status
 

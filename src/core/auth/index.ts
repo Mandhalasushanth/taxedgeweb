@@ -8,6 +8,6 @@ export {
   isAgentRole,
   isStaffRole,
 } from './authTypes'
-export type { AgentRole, AuthSession, AuthTokens, AuthUser, StaffRole, UserRole } from './authTypes'
+export type { AgentRole, AuthSession, AuthTokens, AuthUser, RegisteredUserRecord, StaffRole, UserRole } from './authTypes'
 export { PERMISSIONS, ROLE_PERMISSIONS, permissionsFor, roleHasPermission } from './permissions'
 export type { Permission } from './permissions'

@@ -12,7 +12,7 @@
   overflow: hidden;
   padding: 2.25rem 2.75rem;
   color: #ffffff;
-  background: #083B75;
+  background: linear-gradient(135deg, #061933 0%, #083B75 50%, #0C4A94 100%);
   border-radius: 20px;
   border: 1px solid rgba(255, 122, 0, 0.35);
   box-shadow: 0 10px 30px rgba(8, 59, 117, 0.25);

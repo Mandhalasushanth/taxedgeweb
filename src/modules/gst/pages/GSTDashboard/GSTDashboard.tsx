@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { routePaths } from '@core/config'
-import { Button, EmptyState, Input, Loader } from '@shared/components'
+import { Button, Input } from '@shared/components'
 import { STATUS_LABELS } from '@shared/constants'
 import { APPLICATION_STATUSES } from '@shared/types'
 import type { ApplicationStatus } from '@shared/types'
@@ -15,7 +15,7 @@ import { useGstApplications } from '../../hooks/useGstApplications'
 import './GSTDashboard.css'
 
 export const GSTDashboard = () => {
-  const { data, isLoading, error, search, setSearch, status, setStatus } = useGstApplications()
+  const { search, setSearch, status, setStatus } = useGstApplications()
   const dashboardData = useGstDashboardData()
 
   return (
@@ -62,7 +62,7 @@ export const GSTDashboard = () => {
       </div>
 
       {!dashboardData.isLoading && (
-        <div className="gst-dashboard__overview" style={{ marginTop: '24px' }}>
+        <div className="gst-dashboard__overview">
           <GSTStats stats={dashboardData.stats} />
           <GSTServices services={dashboardData.services} />
           <GSTApplicationList applications={dashboardData.applications} />
