@@ -1,14 +1,17 @@
 /* Raw palette. Never referenced directly by components - variables.css maps
-   these onto semantic tokens. Brand palette is blue + orange only. */
+   these onto semantic tokens. Brand palette is primary blue (#083B75) + primary orange (#FF7A00). */
 :root {
+  --primary-blue: #083B75;
+  --primary-orange: #FF7A00;
+
   --orange-50: #fff7ed;
   --orange-100: #ffedd5;
   --orange-200: #fed7aa;
   --orange-300: #fdba74;
-  --orange-400: #fb923c;
-  --orange-500: #f97316;
-  --orange-600: #ea580c;
-  --orange-700: #c2410c;
+  --orange-400: #ff912a;
+  --orange-500: #FF7A00;
+  --orange-600: #e66e00;
+  --orange-700: #cc6200;
   --orange-800: #9a3412;
   --orange-900: #7c2d12;
 
@@ -16,13 +19,13 @@
   --navy-100: #dbe4f0;
   --navy-200: #b8cbe2;
   --navy-300: #88a8cf;
-  --navy-400: #5580b8;
-  --navy-500: #2c4a75;
-  --navy-600: #1a2f4d;
-  --navy-700: #112037;
-  --navy-800: #0a1424;
-  --navy-900: #070d18;
-  --navy-950: #040810;
+  --navy-400: #3d6ca8;
+  --navy-500: #1d508f;
+  --navy-600: #0e4380;
+  --navy-700: #083B75;
+  --navy-800: #062f5e;
+  --navy-900: #042448;
+  --navy-950: #021730;
 
   --amber-100: #fdf1d8;
   --amber-500: #d99400;
@@ -35,7 +38,7 @@
   --green-emerald: #10b981;
 
   --blue-100: #e5eefc;
-  --blue-500: #2563c9;
+  --blue-500: #083B75;
 
   --grey-0: #ffffff;
   --grey-50: #f8fafc;

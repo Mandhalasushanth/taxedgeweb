@@ -47,8 +47,8 @@
 }
 
 .service-tab--active {
-  background: #FF6200;
+  background: #FF7A00;
   color: #ffffff;
-  border-color: #FF6200;
-  box-shadow: 0 2px 8px rgba(255, 98, 0, 0.28);
+  border-color: #FF7A00;
+  box-shadow: 0 2px 8px rgba(255, 122, 0, 0.28);
 }

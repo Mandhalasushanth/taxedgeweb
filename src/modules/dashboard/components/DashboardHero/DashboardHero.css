@@ -1,6 +1,6 @@
 /* ===================================================
    TAXEDGE DASHBOARD HERO BANNER
-   Using the bottom card Navy Blue (#0A1931)
+   Using Primary Blue (#083B75) & Primary Orange (#FF7A00)
 =================================================== */
 
 .dashboard-hero {
@@ -12,10 +12,10 @@
   overflow: hidden;
   padding: 2.25rem 2.75rem;
   color: #ffffff;
-  background: #0A1931;
+  background: #083B75;
   border-radius: 20px;
-  border: 1px solid rgba(255, 98, 0, 0.35);
-  box-shadow: 0 10px 30px rgba(10, 25, 49, 0.25);
+  border: 1px solid rgba(255, 122, 0, 0.35);
+  box-shadow: 0 10px 30px rgba(8, 59, 117, 0.25);
 }
 
 /* Left Body Content */
@@ -31,7 +31,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #FF6200;
+  color: #FF7A00;
   text-transform: uppercase;
 }
 
@@ -76,7 +76,7 @@
 
 .dashboard-hero__btn--solid {
   background: #ffffff;
-  color: #0A1931;
+  color: #083B75;
   border: 1px solid #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }

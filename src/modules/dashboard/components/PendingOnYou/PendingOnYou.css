@@ -12,7 +12,7 @@
 }
 
 .pending-section__header { margin-bottom: 0.75rem; }
-.pending-section__title { margin: 0; font-family: var(--font-sans); font-size: 1.2rem; font-weight: 800; color: #0A1931; line-height: 1.2; }
+.pending-section__title { margin: 0; font-family: var(--font-sans); font-size: 1.2rem; font-weight: 800; color: #083B75; line-height: 1.2; }
 .pending-section__subtitle { margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #64748B; line-height: 1.4; }
 
 .pending-section__list {
@@ -38,7 +38,7 @@
 }
 .pending-card:hover {
   transform: translateY(-1px);
-  border-color: rgba(255, 98, 0, 0.35);
+  border-color: rgba(255, 122, 0, 0.35);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
 
@@ -46,12 +46,12 @@
 .pending-card__icon { display: grid; flex-shrink: 0; place-items: center; width: 2.15rem; height: 2.15rem; border-radius: 10px; }
 .pending-card__icon-svg { width: 0.92rem; height: 0.92rem; }
 
-.pending-card__icon--danger { color: #FF6200; background: #FFF7ED; }
-.pending-card__icon--muted { color: #2563EB; background: #EFF6FF; }
-.pending-card__icon--success { color: #1D4ED8; background: #EFF6FF; }
+.pending-card__icon--danger { color: #FF7A00; background: #FFF7ED; }
+.pending-card__icon--muted { color: #083B75; background: #EFF6FF; }
+.pending-card__icon--success { color: #083B75; background: #EFF6FF; }
 
 .pending-card__info { display: flex; flex-direction: column; min-width: 0; }
-.pending-card__title { margin: 0; font-family: var(--font-sans); font-size: 0.92rem; font-weight: 700; color: #0A1931; line-height: 1.3; }
+.pending-card__title { margin: 0; font-family: var(--font-sans); font-size: 0.92rem; font-weight: 700; color: #083B75; line-height: 1.3; }
 .pending-card__meta { margin: 0.2rem 0 0 0; font-size: 0.78rem; color: #64748B; line-height: 1.35; }
 
 .pending-card__right { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
@@ -71,7 +71,7 @@
 
 .pending-card__badge--danger { background: #FEF2F2; color: #DC2626; border: 1px solid #FEE2E2; }
 .pending-card__badge--muted,
-.pending-card__badge--success { background: #EFF6FF; color: #1D4ED8; border: 1px solid #DBEAFE; }
+.pending-card__badge--success { background: #EFF6FF; color: #083B75; border: 1px solid #DBEAFE; }
 
 .pending-card__btn {
   display: inline-flex;
@@ -86,10 +86,10 @@
   transition: all 0.15s ease;
   white-space: nowrap;
 }
-.pending-card__btn--upload { color: #FF6200; background: #FFF7ED; border: 1px solid #FFEDD5; }
-.pending-card__btn--upload:hover { background: #FFEDD5; color: #EA580C; }
-.pending-card__btn--view { color: #0A1931; background: #F8FAFC; border: 1px solid #E2E8F0; }
-.pending-card__btn--view:hover { background: #EFF6FF; color: #2563EB; border-color: #DBEAFE; }
+.pending-card__btn--upload { color: #FF7A00; background: #FFF7ED; border: 1px solid #FFEDD5; }
+.pending-card__btn--upload:hover { background: #FFEDD5; color: #e66e00; }
+.pending-card__btn--view { color: #083B75; background: #F8FAFC; border: 1px solid #E2E8F0; }
+.pending-card__btn--view:hover { background: #EFF6FF; color: #083B75; border-color: #DBEAFE; }
 
 @media (max-width: 640px) {
   .pending-section { padding: 1.25rem 1rem; }

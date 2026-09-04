@@ -55,7 +55,7 @@
 }
 
 .app-header__breadcrumb-home:hover {
-  color: #FF6200;
+  color: #FF7A00;
 }
 
 .app-header__breadcrumb-sep {
@@ -102,8 +102,8 @@
 
 .app-header__search-input:focus {
   background: #ffffff;
-  border-color: #FF6200;
-  box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.12);
+  border-color: #FF7A00;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.12);
 }
 
 .app-header__search-input::placeholder {
@@ -152,8 +152,8 @@
 
 .app-header__icon-btn:hover {
   background: #ffffff;
-  color: #FF6200;
-  border-color: rgba(255, 98, 0, 0.35);
+  color: #FF7A00;
+  border-color: rgba(255, 122, 0, 0.35);
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
 }
 
@@ -169,7 +169,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #FF6200;
+  background: #FF7A00;
   border: 2px solid #ffffff;
 }
 
