@@ -4,7 +4,7 @@
   justify-content: center;
   width: 100%;
   padding: 0.95rem 1.5rem;
-  background: #FF6200;
+  background: #FF7A00;
   color: #ffffff;
   border: none;
   border-radius: var(--radius-pill);
@@ -12,7 +12,7 @@
   font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(255, 98, 0, 0.35);
+  box-shadow: 0 4px 14px rgba(255, 122, 0, 0.35);
   transition: all var(--transition-fast);
   outline: none;
   position: relative;
@@ -20,18 +20,18 @@
 }
 
 .customer-type-submit-btn:hover:not(:disabled) {
-  background: #e55700;
-  box-shadow: 0 6px 20px rgba(255, 98, 0, 0.45);
+  background: #e66e00;
+  box-shadow: 0 6px 20px rgba(255, 122, 0, 0.45);
   transform: translateY(-1px);
 }
 
 .customer-type-submit-btn:active:not(:disabled) {
-  background: #cc4d00;
+  background: #cc6200;
   transform: translateY(0);
 }
 
 .customer-type-submit-btn:focus-visible {
-  outline: 2px solid #FF6200;
+  outline: 2px solid #FF7A00;
   outline-offset: 2px;
 }
 

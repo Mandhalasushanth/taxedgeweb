@@ -1,83 +1,56 @@
-import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-
-import { Button, Input } from '@shared/components'
-import { maskMobile } from '@shared/utils'
-
-import { OTPInput } from '../../components/OTPInput/OTPInput'
-import { useAuth } from '../../hooks/useAuth'
-import { useOtpTimer } from '../../hooks/useOtpTimer'
-import { authFlowService } from '../../services/authFlowService'
-import { otpSchema } from '../../validation/authSchema'
+import { AuthBrandLogo } from '../../components/AuthBrandLogo/AuthBrandLogo'
+import { AuthPedestal } from '../../components/AuthPedestal/AuthPedestal'
+import { OtpVerificationCard } from '../../components/OtpVerificationCard/OtpVerificationCard'
 import './OTP.css'
 
-interface OtpLocationState {
+interface OtpRouterLocationState {
   mobile?: string
+  countryCode?: string
 }
 
 export const OTP = () => {
   const location = useLocation()
-  const { verifyOtp } = useAuth()
-  const { remaining, canResend, restart } = useOtpTimer()
-
-  const [mobile, setMobile] = useState((location.state as OtpLocationState | null)?.mobile ?? '')
-  const [code, setCode] = useState('')
-  const [error, setError] = useState<string | null>(null)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const handleVerify = async () => {
-    const parsed = otpSchema.safeParse({ mobile, otp: code })
-    if (!parsed.success) {
-      setError(parsed.error.issues[0]?.message ?? 'Check the details and try again')
-      return
-    }
-
-    setError(null)
-    setIsSubmitting(true)
-    try {
-      await verifyOtp(parsed.data)
-    } catch (verifyError) {
-      setError(verifyError instanceof Error ? verifyError.message : 'Verification failed')
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
-  const handleResend = async () => {
-    await authFlowService.sendOtp(mobile)
-    restart()
-  }
+  const locationState = location.state as OtpRouterLocationState | null
+  const mobile = locationState?.mobile ?? '9867041255'
+  const countryCode = locationState?.countryCode ?? '+91'
 
   return (
-    <div className="otp-page">
-      <header className="otp-page__header">
-        <h1 className="otp-page__title">Verify your number</h1>
-        <p className="otp-page__subtitle">
-          {mobile ? `We sent a 6-digit code to ${maskMobile(mobile)}.` : 'Enter your mobile number to get a code.'}
-        </p>
-      </header>
+    <div className="otp-screen">
+      {/* Left Stage */}
+      <section className="otp-screen__left">
+        <div className="otp-screen__brand">
+          <AuthBrandLogo />
+        </div>
 
-      {!location.state && (
-        <Input
-          name="mobile"
-          label="Mobile number"
-          inputMode="numeric"
-          maxLength={10}
-          prefix="+91"
-          value={mobile}
-          onChange={(event) => setMobile(event.target.value)}
-        />
-      )}
+        <div className="otp-screen__hero-text">
+          <h1 className="otp-screen__headline">
+            One code, <span className="otp-screen__headline-orange">and you are in</span>
+          </h1>
+          <p className="otp-screen__subtext">
+            <span>OTP authentication protects every account. We never</span>
+            <span>ask for your code over a call or WhatsApp.</span>
+          </p>
+        </div>
 
-      <OTPInput value={code} onChange={setCode} error={error ?? undefined} />
+        {/* 3D Pedestal with Phone, Shield and 5-star OTP speech bubble */}
+        <div className="otp-screen__visual-box">
+          <AuthPedestal variant="otp" />
+        </div>
+      </section>
 
-      <Button fullWidth size="lg" isLoading={isSubmitting} onClick={handleVerify}>
-        Verify and continue
-      </Button>
+      {/* Center Dividing Vertical Line with Glowing Orange Ring Node */}
+      <div className="otp-screen__center-divider" aria-hidden="true">
+        <div className="otp-screen__divider-line" />
+        <div className="otp-screen__divider-node" />
+      </div>
 
-      <button className="otp-page__resend" type="button" disabled={!canResend} onClick={handleResend}>
-        {canResend ? 'Resend code' : `Resend code in ${remaining}s`}
-      </button>
+      {/* Right Stage: White Card */}
+      <aside className="otp-screen__right">
+        <div className="otp-screen__card-box">
+          <OtpVerificationCard mobile={mobile} countryCode={countryCode} />
+        </div>
+      </aside>
     </div>
   )
 }

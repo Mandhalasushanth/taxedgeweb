@@ -18,13 +18,13 @@
 .dashboard__link {
   font-size: var(--font-size-sm);
   font-weight: 600;
-  color: #FF6200;
+  color: #FF7A00;
   text-decoration: none;
   transition: color 0.18s ease;
 }
 
 .dashboard__link:hover {
-  color: #ea580c;
+  color: #e66e00;
   text-decoration: underline;
 }
 
@@ -45,8 +45,8 @@
 
 .dashboard__view-all-btn:hover {
   background: #ffffff;
-  color: #FF6200;
-  border-color: rgba(255, 98, 0, 0.4);
+  color: #FF7A00;
+  border-color: rgba(255, 122, 0, 0.4);
   text-decoration: none;
 }
 
@@ -82,7 +82,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #0A1931;
+  background: #083B75;
   color: #ffffff;
   font-size: 0.72rem;
   font-weight: 700;
@@ -91,7 +91,7 @@
 
 .activity__title {
   font-weight: 600;
-  color: #0A1931;
+  color: #083B75;
   margin: 0;
 }
 
@@ -109,7 +109,7 @@
   padding-block: var(--space-3);
   font-size: var(--font-size-sm);
   font-weight: 500;
-  color: #0A1931;
+  color: #083B75;
   border-bottom: 1px solid var(--color-border);
 }
 

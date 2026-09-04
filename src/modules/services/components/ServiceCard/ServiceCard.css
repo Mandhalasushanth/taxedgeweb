@@ -22,8 +22,8 @@
 
 .service-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 98, 0, 0.45);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 98, 0, 0.15);
+  border-color: rgba(255, 122, 0, 0.45);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 122, 0, 0.15);
 }
 
 /* Top Row: Icon + Badge */
@@ -41,15 +41,15 @@
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: rgba(255, 98, 0, 0.08);
-  color: #FF6200;
-  border: 1px solid rgba(255, 98, 0, 0.18);
+  background: rgba(255, 122, 0, 0.08);
+  color: #FF7A00;
+  border: 1px solid rgba(255, 122, 0, 0.18);
   flex-shrink: 0;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .service-card:hover .service-card__icon-box {
-  background: #FF6200;
+  background: #FF7A00;
   color: #ffffff;
   transform: scale(1.04);
 }
@@ -66,7 +66,7 @@
   padding: 0.22rem 0.65rem;
   border-radius: 9999px;
   background: #fff7ed;
-  color: #ea580c;
+  color: #e66e00;
   border: 1px solid #fed7aa;
 }
 
@@ -162,7 +162,7 @@
   gap: 0.5rem;
   width: 100%;
   padding: 0.65rem 1rem;
-  background: #FF6200;
+  background: #FF7A00;
   color: #ffffff;
   font-family: var(--font-sans);
   font-size: 0.88rem;
@@ -171,13 +171,13 @@
   border: none;
   cursor: pointer;
   transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
-  box-shadow: 0 2px 6px rgba(255, 98, 0, 0.22);
+  box-shadow: 0 2px 6px rgba(255, 122, 0, 0.22);
 }
 
 .service-card__btn:hover {
-  background: #ea580c;
+  background: #e66e00;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 98, 0, 0.35);
+  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.35);
 }
 
 .service-card__btn:active {

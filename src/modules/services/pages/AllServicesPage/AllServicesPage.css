@@ -20,7 +20,7 @@
   font-family: var(--font-sans);
   font-size: clamp(1.5rem, 2vw, 1.85rem);
   font-weight: 800;
-  color: #0A2647;
+  color: #083B75;
   letter-spacing: -0.025em;
   margin: 0;
   line-height: 1.2;
@@ -63,7 +63,7 @@
   height: 60px;
   border-radius: 50%;
   background: #fff7ed;
-  color: #FF6200;
+  color: #FF7A00;
   margin-bottom: 1rem;
 }
 
@@ -84,7 +84,7 @@
 
 .all-services-page__empty-btn {
   padding: 0.55rem 1.25rem;
-  background: #FF6200;
+  background: #FF7A00;
   color: #ffffff;
   font-family: var(--font-sans);
   font-size: 0.86rem;
@@ -96,7 +96,7 @@
 }
 
 .all-services-page__empty-btn:hover {
-  background: #ea580c;
+  background: #e66e00;
 }
 
 /* Responsive Rules */

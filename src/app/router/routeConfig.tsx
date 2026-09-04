@@ -30,7 +30,6 @@ import { StaffRoute } from './StaffRoute'
 const authLayoutRoutes = authenticationRoutes.filter(
   (r) =>
     r.path !== routePaths.auth.createProfile &&
-    r.path !== routePaths.auth.register &&
     r.path !== routePaths.auth.customerType,
 )
 
@@ -41,15 +40,11 @@ const authLayoutRoutes = authenticationRoutes.filter(
 export const routeConfig: RouteObject[] = [
   {
     path: routePaths.root,
-    element: <CreateProfilePage />,
+    element: <Navigate to={routePaths.auth.login} replace />,
   },
   {
     path: routePaths.registration,
-    element: <CreateProfilePage />,
-  },
-  {
-    path: routePaths.auth.register,
-    element: <CreateProfilePage />,
+    element: <Navigate to={routePaths.auth.register} replace />,
   },
   {
     path: routePaths.auth.createProfile,
