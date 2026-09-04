@@ -7,7 +7,9 @@ import type {
   CreateProfilePayload,
   LoginPayload,
   RegisterPayload,
+  SaveRegistrationStep1Payload,
   VerifyOtpPayload,
+  VerifyPasscodePayload,
 } from '../types/auth.types'
 
 /* ------------------------------------------------------------------ *
@@ -27,16 +29,15 @@ const DEMO_ROLES: Record<string, { role: UserRole; fullName: string; id: string;
   '9000000005': { role: 'ITR_AGENT', fullName: 'Sneha Kulkarni', id: 'stf_005', department: 'Compliance' },
 }
 
-const registeredUsers = new Map<string, { fullName: string; email: string; mobile: string }>()
-
 const mockUser = (mobile: string): AuthUser => {
-  const demo = DEMO_ROLES[mobile]
+  const clean = mobile.replace(/\D/g, '')
+  const demo = DEMO_ROLES[clean]
   if (demo) {
     return {
       id: demo.id,
       fullName: demo.fullName,
       email: `${demo.fullName.split(' ')[0].toLowerCase()}@taxedge.in`,
-      mobile,
+      mobile: clean,
       role: demo.role,
       department: demo.department,
       permissions: permissionsFor(demo.role),
@@ -44,32 +45,27 @@ const mockUser = (mobile: string): AuthUser => {
     }
   }
 
-  const registered = registeredUsers.get(mobile)
-  if (registered) {
+  const registeredRecord = authStorage.getRegisteredUser(clean)
+  if (registeredRecord?.user) {
     return {
-      id: `usr_${Date.now().toString(36)}`,
-      fullName: registered.fullName,
-      email: registered.email,
-      mobile: registered.mobile,
-      role: 'CUSTOMER',
-      permissions: [],
-      isProfileComplete: true,
+      ...registeredRecord.user,
+      isProfileComplete: Boolean(registeredRecord.isRegistered),
     }
   }
 
   const stored = authStorage.getUser()
-  if (stored && stored.fullName && stored.fullName !== 'Demo Customer') {
+  if (stored && stored.fullName && stored.isProfileComplete && stored.fullName !== 'Customer') {
     return stored
   }
 
   return {
-    id: 'usr_cus_001',
-    fullName: stored?.fullName || 'Customer',
-    email: stored?.email || `${mobile || 'user'}@taxedge.in`,
-    mobile: mobile || stored?.mobile || '9876543210',
+    id: `usr_${Date.now().toString(36)}`,
+    fullName: stored?.fullName || '',
+    email: stored?.email || '',
+    mobile: clean || stored?.mobile || '',
     role: 'CUSTOMER',
     permissions: [],
-    isProfileComplete: true,
+    isProfileComplete: false,
   }
 }
 
@@ -78,14 +74,21 @@ const mockSession = (mobile: string): AuthSession => ({
   tokens: { accessToken: 'mock.access.token', refreshToken: 'mock.refresh.token' },
 })
 
-const delay = (ms = 500) => new Promise((resolve) => setTimeout(resolve, ms))
+const delay = (ms = 400) => new Promise((resolve) => setTimeout(resolve, ms))
 /* ------------------------------------------------------------------ */
 
 /**
- * Business rules for signing in. Pages call this, never authApi directly,
- * so the mock switch and any future multi-step logic lives in one place.
+ * Business rules for signing in and registration. Pages call this, never authApi directly,
+ * so the mock switch and multi-step logic lives in one place.
  */
 export const authFlowService = {
+  /** Check if a mobile number is already registered (has completed Step 2) */
+  isRegistered(mobile: string): boolean {
+    const clean = mobile.replace(/\D/g, '')
+    if (DEMO_ROLES[clean]) return true
+    return authStorage.isMobileRegistered(clean)
+  },
+
   async login(payload: LoginPayload): Promise<AuthSession> {
     if (env.enableMocks) {
       await delay()
@@ -94,14 +97,83 @@ export const authFlowService = {
     return authApi.login(payload)
   },
 
+  async verifyPasscode(payload: VerifyPasscodePayload): Promise<AuthSession> {
+    const clean = payload.mobile.replace(/\D/g, '')
+    if (env.enableMocks) {
+      await delay(300)
+      if (DEMO_ROLES[clean]) {
+        if (payload.passcode !== '123456') {
+          throw new Error('Incorrect passcode. Try 123456 in demo mode.')
+        }
+        const session = mockSession(clean)
+        authStorage.setTokens(session.tokens)
+        authStorage.setUser(session.user)
+        return session
+      }
+
+      const record = authStorage.getRegisteredUser(clean)
+      if (!record || !record.isRegistered) {
+        throw new Error('No registered account found for this mobile number.')
+      }
+
+      if (record.passcode !== payload.passcode) {
+        throw new Error('Incorrect passcode. Please try again.')
+      }
+
+      const session: AuthSession = {
+        user: record.user,
+        tokens: { accessToken: 'mock.access.token', refreshToken: 'mock.refresh.token' },
+      }
+      authStorage.setTokens(session.tokens)
+      authStorage.setUser(record.user)
+      return session
+    }
+
+    return authApi.login({ mobile: payload.mobile, password: payload.passcode })
+  },
+
+  async saveRegistrationStep1(payload: SaveRegistrationStep1Payload): Promise<void> {
+    const clean = payload.mobile.replace(/\D/g, '')
+    authStorage.saveRegisteredUser({
+      mobile: clean,
+      passcode: payload.passcode,
+      isRegistered: false,
+      user: payload.user,
+    })
+  },
+
+  async completeRegistration(mobile: string): Promise<void> {
+    const clean = mobile.replace(/\D/g, '')
+    const record = authStorage.getRegisteredUser(clean)
+    if (record) {
+      const updatedUser: AuthUser = {
+        ...record.user,
+        isProfileComplete: true,
+      }
+      authStorage.saveRegisteredUser({
+        ...record,
+        isRegistered: true,
+        user: updatedUser,
+      })
+      authStorage.setUser(updatedUser)
+    } else {
+      const currentUser = authStorage.getUser()
+      if (currentUser) {
+        const completedUser = { ...currentUser, isProfileComplete: true }
+        authStorage.saveRegisteredUser({
+          mobile: clean,
+          passcode: '123456',
+          isRegistered: true,
+          user: completedUser,
+        })
+        authStorage.setUser(completedUser)
+      }
+    }
+  },
+
   async register(payload: RegisterPayload): Promise<{ mobile: string }> {
     if (env.enableMocks) {
       await delay()
-      registeredUsers.set(payload.mobile, {
-        fullName: payload.fullName,
-        email: payload.email,
-        mobile: payload.mobile,
-      })
       const user: AuthUser = {
         id: `usr_${Date.now().toString(36)}`,
         fullName: payload.fullName,
@@ -111,6 +183,12 @@ export const authFlowService = {
         permissions: [],
         isProfileComplete: false,
       }
+      authStorage.saveRegisteredUser({
+        mobile: payload.mobile,
+        passcode: payload.password,
+        isRegistered: false,
+        user,
+      })
       authStorage.setUser(user)
       return { mobile: payload.mobile }
     }
@@ -130,7 +208,10 @@ export const authFlowService = {
     if (env.enableMocks) {
       await delay()
       if (payload.otp !== '123456') throw new Error('That code is incorrect. Try 123456 in demo mode.')
-      return mockSession(payload.mobile)
+      const session = mockSession(payload.mobile)
+      authStorage.setTokens(session.tokens)
+      authStorage.setUser(session.user)
+      return session
     }
     return authApi.verifyOtp(payload)
   },

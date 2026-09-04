@@ -62,7 +62,7 @@ export const GSTDashboard = () => {
       </div>
 
       {!dashboardData.isLoading && (
-        <div className="gst-dashboard__overview" style={{ marginTop: '24px' }}>
+        <div className="gst-dashboard__overview">
           <GSTStats stats={dashboardData.stats} />
           <GSTServices services={dashboardData.services} />
           <GSTApplicationList applications={dashboardData.applications} />

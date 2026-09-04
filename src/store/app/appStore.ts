@@ -21,6 +21,7 @@ interface AppState {
   setSidebarOpen: (isOpen: boolean) => void
   pushToast: (message: string, tone?: Toast['tone']) => void
   dismissToast: (id: string) => void
+  clearToasts: () => void
 }
 
 const initialTheme: ThemeMode = localStore.get<ThemeMode>(STORAGE_KEYS.theme) ?? 'light'
@@ -51,4 +52,5 @@ export const useAppStore = create<AppState>((set) => ({
     })),
 
   dismissToast: (id) => set((state) => ({ toasts: state.toasts.filter((toast) => toast.id !== id) })),
+  clearToasts: () => set({ toasts: [] }),
 }))

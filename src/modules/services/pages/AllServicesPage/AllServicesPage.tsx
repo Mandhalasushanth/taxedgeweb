@@ -63,9 +63,9 @@ export const AllServicesPage = () => {
     <div className="all-services-page">
       {/* Hero Section */}
       <header className="all-services-page__hero">
-        <h1 className="all-services-page__title">All Services</h1>
+        <h1 className="all-services-page__title">All services</h1>
         <p className="all-services-page__subtitle">
-          Explore all TaxEdge services with transparent pricing and turnaround time.
+          Every service TaxEdge offers, with the price and turnaround up front. Admin can add new services without an app update.
         </p>
       </header>
 

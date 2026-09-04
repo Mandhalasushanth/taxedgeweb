@@ -39,10 +39,28 @@ export const profileSchema = z.object({
     .transform((val) => val.replace(/\D/g, '').slice(0, 10))
     .refine((val) => val.length === 10, 'Enter any valid 10-digit mobile number'),
 
+  passcode: z
+    .string()
+    .trim()
+    .min(1, 'Passcode is required')
+    .transform((val) => val.replace(/\D/g, '').slice(0, 6))
+    .refine((val) => val.length === 6, 'Enter a 6-digit passcode'),
+
+  confirmPasscode: z
+    .string()
+    .trim()
+    .min(1, 'Please confirm your passcode')
+    .transform((val) => val.replace(/\D/g, '').slice(0, 6))
+    .refine((val) => val.length === 6, 'Enter a 6-digit passcode'),
+
   address: z
     .string()
     .trim()
     .min(1, 'Address is required'),
+})
+.refine((data) => data.passcode === data.confirmPasscode, {
+  message: 'Passcodes do not match',
+  path: ['confirmPasscode'],
 })
 
 export type ProfileFormValues = {
@@ -52,6 +70,8 @@ export type ProfileFormValues = {
   pan: string
   aadhaar: string
   mobile: string
+  passcode: string
+  confirmPasscode: string
   address: string
 }
 

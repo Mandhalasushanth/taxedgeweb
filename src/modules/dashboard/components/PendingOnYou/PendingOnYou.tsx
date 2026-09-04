@@ -1,4 +1,6 @@
+import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useAppStore } from '@store/index'
 import type { PendingTask } from '../../types/dashboard.types'
 import './PendingOnYou.css'
 
@@ -30,40 +32,104 @@ const ICONS: Record<string, React.ReactNode> = {
 }
 
 export const PendingOnYou = ({ tasks = [] }: PendingOnYouProps) => {
+  const [uploadedOverrides, setUploadedOverrides] = useState<Record<string, Partial<PendingTask>>>({})
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const activeTaskIdRef = useRef<string | null>(null)
+  const pushToast = useAppStore((state) => state.pushToast)
+
   if (!tasks.length) return null
+
+  const taskList = tasks.map((t) => ({
+    ...t,
+    ...(uploadedOverrides[t.id] ?? {}),
+  }))
+
+  const handleUploadClick = (taskId: string) => {
+    activeTaskIdRef.current = taskId
+    fileInputRef.current?.click()
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file || !activeTaskIdRef.current) return
+
+    const targetId = activeTaskIdRef.current
+    setUploadedOverrides((prev) => ({
+      ...prev,
+      [targetId]: {
+        statusLabel: 'Uploaded',
+        statusTone: 'success',
+        iconTone: 'success',
+        meta: `Uploaded: ${file.name} · Under review`,
+        actionLabel: 'View',
+      },
+    }))
+
+    pushToast(`Document "${file.name}" uploaded successfully!`, 'success')
+    e.target.value = ''
+    activeTaskIdRef.current = null
+  }
 
   return (
     <section className="pending-section" aria-labelledby="pending-heading">
+      <input
+        type="file"
+        ref={fileInputRef}
+        className="pending-file-input"
+        accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.xls,.xlsx,.zip"
+        onChange={handleFileChange}
+        aria-hidden="true"
+        tabIndex={-1}
+      />
+
       <div className="pending-section__header">
         <h2 className="pending-section__title" id="pending-heading">Pending on you</h2>
         <p className="pending-section__subtitle">Clear these to keep your filings on schedule.</p>
       </div>
 
       <div className="pending-section__list">
-        {tasks.map((t) => (
-          <div className="pending-card" key={t.id}>
-            <div className="pending-card__left">
-              <span className={`pending-card__icon pending-card__icon--${t.iconTone}`} aria-hidden="true">
-                {ICONS[t.iconTone] || ICONS.muted}
-              </span>
-              <div className="pending-card__info">
-                <h3 className="pending-card__title">{t.title}</h3>
-                <p className="pending-card__meta">{t.meta}</p>
+        {taskList.map((t) => {
+          const isUpload = t.actionLabel.toLowerCase() === 'upload'
+
+          return (
+            <div className="pending-card" key={t.id}>
+              <div className="pending-card__left">
+                <span className={`pending-card__icon pending-card__icon--${t.iconTone}`} aria-hidden="true">
+                  {ICONS[t.iconTone] || ICONS.muted}
+                </span>
+                <div className="pending-card__info">
+                  <h3 className="pending-card__title">{t.title}</h3>
+                  <p className="pending-card__meta">{t.meta}</p>
+                </div>
+              </div>
+
+              <div className="pending-card__right">
+                <span className={`pending-card__badge pending-card__badge--${t.statusTone}`}>
+                  <span className="pending-card__badge-dot" aria-hidden="true">●</span>
+                  {t.statusLabel}
+                </span>
+
+                {isUpload ? (
+                  <button
+                    type="button"
+                    className="pending-card__btn pending-card__btn--upload"
+                    onClick={() => handleUploadClick(t.id)}
+                    aria-label={`Upload document for ${t.title}`}
+                  >
+                    Upload
+                  </button>
+                ) : (
+                  <Link
+                    className={`pending-card__btn pending-card__btn--${t.actionLabel.toLowerCase()}`}
+                    to={t.actionTo}
+                  >
+                    {t.actionLabel}
+                  </Link>
+                )}
               </div>
             </div>
-
-            <div className="pending-card__right">
-              <span className={`pending-card__badge pending-card__badge--${t.statusTone}`}>
-                <span className="pending-card__badge-dot" aria-hidden="true">●</span>
-                {t.statusLabel}
-              </span>
-
-              <Link className={`pending-card__btn pending-card__btn--${t.actionLabel.toLowerCase()}`} to={t.actionTo}>
-                {t.actionLabel}
-              </Link>
-            </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </section>
   )

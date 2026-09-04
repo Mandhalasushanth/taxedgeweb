@@ -4,12 +4,14 @@ import './CreateAccountButton.css'
 export interface CreateAccountButtonProps {
   onClick: () => void
   isLoading?: boolean
+  disabled?: boolean
   label?: string
 }
 
 export const CreateAccountButton: FC<CreateAccountButtonProps> = ({
   onClick,
   isLoading = false,
+  disabled = false,
   label = 'Create account →',
 }) => {
   return (
@@ -17,7 +19,7 @@ export const CreateAccountButton: FC<CreateAccountButtonProps> = ({
       type="button"
       className="customer-type-submit-btn"
       onClick={onClick}
-      disabled={isLoading}
+      disabled={isLoading || disabled}
       aria-busy={isLoading}
     >
       {isLoading ? (

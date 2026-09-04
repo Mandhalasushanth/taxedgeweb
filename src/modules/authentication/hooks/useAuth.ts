@@ -7,7 +7,7 @@ import { useAuthStore } from '@store/index'
 import type { AuthSession } from '@core/auth'
 
 import { authFlowService } from '../services/authFlowService'
-import type { LoginPayload, VerifyOtpPayload } from '../types/auth.types'
+import type { LoginPayload, VerifyOtpPayload, VerifyPasscodePayload } from '../types/auth.types'
 
 /** The authentication module's public surface for pages. */
 export const useAuth = () => {
@@ -44,11 +44,26 @@ export const useAuth = () => {
     [completeSignIn],
   )
 
+  const verifyPasscode = useCallback(
+    async (payload: VerifyPasscodePayload) => {
+      const session = await authFlowService.verifyPasscode(payload)
+      signIn(session)
+
+      if (isStaffRole(session.user.role)) {
+        navigate(routePaths.staff.dashboard, { replace: true })
+        return
+      }
+
+      navigate(routePaths.dashboard, { replace: true })
+    },
+    [signIn, navigate],
+  )
+
   const logout = useCallback(async () => {
     await authFlowService.logout()
     signOut()
     navigate(routePaths.auth.login, { replace: true })
   }, [signOut, navigate])
 
-  return { user, isAuthenticated, login, verifyOtp, logout, setUser }
+  return { user, isAuthenticated, login, verifyOtp, verifyPasscode, logout, setUser }
 }
