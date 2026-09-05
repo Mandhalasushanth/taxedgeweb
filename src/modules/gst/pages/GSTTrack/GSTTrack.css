@@ -167,11 +167,19 @@
 
 .gst-track-page__sidebar-col {
   min-width: 0;
+  position: sticky;
+  top: calc(var(--header-height, 64px) + 1.25rem);
+  align-self: start;
 }
 
 @media (max-width: 960px) {
   .gst-track-page__grid {
     grid-template-columns: 1fr;
+  }
+
+  .gst-track-page__sidebar-col {
+    position: static;
+    top: auto;
   }
 
   .gst-track-header-card__top {

@@ -54,9 +54,17 @@ export const DashboardLayout = () => {
   const { data } = useDashboardSummary()
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
-  const currentLabel = useMemo(() => {
-    const items = navSections.flatMap((s) => s.items).filter((i) => !i.to.includes('#'))
-    return items.filter((i) => location.pathname === i.to || location.pathname.startsWith(`${i.to}/`)).sort((a, b) => b.to.length - a.to.length)[0]?.label ?? 'Dashboard'
+  const currentNav = useMemo(() => {
+    for (const section of navSections) {
+      const match = section.items
+        .filter((i) => !i.to.includes('#'))
+        .filter((i) => location.pathname === i.to || location.pathname.startsWith(`${i.to}/`))
+        .sort((a, b) => b.to.length - a.to.length)[0]
+      if (match) {
+        return { sectionTitle: section.title, label: match.label }
+      }
+    }
+    return { sectionTitle: 'Overview', label: 'Dashboard' }
   }, [location.pathname])
 
   const badges: Partial<Record<'applications' | 'notifications', string>> = {
@@ -172,9 +180,67 @@ export const DashboardLayout = () => {
             </button>
 
             <nav className="shell__breadcrumb" aria-label="Breadcrumb">
-              <Link to={routePaths.dashboard}>Home</Link>
-              <span className="shell__breadcrumb-sep" aria-hidden="true">→</span>
-              <span className="shell__breadcrumb-current">{currentLabel}</span>
+              {location.pathname === routePaths.gst.filing ||
+              location.pathname === routePaths.gst.filePeriod ||
+              location.pathname === routePaths.gst.fileUpload ||
+              location.pathname === routePaths.gst.fileReview ||
+              location.pathname === routePaths.gst.filePayment ||
+              location.pathname === routePaths.gst.fileSuccess ||
+              location.pathname === routePaths.gst.fileReceipt ? (
+                <>
+                  <Link to={routePaths.gst.root}>GST</Link>
+                  <span className="shell__breadcrumb-sep" aria-hidden="true">→</span>
+                  <Link to={routePaths.gst.filing}>Filing</Link>
+                  <span className="shell__breadcrumb-sep" aria-hidden="true">→</span>
+                  <span className="shell__breadcrumb-current">
+                    {location.pathname === routePaths.gst.fileUpload
+                      ? 'Documents'
+                      : location.pathname === routePaths.gst.fileReview
+                        ? 'Review'
+                        : location.pathname === routePaths.gst.filePayment
+                          ? 'Payment'
+                          : location.pathname === routePaths.gst.fileSuccess
+                            ? 'Confirmation'
+                            : location.pathname === routePaths.gst.fileReceipt
+                              ? 'Receipt'
+                              : 'Period'}
+                  </span>
+                </>
+              ) : location.pathname === routePaths.gst.registration ? (
+                <>
+                  <Link to={routePaths.gst.root}>GST</Link>
+                  <span className="shell__breadcrumb-sep" aria-hidden="true">→</span>
+                  <span className="shell__breadcrumb-current">Registration</span>
+                </>
+              ) : location.pathname === routePaths.gst.returns ? (
+                <>
+                  <Link to={routePaths.gst.root}>GST</Link>
+                  <span className="shell__breadcrumb-sep" aria-hidden="true">→</span>
+                  <span className="shell__breadcrumb-current">Returns</span>
+                </>
+              ) : location.pathname.startsWith('/gst/') && location.pathname.endsWith('/track') ? (
+                <>
+                  <Link to={routePaths.gst.root}>GST</Link>
+                  <span className="shell__breadcrumb-sep" aria-hidden="true">→</span>
+                  <span className="shell__breadcrumb-current">Track Application</span>
+                </>
+              ) : location.pathname === routePaths.gst.root ? (
+                <span className="shell__breadcrumb-current">GST</span>
+              ) : currentNav.sectionTitle === 'Services' ? (
+                <>
+                  <Link to={routePaths.services}>Services</Link>
+                  <span className="shell__breadcrumb-sep" aria-hidden="true">→</span>
+                  <span className="shell__breadcrumb-current">{currentNav.label}</span>
+                </>
+              ) : currentNav.label === 'Dashboard' ? (
+                <span className="shell__breadcrumb-current">Dashboard</span>
+              ) : (
+                <>
+                  <Link to={routePaths.dashboard}>Home</Link>
+                  <span className="shell__breadcrumb-sep" aria-hidden="true">→</span>
+                  <span className="shell__breadcrumb-current">{currentNav.label}</span>
+                </>
+              )}
             </nav>
           </div>
 

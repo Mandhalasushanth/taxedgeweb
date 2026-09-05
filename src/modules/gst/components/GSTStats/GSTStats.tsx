@@ -33,10 +33,7 @@ const getIcon = (type: GstStat['iconType']) => {
     case 'exposure':
       return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 3h12" />
-          <path d="M6 8h12" />
-          <path d="M6 13l3.5 3.5c2 2 5.5 2 7.5 0L19 14.5" />
-          <path d="M12 3v18" />
+          <path d="M6 3h12M6 8h12M6 13l8.5 8M6 13h3a4 4 0 0 0 0-8" />
         </svg>
       );
   }
@@ -48,7 +45,7 @@ export const GSTStats = ({ stats }: GSTStatsProps) => {
       {stats.map((stat) => (
         <div key={stat.id} className="gst-stat-card">
           <div className="gst-stat-card__header">
-            <div className="gst-stat-card__icon">{getIcon(stat.iconType)}</div>
+            <div className={`gst-stat-card__icon gst-stat-card__icon--${stat.iconType}`}>{getIcon(stat.iconType)}</div>
             <span className="gst-stat-card__title">{stat.title}</span>
           </div>
           <div className="gst-stat-card__body">

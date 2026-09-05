@@ -58,24 +58,24 @@
 .gst-dropzone__icon-circle {
   width: 52px;
   height: 52px;
-  border-radius: 50%;
-  background-color: #e2e8f0;
+  border-radius: 16px;
+  background-color: var(--taxedge-light-blue, #eaf1fe);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
-  color: var(--color-text-muted, #475569);
+  margin-bottom: 0.85rem;
+  color: var(--taxedge-blue, #0b5ed7);
   transition: all var(--transition-fast);
 }
 
 .gst-dropzone:hover .gst-dropzone__icon-circle {
-  background-color: var(--taxedge-light-blue, #eaf1fe);
-  color: var(--taxedge-blue, #0b5ed7);
+  background-color: #dbeafe;
+  color: var(--taxedge-navy, #083b75);
 }
 
 .gst-dropzone__icon {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
 }
 
 .gst-dropzone__heading {
@@ -86,27 +86,31 @@
 }
 
 .gst-dropzone__sub {
-  margin: 0 0 1.25rem 0;
+  margin: 0 0 1rem 0;
   font-size: 0.85rem;
   color: var(--color-text-muted, #64748b);
 }
 
 .gst-btn-browse {
-  padding: 0.55rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.4rem;
   font-size: 0.875rem;
   font-weight: var(--font-weight-semibold, 600);
-  color: var(--color-text, #172033);
-  background-color: var(--color-surface, #ffffff);
-  border: 1px solid var(--color-border, #cbd5e1);
+  color: var(--taxedge-blue, #0b5ed7);
+  background-color: var(--taxedge-light-blue, #eaf1fe);
+  border: none;
   border-radius: 9999px;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-fast);
+  box-shadow: none;
+  transition: all var(--transition-fast, 0.15s ease);
 }
 
 .gst-btn-browse:hover {
-  background-color: #f1f5f9;
-  border-color: #94a3b8;
+  background-color: #dbeafe;
+  color: var(--taxedge-navy, #083b75);
+  transform: translateY(-1px);
 }
 
 /* Document List */

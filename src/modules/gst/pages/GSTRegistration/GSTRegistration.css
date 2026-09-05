@@ -56,17 +56,19 @@
   }
 }
 
+.gst-reg-sidebar {
+  position: sticky;
+  top: calc(var(--header-height, 64px) + 1.25rem);
+  align-self: start;
+}
+
 @media (max-width: 860px) {
   .gst-reg-content-grid {
     grid-template-columns: 1fr;
   }
-}
 
-.gst-reg-main-content {
-  min-width: 0;
-}
-
-.gst-reg-sidebar {
-  position: sticky;
-  top: 1.5rem;
+  .gst-reg-sidebar {
+    position: static;
+    top: auto;
+  }
 }
