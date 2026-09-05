@@ -21,4 +21,24 @@ export default defineConfig({
   server: {
     port: 5173,
   },
+  build: {
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+              return 'vendor-react'
+            }
+            if (id.includes('zustand')) {
+              return 'vendor-state'
+            }
+            if (id.includes('axios') || id.includes('zod')) {
+              return 'vendor-utils'
+            }
+          }
+        },
+      },
+    },
+  },
 })

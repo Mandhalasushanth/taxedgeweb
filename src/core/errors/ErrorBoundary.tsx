@@ -2,6 +2,7 @@ import { Component } from 'react'
 import type { ErrorInfo, ReactNode } from 'react'
 
 import './ErrorBoundary.css'
+import { errorTracker } from './errorTracker'
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -20,8 +21,9 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 
   componentDidCatch(error: Error, info: ErrorInfo): void {
-    // Replace with a real reporter (Sentry, etc.) when one is wired up.
-    console.error('[ErrorBoundary]', error, info.componentStack)
+    errorTracker.captureException(error, {
+      extra: { componentStack: info.componentStack },
+    })
   }
 
   handleReload = (): void => {
