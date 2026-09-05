@@ -64,8 +64,8 @@ export const GSTServices = ({ services }: GSTServicesProps) => {
   const handleStart = (service: GstService) => {
     if (service.iconType === 'registration' || service.id === '1') {
       navigate(routePaths.gst.registration);
-    } else if (service.iconType === 'filing') {
-      navigate(routePaths.gst.returns);
+    } else if (service.iconType === 'filing' || service.id === '2') {
+      navigate(routePaths.gst.filing);
     } else {
       navigate(routePaths.gst.registration);
     }
